@@ -27,6 +27,7 @@
     min-height: 4vw;
     background-color: 	#ffbf00;
 }
+
 .kotak_login{
 	border-radius: 5%;
 	width: 350px;
@@ -45,4 +46,33 @@
 	color: darkslategrey;
 	text-align: center;
 	font-size: medium;
+}
+.wrapjudul{
+    margin-top: 1.4vw;
+}
+.wrapbar{
+    padding-top: 0.8vw;
+}
+.bartitle{
+	width: 350px;
+	background: #ffbf00;
+	/*meletakkan form ke tengah*/
+	margin: -0.5vw auto;
+    padding: 0px 8.5vw;  
+    font-size: 1.9vw;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.conbar{
+    float: left;
+    font-size: 1.6vw ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.bartitle-2{
+	width: 9vw;
+    background: #ffbf00;
+    float: right;
+    font-size: 1.6vw;
+    margin-top: -0.85vw;
+    padding-top: 0.5vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

@@ -12,3 +12,4 @@
 */
 
 Route::get('/','BerandaController@home');
+Route::get('/login','BerandaController@f_login');

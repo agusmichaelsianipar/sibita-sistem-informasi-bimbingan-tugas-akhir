@@ -11,9 +11,9 @@ class BerandaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function f_login()
     {
-        return view('index');
+        return view('login');
     }
 
     /**
@@ -21,9 +21,9 @@ class BerandaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function home()
     {
-        //
+        return view('index');
     }
 
     /**
