@@ -76,3 +76,15 @@
     padding-top: 0.5vw;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.bartitle-2 a{
+    text-decoration: none;
+    color: black;
+}
+.bartitle a{
+    text-decoration: none;
+    color: black;
+}
+.conbar a{
+    text-decoration: none;
+    color: black;
+}

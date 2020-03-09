@@ -1,4 +1,4 @@
-@extends('layout/main')
+@extends('layout/main_mahasiswa')
 @section('title','SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 @section('bar')
     <div class="navbarberanda">
@@ -11,6 +11,6 @@
                     <div class="bartitle-2"><a href="{{ url('/login') }}"><p>Sign-In <i class="fas fa-sign-in-alt"></i></p></a></div>
             </div>
         </div>
-    </div>
 
+    </div>
 @endsection

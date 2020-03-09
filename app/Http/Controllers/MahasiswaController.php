@@ -4,30 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class BerandaController extends Controller
+class MahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function f_login()
+    public function index()
     {
-        return view('login');
+        return view('mahasiswa');
     }
 
-    public function f_sign_up()
-    {
-        return view('sign_up');
-    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function create()
     {
-        return view('index');
+        //
     }
 
     /**
