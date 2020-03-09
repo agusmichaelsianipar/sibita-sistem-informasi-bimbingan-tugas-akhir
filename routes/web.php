@@ -13,3 +13,5 @@
 
 Route::get('/','BerandaController@home');
 Route::get('/login','BerandaController@f_login');
+Route::get('/sign-up','BerandaController@f_sign_up');
+Route::get('/mahasiswa','MahasiswaController@index');
