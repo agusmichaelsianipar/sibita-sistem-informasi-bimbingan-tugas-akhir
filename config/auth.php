@@ -46,6 +46,33 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'mahasiswa' => [
+            'driver' => 'session',
+            'provider' => 'mahasiswas',
+        ],
+        'mahasiswa-api' => [
+            'driver' => 'token',
+            'provider' => 'mahasiswas',
+            'hash' => false,
+        ],
+        'super_admin' => [
+            'driver' => 'session',
+            'provider' => 'super_admins',
+        ],
+        'super_admin-api' => [
+            'driver' => 'token',
+            'provider' => 'super_admins',
+            'hash' => false,
+        ],
+        'dosbing_koorta' => [
+            'driver' => 'session',
+            'provider' => 'dosbing_koortas',
+        ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'dosbing_koortas',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +96,18 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'mahasiswas' => [
+            'driver' => 'eloquent',
+            'model' => App\Mahasiswa::class,
+        ],
+        'super_admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Super_Admin::class,
+        ],
+        'dosbing_koortas' => [
+            'driver' => 'eloquent',
+            'model' => App\Dosbing_Koorta::class,
         ],
 
         // 'users' => [
@@ -98,6 +137,24 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'mahasiswas' => [
+            'provider' => 'mahasiswas',
+            'table' => 'password_resets',
+            'expire' => 20,
+            'throttle' => 20,
+        ],
+        'super_admins' => [
+            'provider' => 'super_admins',
+            'table' => 'password_resets',
+            'expire' => 20,
+            'throttle' => 20,
+        ],
+        'dosbing_koortas' => [
+            'provider' => 'dosbing_koortas',
+            'table' => 'password_resets',
+            'expire' => 20,
+            'throttle' => 20,
         ],
     ],
 

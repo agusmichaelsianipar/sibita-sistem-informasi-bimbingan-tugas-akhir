@@ -238,18 +238,22 @@ a.article, a.article:hover {
     float: right;
     margin-left: -5px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color : black;
 }
 .top-title{
     font-size: 2.4vw;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color : black;
 }
 .top-title-2{
     margin-top: -1.9vw;
     font-size: 1.8vw;
+    color : black;
 }
 .top-title-3{
     margin-top: -1vw;
     font-size: 1.4vw;
+    /* color : black; */
 }
 .navbarberanda{
     width: 100%;
