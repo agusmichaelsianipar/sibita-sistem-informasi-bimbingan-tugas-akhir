@@ -1,16 +1,23 @@
-@extends('layout/main_mahasiswa')
-@section('title','SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
-@section('bar')
-    <div class="navbarberanda">
-        <div class="container">
-            <div class="wrapbar">
-                <div class="conbar">
-                    <a href="{{ url('/') }}"><p><i class="fas fa-home"></i> Beranda</p></a>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard Mahasiswa</div>
+
+                <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    You are logged in as <strong>Mahasiswa</strong>!
                 </div>
-                    <div class="bartitle-2"><a href="{{ url('/sign-up') }}"><p>Sign-Up <i class="fas fa-clipboard-list"></i></p></a></div>    
-                    <div class="bartitle-2"><a href="{{ url('/login') }}"><p>Sign-In <i class="fas fa-sign-in-alt"></i></p></a></div>
             </div>
         </div>
-
     </div>
+</div>
 @endsection
