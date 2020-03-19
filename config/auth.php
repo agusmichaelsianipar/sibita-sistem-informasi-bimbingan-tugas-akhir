@@ -44,34 +44,30 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
-            'hash' => false,
         ],
         'mahasiswa' => [
             'driver' => 'session',
             'provider' => 'mahasiswas',
-        ],
+        ], 
         'mahasiswa-api' => [
             'driver' => 'token',
             'provider' => 'mahasiswas',
-            'hash' => false,
         ],
-        'super_admin' => [
+        'dosen' => [
             'driver' => 'session',
-            'provider' => 'super_admins',
-        ],
-        'super_admin-api' => [
+            'provider' => 'dosens',
+        ], 
+        'dosen-api' => [
             'driver' => 'token',
-            'provider' => 'super_admins',
-            'hash' => false,
+            'provider' => 'dosens',
         ],
-        'dosbing_koorta' => [
+        'superadmin' => [
             'driver' => 'session',
-            'provider' => 'dosbing_koortas',
-        ],
-        'api' => [
+            'provider' => 'superadmins',
+        ], 
+        'superadmin-api' => [
             'driver' => 'token',
-            'provider' => 'dosbing_koortas',
-            'hash' => false,
+            'provider' => 'superadmins',
         ],
     ],
 
@@ -101,13 +97,13 @@ return [
             'driver' => 'eloquent',
             'model' => App\Mahasiswa::class,
         ],
-        'super_admins' => [
+        'dosens' => [
             'driver' => 'eloquent',
-            'model' => App\Super_Admin::class,
+            'model' => App\Dosen::class,
         ],
-        'dosbing_koortas' => [
+        'superadmins' => [
             'driver' => 'eloquent',
-            'model' => App\Dosbing_Koorta::class,
+            'model' => App\Superadmin::class,
         ],
 
         // 'users' => [
@@ -136,39 +132,22 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
-            'throttle' => 60,
         ],
         'mahasiswas' => [
             'provider' => 'mahasiswas',
             'table' => 'password_resets',
             'expire' => 20,
-            'throttle' => 20,
         ],
-        'super_admins' => [
-            'provider' => 'super_admins',
+        'dosens' => [
+            'provider' => 'dosens',
             'table' => 'password_resets',
             'expire' => 20,
-            'throttle' => 20,
         ],
-        'dosbing_koortas' => [
-            'provider' => 'dosbing_koortas',
+        'superadmins' => [
+            'provider' => 'superadmins',
             'table' => 'password_resets',
             'expire' => 20,
-            'throttle' => 20,
         ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Password Confirmation Timeout
-    |--------------------------------------------------------------------------
-    |
-    | Here you may define the amount of seconds before a password confirmation
-    | times out and the user is prompted to re-enter their password via the
-    | confirmation screen. By default, the timeout lasts for three hours.
-    |
-    */
-
-    'password_timeout' => 10800,
 
 ];

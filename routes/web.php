@@ -11,33 +11,29 @@
 |
 */
 
-Route::get('/','BerandaController@home');
-Route::get('/login','BerandaController@f_login');
-Route::get('/sign-up','BerandaController@f_sign_up');
-Route::get('/mahasiswa','MahasiswaController@index');
-Route::get('/dosbing','DosbingController@index');
-Route::get('/kordta','KordtaController@index');
-
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
-Route::prefix('mahasiswas')->group(function(){
-    Route::get('/login','Auth\MahasiswaLoginController@showLoginForm')->name('mahasiswas.login');
-    Route::post('/login','Auth\MahasiswaLoginController@login')->name('mahasiswas.login.submit');
-    Route::get('/', 'MahasiswasController@index')->name('mahasiswas.dashboard');
+Route::prefix('mahasiswa')->group(function(){
+    Route::get('/login','Auth\MahasiswaLoginController@showLoginForm')->name('mahasiswa.login');
+    Route::post('/login','Auth\MahasiswaLoginController@login')->name('mahasiswa.login.submit');
+    Route::get('/', 'MahasiswaController@index')->name('mahasiswa.dashboard');
 });
 
-Route::prefix('superadmins')->group(function(){
-    Route::get('/login','Auth\SuperAdminLoginController@showLoginForm')->name('superadmins.login');
-    Route::post('/login','Auth\SuperAdminLoginController@login')->name('superadmins.login.submit');
-    Route::get('/', 'SuperAdminsController@index')->name('superadmins.dashboard');
+Route::prefix('dosen')->group(function(){
+    Route::get('/login','Auth\DosenLoginController@showLoginForm')->name('dosen.login');
+    Route::post('/login','Auth\DosenLoginController@login')->name('dosen.login.submit');
+    Route::get('/', 'DosenController@index')->name('dosen.dashboard');
 });
 
-Route::prefix('dosbingkoortas')->group(function(){
-    Route::get('/login','Auth\DosbingKoorTALoginController@showLoginForm')->name('dosbingkoortas.login');
-    Route::post('/login','Auth\DosbingKoorTALoginController@login')->name('dosbingkoortas.login.submit');
-    Route::get('/', 'DosbingKoorTasController@index')->name('dosbingkoortas.dashboard');
+Route::prefix('superadmin')->group(function(){
+    Route::get('/login','Auth\SuperadminLoginController@showLoginForm')->name('superadmin.login');
+    Route::post('/login','Auth\SuperadminLoginController@login')->name('superadmin.login.submit');
+    Route::get('/', 'SuperadminController@index')->name('superadmin.dashboard');
 });
 
