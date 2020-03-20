@@ -23,6 +23,6 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        return view('mahasiswa');
+        return view('main_mahasiswa');
     }
 }
