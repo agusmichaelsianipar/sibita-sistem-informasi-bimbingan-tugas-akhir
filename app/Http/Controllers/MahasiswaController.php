@@ -23,6 +23,18 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        return view('main_mahasiswa');
+        return view('beranda_mahasiswa');
     }
+    public function showProfil()
+    {
+        return view('profil_mahasiswa');
+    }
+    public function showBimbingan()
+    {
+        return view('bimbingan');
+    }
+    public function showPengJudul()
+    {
+        return view('judul');
+    }    
 }
