@@ -49,3 +49,13 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+## Konfigurasi
+
+1. Database
+
+Buat Database Mysql dengan nama : sibita-v1_2
+
+Migrasikan database dengan php artisan migrate
+
+Now you have the tables
