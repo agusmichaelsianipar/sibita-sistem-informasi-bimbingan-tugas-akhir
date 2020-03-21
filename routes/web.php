@@ -23,6 +23,10 @@ Route::prefix('mahasiswa')->group(function(){
     Route::get('/login','Auth\MahasiswaLoginController@showLoginForm')->name('mahasiswa.login');
     Route::post('/login','Auth\MahasiswaLoginController@login')->name('mahasiswa.login.submit');
     Route::get('/', 'MahasiswaController@index')->name('mahasiswa.dashboard');
+    Route::get('/beranda', 'MahasiswaController@index')->name('mahasiswa.beranda');
+    Route::get('/profil', 'MahasiswaController@showProfil')->name('mahasiswa.profil');
+    Route::get('/bimbingan', 'MahasiswaController@showBimbingan')->name('mahasiswa.bimbingan');
+    Route::get('/pengajuan-judul', 'MahasiswaController@showPengJudul')->name('mahasiswa.judul');
 });
 
 Route::prefix('dosen')->group(function(){

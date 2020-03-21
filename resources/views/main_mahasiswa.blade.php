@@ -29,16 +29,16 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#" data-toggle="collapse" aria-expanded="false">Beranda</a>
+                    <a href="{{ route('mahasiswa.beranda') }}">Beranda</a>
                 </li>
                 <li>
-                    <a href="#">Profil</a>
+                    <a href="{{ route('mahasiswa.profil') }}">Profil</a>
                 </li>
                 <li>
-                    <a href="#">Buku Kendali Bimbingan</a>
+                    <a href="{{ route('mahasiswa.bimbingan') }}">Buku Kendali Bimbingan</a>
                 </li>
                 <li>
-                    <a href="#">Pengajuan Judul</a>
+                    <a href="{{ route('mahasiswa.judul') }}">Pengajuan Judul</a>
                 </li>
                 <li>
                 <a href="{{ route('logout') }}"
@@ -54,16 +54,10 @@
             </ul>
         </nav>
 
-
-
-    <!-- @yield('bar')
-    @yield('sidebar')
-    @yield('containing') -->
     <div id="content">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-
         <button type="button" id="sidebarCollapse" class="navbar-btn">
             <span></span>
             <span></span>
@@ -79,18 +73,13 @@
                 <p class="top-title-3">INSTITUT TEKNOLOGI SUMATERA</p>
             </div>
             </div>
-            <!-- <div class="">
-                <p class="top-title">SISTEM INFORMASI BIMBINGAN TUGAS AKHIR</p>
-                <p class="top-title-2">PROGRAM STUDI TEKNIK INFORMATIKA</p>
-                <p class="top-title-3">INSTITUT TEKNOLOGI SUMATERA</p>
-            </div> -->
         </div>
     </div>
     
 </nav>
 
 
-<h2>Disini Konten</h2>
+@yield('beranda')
 
 
 </div>
