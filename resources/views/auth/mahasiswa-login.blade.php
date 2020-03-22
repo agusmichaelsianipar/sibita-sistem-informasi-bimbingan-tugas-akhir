@@ -1,18 +1,19 @@
 @extends('layouts.app')
-
+@section('title','LOGIN MAHASISWA | SIBITA')
+@section('brand','MAHASISWA | SIBITA')
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login Mahasiswa</div>
+                <div class="panel-heading"><label for="" class="control-label">LOGIN MAHASISWA</label></div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('mahasiswa.login.submit') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">E-Mail</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
