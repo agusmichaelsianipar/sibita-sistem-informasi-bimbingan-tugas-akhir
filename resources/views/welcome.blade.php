@@ -119,8 +119,9 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('mahasiswa.login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
+                        <a href="#">Register</a>
+                        <!-- {{ url('/register') }} -->
+                        @endif
                 </div>
             @endif
 
