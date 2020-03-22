@@ -322,4 +322,88 @@ a.article, a.article:hover {
 .conbar a{
     text-decoration: none;
     color: black;
+}conbar{
+    float: left;
+    font-size: 1.6vw ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}   float: left;
+    font-size: 1.6vw ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.bartitle-2{
+	width: 9vw;
+    background: #ffbf00;
+    float: right;
+    font-size: 1.6vw;
+    margin-top: -0.85vw;
+    padding-top: 0.5vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.bartitle-2 a{
+    text-decoration: none;
+    color: black;
+}
+.bartitle a{
+    text-decoration: none;
+    color: black;
+}
+.conbar a{
+    text-decoration: none;
+    color: black;
+}conbar{
+    float: left;
+    font-size: 1.6vw ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.bartitle-2{
+	width: 9vw;
+    background: #ffbf00;
+    float: right;
+    font-size: 1.6vw;
+    margin-top: -0.85vw;
+    padding-top: 0.5vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.bartitle-2 a{
+    text-decoration: none;
+    color: black;
+}
+.bartitle a{
+    text-decoration: none;
+    color: black;
+}
+.conbar a{
+    text-decoration: none;
+    color: black;
+}
+
+/*
+CSS bimbingan
+*/
+.kartu-bimbingan{
+    border-style: solid;
+    border-color:lightgray;
+    border-width: 1px;
+    padding: 5px;
+    margin: 20px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+/*
+.konten-bimbingan{
+    
+}
+*/
+.dosen-bimbingan p{
+    text-align: left;
+}
+
+/*
+.judul-kartu{
+    
+}
+*/
+
+.judul-kartu:hover{
+    cursor: pointer;
 }
