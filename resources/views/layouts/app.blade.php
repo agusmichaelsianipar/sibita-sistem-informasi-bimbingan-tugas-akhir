@@ -30,7 +30,7 @@
                     <!-- Branding Image -->
                     
                     <a class="navbar-brand" href="{{ url('/') }}">
-                    <img style="float:left;width:2.5vw;height:2.5vw;" src="{!! asset('assets/image/logo-itera.png') !!}" alt="">    
+                    <img style="float:left;width:2vw;height:2vw;" src="{!! asset('assets/image/logo-itera.png') !!}" alt="">    
                     @yield('brand')
                     </a>
                 </div>

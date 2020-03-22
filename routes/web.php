@@ -33,6 +33,9 @@ Route::prefix('dosen')->group(function(){
     Route::get('/login','Auth\DosenLoginController@showLoginForm')->name('dosen.login');
     Route::post('/login','Auth\DosenLoginController@login')->name('dosen.login.submit');
     Route::get('/', 'DosenController@index')->name('dosen.dashboard');
+    Route::get('/profile', 'DosenController@profil')->name('dosen.profile');
+    Route::get('/bimbingan', 'DosenController@bimbingan')->name('dosen.bimbingan');
+    Route::get('/judul', 'DosenController@judul')->name('dosen.judul');
 });
 
 Route::prefix('superadmin')->group(function(){

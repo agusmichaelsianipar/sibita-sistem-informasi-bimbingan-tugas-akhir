@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title','LOGIN | SIBITA');
-@section('brand','MAHASISWA | SIBITA');
+@section('title','LOGIN MAHASISWA | SIBITA')
+@section('brand','MAHASISWA | SIBITA')
 @section('content')
 <div class="container">
     <div class="row">
