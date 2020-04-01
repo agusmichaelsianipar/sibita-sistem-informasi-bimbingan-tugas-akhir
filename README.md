@@ -59,3 +59,7 @@ Buat Database Mysql dengan nama : sibita-v1_2
 Migrasikan database dengan php artisan migrate
 
 Now you have the tables
+2. Spesifikasi
+
+PHP 7.2.24
+Laravel Framework Version 5.4
