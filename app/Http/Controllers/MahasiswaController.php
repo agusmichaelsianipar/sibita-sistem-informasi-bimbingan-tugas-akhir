@@ -36,8 +36,11 @@ class MahasiswaController extends Controller
         */
 
         //data sementara untuk testing
-        $kartu1 = array("id"=>"1", "judul"=>"Bimbingan 1", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submission"=>"link");
-        $kartu2 = array("id"=>"2", "judul"=>"Bimbingan 2", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submission"=>"link");
+        $link1 = array('link'=>'https://oke.id', 'linkname'=>'Revisi ke sekian');
+        $link2 = array('link'=>'https://eko.id', 'linkname'=>'Revisi ke sekuan');
+        $kartu1 = array("id"=>"1", "judul"=>"Bimbingan 1", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submissions"=>[$link1, $link2]);
+        
+        $kartu2 = array("id"=>"2", "judul"=>"Bimbingan 2", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submissions"=>[]);
 
         $daftarBimbingan = array($kartu1, $kartu2);
         return view('bimbingan', ['daftarBimbingan'=>$daftarBimbingan]);
