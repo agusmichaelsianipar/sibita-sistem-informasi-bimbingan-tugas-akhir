@@ -326,7 +326,7 @@ a.article, a.article:hover {
     float: left;
     font-size: 1.6vw ;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}   float: left;
+   float: left;
     font-size: 1.6vw ;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -389,21 +389,83 @@ CSS bimbingan
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
-/*
-.konten-bimbingan{
-    
+.judul-kartu{
+    background-color: #eee;
+    padding: 3px;
 }
-*/
+
+.judul-kartu h5{
+    padding: 5px;
+    margin: auto;
+}
+
+.judul-kartu:hover{
+    cursor: pointer;
+}
+
+.konten-bimbingan{
+    padding: 20px;
+}
+
+.kb-s1{
+    overflow: hidden;
+}
+
+.kb-ch1{
+    float: left;
+    width: 50%;
+    min-width: 400px;
+}
+
+.kb-s2{
+    overflow: hidden;
+}
+
+.kb-ch2{
+    float: left;
+    min-width: 400px;
+}
+
 .dosen-bimbingan p{
     text-align: left;
 }
 
-/*
-.judul-kartu{
+
+
+.subm-box{
+    color: #999;    
+    border-style: solid;
+    border-width: 1px;
+    border-color: #eee;
+    padding: 4px;
+    margin: 2px;
+    overflow: hidden;
+    
     
 }
-*/
 
-.judul-kartu:hover{
+.subm-box:hover{
+    background-color: #eef;
+}
+
+.subm-link{
+    float: left;
+    display: block;
+    padding: auto;
+    margin: 2px;
+}
+.subm-edt{
+    float: right;
+    display: block;
+    padding: auto ;
+    margin: 2px;
+}
+
+.subm-edt:hover{
     cursor: pointer;
+}
+
+.subm-edt .notClickable:hover{
+    cursor: normal;
+
 }
