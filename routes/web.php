@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/daftarta','GuestController@index');
+Route::post('/daftar','GuestController@store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
