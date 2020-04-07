@@ -25,7 +25,7 @@ class SuperadminLoginController extends Controller
         //Attempt to log the user in
         if(Auth::guard('superadmin')->attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
             //If succesfull, then redirect to their intended location
-            return redirect()->intended(route('superadmin.dashboard'));
+            return redirect()->intended(route('superadmin.beranda'));
         }
 
         //If unsuccesfull, then redirect back to the login with the form data

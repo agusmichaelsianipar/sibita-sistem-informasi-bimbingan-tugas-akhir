@@ -1,0 +1,36 @@
+.tabled{
+}
+
+.nama{
+    float: left;
+    width: 300px;
+    height: 40px;
+}
+
+.emaildosen{
+    float: left;
+    width: 300px;
+    height: 40px;
+}
+
+.statusdosen{
+    float: left;
+    width: 200px;
+    height: 40px;
+
+}
+
+.hapusdosen{
+    height: 40px;
+}
+
+.editdosen{
+    float: left;
+    width: 50px;
+    height: 40px;
+
+}
+
+.tambahdosen .btn{
+    color:black;
+}
