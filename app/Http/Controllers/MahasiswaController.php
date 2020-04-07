@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\bimbingan;
+use App\submissions;
 
 class MahasiswaController extends Controller
 {
@@ -37,24 +39,29 @@ class MahasiswaController extends Controller
         /*
             lakukan kueri mengambil bimbingan dari database
         */
-        //$kartuBimbingan = DB::select("SELECT * FROM bimbingan_cards WHERE 'mahasiswa_bimbingan' = ".auth()->user()->id);
-        $kartuBimbingan = DB::table('bimbingan_cards')->where('mahasiswa_bimbingan', auth()->user()->id)->get()->toArray();
-        //$submissions = DB::table('submissions_list')->where('bimbingan_parent', $kartuBimbingan[''])
         //after i learn about the Eloquent
-        $bimbingans = bimbingan::where('dosen_bimbingan', auth()->user()-id)->get();
+        
+        $kartuBimbingan = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email())->get();
 
+        foreach($kartuBimbingan->keys()->toArray() as $bimbinganId){
+            $submissions = submissions::where('bimbingan_parent', $bimbinganId);
+            foreach($submissions as $submission){
+                foreach($submission as $field){
+                    echo $field." ";
+                }
+                echo "<br>";
+            }
+            echo "<br>";
+        }
         //data sementara untuk testing
         $link1 = array('link'=>'https://oke.id', 'linkname'=>'Revisi ke sekian');
         $link2 = array('link'=>'https://eko.id', 'linkname'=>'Revisi ke sekuan');
         $kartu1 = array("id"=>"1", "judul"=>"Bimbingan 1", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submissions"=>[$link1, $link2]);
-        
         $kartu2 = array("id"=>"2", "judul"=>"Bimbingan 2", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submissions"=>[]);
         
         $daftarBimbingan = array($kartu1, $kartu2);
-        //return view('bimbingan', ['daftarBimbingan'=>$daftarBimbingan, 'mahasiswaId'=>auth()->user()->id, '']);
-        foreach($kartuBimbingan as $aa){
-            //echo $aa;
-        }
+        //return view('bimbingan', ['daftarBimbingan'=>$kartuBimbingan->toArray(), 'mahasiswaId'=>auth()->user()->id, '']);
+        
     }
     public function showPengJudul()
     {

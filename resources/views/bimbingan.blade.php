@@ -10,26 +10,26 @@
         @foreach($daftarBimbingan as $daftar)
         <div class="container-fluid kartu-bimbingan">
             <div class="judul-kartu" data-toggle="collapse" data-target="#kb{{$daftar['id']}}">
-                <h5>{{$daftar['judul']}}</h5>
+                <h5>{{$daftar['judul_bimbingan']}}</h5>
             </div>
             <div class="konten-bimbingan collapse" id="kb{{$daftar['id']}}">
                 <div>
                     <div class="kb-s1">
                         <div class="kb-ch1">Waktu Bimbingan:
                             <p>
-                                {{$daftar['waktu']}}
+                                {{$daftar['waktu_bimbingan']}}
                             </p>
                         </div>
                         <div class="kb-ch1">Dosen pembimbing:
                             <p>
-                                {{$daftar['dosen']}}
+                                {{$daftar['dosen_bimbingan']}}
                             </p>
                         </div>
                     </div>
                     <div class="kb-s2">
                         <div class="kb-ch2">Catatan bimbingan:
                             <p>
-                                {{$daftar['catatan']}}
+                                {{$daftar['catatan_bimbingan']}}
                             </p> 
                         </div>
                     </div>

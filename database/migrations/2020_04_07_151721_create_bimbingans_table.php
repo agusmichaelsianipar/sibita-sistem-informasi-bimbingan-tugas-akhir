@@ -17,6 +17,7 @@ class CreateBimbingansTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->dateTime('waktu_bimbingan');
+            $table->string('judul_bimbingan');
             $table->string('dosen_bimbingan');
             $table->string('mahasiswa_bimbingan');
             $table->text('catatan_bimbingan');
