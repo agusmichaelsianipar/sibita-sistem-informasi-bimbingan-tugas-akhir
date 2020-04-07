@@ -427,11 +427,8 @@ conbar{
     padding: auto ;
     margin: 2px;
 }
-.subm-edt:hover{
+
+
+.clickAble:hover{
     cursor: pointer;
 }
-
-.subm-edt .notClickable:hover{
-    cursor: normal;
-
-} 

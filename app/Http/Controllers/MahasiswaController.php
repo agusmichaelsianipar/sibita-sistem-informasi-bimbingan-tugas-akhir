@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class MahasiswaController extends Controller
 {
@@ -34,6 +37,10 @@ class MahasiswaController extends Controller
         /*
             lakukan kueri mengambil bimbingan dari database
         */
+        //$kartuBimbingan = DB::select("SELECT * FROM bimbingan_cards WHERE 'mahasiswa_bimbingan' = ".auth()->user()->id);
+        
+        $kartuBimbingan = DB::table('bimbingan_cards')->where('mahasiswa_bimbingan', auth()->user()->id)->get()->toArray();
+        //$submissions = DB::table('submissions_list')->where('bimbingan_parent', $kartuBimbingan[''])
 
         //data sementara untuk testing
         $link1 = array('link'=>'https://oke.id', 'linkname'=>'Revisi ke sekian');
@@ -41,12 +48,44 @@ class MahasiswaController extends Controller
         $kartu1 = array("id"=>"1", "judul"=>"Bimbingan 1", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submissions"=>[$link1, $link2]);
         
         $kartu2 = array("id"=>"2", "judul"=>"Bimbingan 2", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submissions"=>[]);
-
+        
         $daftarBimbingan = array($kartu1, $kartu2);
-        return view('bimbingan', ['daftarBimbingan'=>$daftarBimbingan]);
+        //return view('bimbingan', ['daftarBimbingan'=>$daftarBimbingan, 'mahasiswaId'=>auth()->user()->id, '']);
+        foreach($kartuBimbingan as $aa){
+            //echo $aa;
+        }
     }
     public function showPengJudul()
     {
         return view('judul');
-    }    
+    }
+    public function storeSubm(Request $request){
+        /*
+        #TODO
+        Do query to database submissions
+        */
+
+        // Verifying the inputs
+        $this->validate($request, [
+            'txtLink' => 'required',
+            'txtLinkName' => 'required',
+            'txtOwner' => 'required'
+        ]);
+        
+        $txtLink = $request['txtLink'];
+        $txtLinkName = $request['txtLinkName'];
+        $txtOwner = $request['txtOwner'];
+        
+        echo $txtLink."</br>".$txtLinkName."</br>".$txtOwner;
+        
+        // add the submissions to submissions_list
+        DB::table('submissions_list')->insert([
+            'link' => $txtLink,
+            'link_name' => $txtLinkName,
+            'owner_mhs' => $txtOwner
+        ]);
+
+        return redirect('/mahasiswa/bimbingan');
+    }
+    
 }

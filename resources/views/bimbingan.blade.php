@@ -48,20 +48,42 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="subm-edt" onclick="editLink()">
+                                <div class="subm-edt clickAble" onclick="editLink()">
                                     Edit
                                 </div>
-                                <div class="subm-edt notClickable">
+                                <div class="subm-edt">
                                     |
                                 </div>
-                                <div class="subm-edt" onclick="hapusLink(this)">
+                                <div class="subm-edt clickAble" onclick="hapusLink(this)">
                                     Delete
                                 </div>
                             </div>
                             @endforeach
-                            <button type="button" onclick="tambahLink(this)">
-                                Tambah Link
-                            </button>
+                            
+                            <div class="subm-box">
+                                <div class="clickAble" data-toggle="collapse" data-target="#adSubm">
+                                    Tambah Link
+                                </div>
+                                <div class="collapse" id="adSubm">
+                                    <form action="{{route('mahasiswa.tambahSubmission')}}" method="post" id="mhsAddSubm{{$mahasiswaId}}">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="txtBimbinganOwner" value="{{$mahasiswaId}}">
+                                        <label for="txtLink">Link: </label>
+                                        <input class="form-control" type="text" name="txtLink" id="txtLink">
+                                        <label for="txtLinkName">Nama:</label>
+                                        <input class="form-control" type="text" name="txtLinkName" id="txtLinkText">
+                                        <div class="subm-edt clickAble" data-toggle="collapse" data-target="#adSubm">
+                                            Batal
+                                        </div>
+                                        <div class="subm-edt">
+                                            |
+                                        </div>
+                                        <div class="subm-edt clickAble" onClick="document.getElementById('mhsAddSubm{{$mahasiswaId}}').submit()">
+                                            Kirim
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,40 +95,6 @@
 @endsection
 
 <script type="text/javascript">
-    function tambahLink(tombol){
-        console.log("Menambah Link");
-        submHolder = tombol.parentElement;
-        tombol.remove();
-        submHolder.innerHTML = submHolder.innerHTML + (
-            "<div class='subm-box'>"+
-                "<label for='txtLink'>Link: </label>"+
-                "<input class='form-control' type='text' id='txtLink'>"+
-                "<label for='txtLinktext'>Label: </label>"+
-                "<input class='form-control' type='text' id='txtLinktext'>"+
-                "<div class='subm-edt' onclick=tambahLinkOk(this)>"+
-                    "Ok" +
-                "</div>"+
-                "<div class='subm-edt notClickable'>"+
-                    " | " +
-                "</div>"+
-                "<div class='subm-edt' onClick=tambahLinkCancel(this)>"+
-                    "Cancel" +
-                "</div>"+
-            "</div>"
-        );
-    }
-    
-    function tambahLinkCancel(object){
-        console.log("Menambah Link Dibatalkan");
-        submBox = object.parentElement;
-        submHolder = submBox.parentElement;
-        submBox.remove();
-        submHolder.innerHTML = submHolder.innerHTML + (
-                            "<button type='button' onclick='tambahLink(this)'>"+
-                                "Tambah Link"+
-                            "</button>"
-        );
-    }
     function ubahKeList(box){
         box = box.parentElement.parentElement;
         console.log(box);
@@ -122,26 +110,6 @@
     }
     function editLink(){
         //code here
-        
-    }
-    function tambahLinkOk(box){
-        //code Here
-        console.log("Link Ditambah");
-        link = box.parentNode.getElementsByTagName('input')[0].value;
-        label = box.parentNode.getElementsByTagName('input')[1].value;
-        box.parentElement.innerHTML = (""+
-                                "<div class='subm-link'>"+
-                                    "<a href='"+link+"' target='blank'>"+
-                                        "<div >"+
-                                            label+
-                                        "</div>"+
-                                    "</a>"+
-                                "</div>"+
-                                "<div class='subm-edt' onclick='editLink()'>Edit</div>" +
-                                "<div class='subm-edt notClickable'> | </div>" +
-                                "<div class='subm-edt' onclick='hapusLink()'>Delete</div>"
-            );
-        submHolder.parentElement.innerHTML += "<button type='button' onclick='tambahLink(this)'>Tambah Link</button>";
     }
 </script>
 
