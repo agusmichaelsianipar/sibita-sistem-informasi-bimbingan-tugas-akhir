@@ -34,3 +34,12 @@
 .tambahdosen .btn{
     color:black;
 }
+
+#status{
+    width: 600px;
+    height: 35px;
+}
+#status option{
+    width: 550px;
+    height: 35px;
+}
