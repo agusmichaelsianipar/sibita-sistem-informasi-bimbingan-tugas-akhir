@@ -27,8 +27,6 @@
 @endforeach
 </div>
 <div class="tambahdosen">
-    <button type="button" class="btn btn-primary">
-    <i class="fas fa-plus" style="color:black;"></i>  Tambah Dosen 
-    </button>
+    <a class="btn btn-primary" href="{{ route('superadmin.tambahDosbing') }}" role="button"><i class="fas fa-plus"></i>   Tambah Dosen</a>
 </div>
 @endsection
