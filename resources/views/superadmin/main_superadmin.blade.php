@@ -17,6 +17,7 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/berandastyle.css') !!}">
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/mahasiswa.css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/dosen.css') !!}">
     </head>
     <body>
     

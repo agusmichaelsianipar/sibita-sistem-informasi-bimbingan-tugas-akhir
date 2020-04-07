@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Dosen;
 
 class SuperadminController extends Controller
 {
@@ -27,7 +29,9 @@ class SuperadminController extends Controller
     }
 
     public function aturDosen(){
-        return view('superadmin.crudDosen');
+        $dosen = Dosen::all();
+
+        return view('superadmin.crudDosen',['dosen'=>$dosen]);
     }
 
     public function aturKoorTA(){
