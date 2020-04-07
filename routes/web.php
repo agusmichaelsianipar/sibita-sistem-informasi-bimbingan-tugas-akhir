@@ -45,6 +45,7 @@ Route::prefix('dosen')->group(function(){
 Route::prefix('superadmin')->group(function(){
     Route::get('/login','Auth\SuperadminLoginController@showLoginForm')->name('superadmin.login');
     Route::post('/login','Auth\SuperadminLoginController@login')->name('superadmin.login.submit');
-    Route::get('/', 'SuperadminController@index')->name('superadmin.dashboard');
+    Route::get('/', 'SuperadminController@index')->name('superadmin.beranda');
+    Route::get('/aturdosbing', 'SuperadminController@aturDosen')->name('superadmin.aturDosbing');
+    Route::get('/aturkoorta', 'SuperadminController@aturKoorTA')->name('superadmin.aturKoorTA');
 });
-

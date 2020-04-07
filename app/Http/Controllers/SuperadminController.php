@@ -23,6 +23,14 @@ class SuperadminController extends Controller
      */
     public function index()
     {
-        return view('main_superadmin');
+        return view('superadmin.berandaAdmin');
+    }
+
+    public function aturDosen(){
+        return view('superadmin.crudDosen');
+    }
+
+    public function aturKoorTA(){
+        return view('superadmin.updateKoorTA');
     }
 }
