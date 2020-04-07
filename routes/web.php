@@ -27,6 +27,8 @@ Route::prefix('mahasiswa')->group(function(){
     Route::get('/profil', 'MahasiswaController@showProfil')->name('mahasiswa.profil');
     Route::get('/bimbingan', 'MahasiswaController@showBimbingan')->name('mahasiswa.bimbingan');
     Route::post('/bimbingan/addSubm', 'MahasiswaController@storeSubm')->name('mahasiswa.tambahSubmission');
+    Route::post('/bimbingan/delSubm', 'MahasiswaController@deleteSubm')->name('mahasiswa.hapusSubmission');
+    Route::post('/bimbingan/edtSubm', 'MahasiswaController@editSubm')->name('mahasiswa.editSubmission');
     Route::get('/pengajuan-judul', 'MahasiswaController@showPengJudul')->name('mahasiswa.judul');
 });
 

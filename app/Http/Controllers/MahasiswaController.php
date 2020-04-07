@@ -41,26 +41,26 @@ class MahasiswaController extends Controller
         */
         //after i learn about the Eloquent
         
-        $kartuBimbingan = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email())->get();
+        $raw_kartuBimbingans = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email)->get()->toArray();
 
-        foreach($kartuBimbingan->keys()->toArray() as $bimbinganId){
-            $submissions = submissions::where('bimbingan_parent', $bimbinganId);
-            foreach($submissions as $submission){
-                foreach($submission as $field){
-                    echo $field." ";
-                }
-                echo "<br>";
+        $kartuBimbingans = [];
+        foreach($raw_kartuBimbingans as $raw_kartuBimbingan){
+            $tmp_kartuBimbingan = [];
+
+            $tmp_submissions = [];
+            $raw_submissions = submissions::where('bimbingan_parent', $raw_kartuBimbingan['id'])->get()->toArray();
+            foreach($raw_submissions as $raw_submission){
+                $tmp_submission = $raw_submission;
+                array_push($tmp_submissions, $tmp_submission);
             }
-            echo "<br>";
+            $tmp_kartuBimbingan = $raw_kartuBimbingan;
+            $tmp_submissions = array("submissions"=>$tmp_submissions);
+            $tmp_kartuBimbingan = array_merge($tmp_kartuBimbingan, $tmp_submissions);
+
+            array_push($kartuBimbingans, $tmp_kartuBimbingan);
         }
-        //data sementara untuk testing
-        $link1 = array('link'=>'https://oke.id', 'linkname'=>'Revisi ke sekian');
-        $link2 = array('link'=>'https://eko.id', 'linkname'=>'Revisi ke sekuan');
-        $kartu1 = array("id"=>"1", "judul"=>"Bimbingan 1", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submissions"=>[$link1, $link2]);
-        $kartu2 = array("id"=>"2", "judul"=>"Bimbingan 2", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submissions"=>[]);
-        
-        $daftarBimbingan = array($kartu1, $kartu2);
-        //return view('bimbingan', ['daftarBimbingan'=>$kartuBimbingan->toArray(), 'mahasiswaId'=>auth()->user()->id, '']);
+
+        return view('bimbingan', ['kartuBimbingans'=>$kartuBimbingans, 'mahasiswaId'=>auth()->user()->id, '']);
         
     }
     public function showPengJudul()
@@ -93,6 +93,16 @@ class MahasiswaController extends Controller
             'owner_mhs' => $txtOwner
         ]);
 
+        return redirect('/mahasiswa/bimbingan');
+    }
+
+    public function deleteSubm(Request $request){
+        $this->validate($request, [
+            'txtSubmId' => 'required'
+        ]);
+        $txtSubmId = $request['txtSubmId'];
+        
+        DB::table('submissions')->where('id', $txtSubmId)->delete();
         return redirect('/mahasiswa/bimbingan');
     }
     
