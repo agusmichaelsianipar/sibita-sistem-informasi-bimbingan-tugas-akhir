@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubmissionsTable extends Migration
+class CreateBimbingansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateSubmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('submissions', function (Blueprint $table) {
+        Schema::create('bimbingans', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('bimbingan_parent');
-            $table->string('link');
-            $table->string('link_name');
+            $table->dateTime('waktu_bimbingan');
+            $table->string('dosen_bimbingan');
+            $table->string('mahasiswa_bimbingan');
+            $table->text('catatan_bimbingan');
         });
     }
 
@@ -29,6 +30,6 @@ class CreateSubmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('submissions');
+        Schema::dropIfExists('bimbingans');
     }
 }

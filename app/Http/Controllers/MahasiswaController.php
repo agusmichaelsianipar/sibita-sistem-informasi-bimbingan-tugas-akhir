@@ -38,9 +38,10 @@ class MahasiswaController extends Controller
             lakukan kueri mengambil bimbingan dari database
         */
         //$kartuBimbingan = DB::select("SELECT * FROM bimbingan_cards WHERE 'mahasiswa_bimbingan' = ".auth()->user()->id);
-        
         $kartuBimbingan = DB::table('bimbingan_cards')->where('mahasiswa_bimbingan', auth()->user()->id)->get()->toArray();
         //$submissions = DB::table('submissions_list')->where('bimbingan_parent', $kartuBimbingan[''])
+        //after i learn about the Eloquent
+        $bimbingans = bimbingan::where('dosen_bimbingan', auth()->user()-id)->get();
 
         //data sementara untuk testing
         $link1 = array('link'=>'https://oke.id', 'linkname'=>'Revisi ke sekian');
