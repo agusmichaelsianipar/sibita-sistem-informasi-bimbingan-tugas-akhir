@@ -30,6 +30,7 @@ Route::prefix('mahasiswa')->group(function(){
     Route::get('/profil', 'MahasiswaController@showProfil')->name('mahasiswa.profil');
     Route::get('/bimbingan', 'MahasiswaController@showBimbingan')->name('mahasiswa.bimbingan');
     Route::get('/pengajuan-judul', 'MahasiswaController@showPengJudul')->name('mahasiswa.judul');
+    Route::post('/pengajuan-judulta', 'MahasiswaController@storePengJudul');
 });
 
 Route::prefix('dosen')->group(function(){
