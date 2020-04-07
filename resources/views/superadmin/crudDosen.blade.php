@@ -8,9 +8,9 @@
     <div class="nama">
         {{$dosbing->name}}
     </div>
-    <div class="emaildosen">
+    <!-- <div class="emaildosen">
         {{$dosbing->email}}
-    </div>
+    </div> -->
     <div class="statusdosen">
         @if($dosbing->status)
             Koordinator TA
@@ -19,10 +19,11 @@
         @endif
     </div>
     <div class="editdosen">
-        <span class="badge badge-success">Edit</span>
+        <button class="btn btn-success btn-sm">Ubah</button>
     </div>
     <div class="hapusdosen">
-        <span class="badge badge-danger">Hapus</span>
+        <form action="" method="post"></form>
+        <button class="btn btn-danger btn-sm">Hapus</button>
     </div>
 @endforeach
 </div>

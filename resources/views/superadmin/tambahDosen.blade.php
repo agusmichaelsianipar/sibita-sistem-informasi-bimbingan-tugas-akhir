@@ -22,14 +22,14 @@
             {{ csrf_field() }}
                 <div class="form-group">
                     <label for="nama">Nama Dosen</label>
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Dosen">
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Dosen" value="{{ old('nama') }}">
                     @if ($errors->has('nama'))
                         <span class="text-danger">{{ $errors->first('nama') }}</span>
                     @endif                       
                 </div>
                 <div class="form-group">
                     <label for="email">Email Dosen</label>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Masukkan Email Dosen">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Masukkan Email Dosen" value="{{ old('email') }}">
                     @if ($errors->has('email'))
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                     @endif                   
