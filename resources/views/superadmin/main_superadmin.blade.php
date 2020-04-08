@@ -11,12 +11,13 @@
 
         <!-- Fontawesome Icon's  -->
         <script src="https://kit.fontawesome.com/b3830587bc.js" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/berandastyle.css') !!}">
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/mahasiswa.css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/dosen.css') !!}">
     </head>
     <body>
     
@@ -29,13 +30,13 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#" data-toggle="collapse" aria-expanded="false">Beranda</a>
+                    <a href="{{ route('superadmin.beranda') }}">Beranda</a>
                 </li>
                 <li>
-                    <a href="#">Profil</a>
+                    <a href="{{ route('superadmin.aturDosbing') }}">Atur Dosen Pembimbing</a>
                 </li>
                 <li>
-                    <a href="#">Assignmen Dosbing Mahasiswa</a>
+                    <a href="{{ route('superadmin.aturKoorTA') }}">Atur Koordinator TA</a>
                 </li>
                 <li>
                     <a href="{{ route('logout') }}"
@@ -43,19 +44,12 @@
                                     document.getElementById('logout-form').submit();">
                         Sign-Out
                     </a>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                 </li>
             </ul>
         </nav>
-
-
-
-    <!-- @yield('bar')
-    @yield('sidebar')
-    @yield('containing') -->
     <div id="content">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -76,18 +70,13 @@
                 <p class="top-title-3">INSTITUT TEKNOLOGI SUMATERA</p>
             </div>
             </div>
-            <!-- <div class="">
-                <p class="top-title">SISTEM INFORMASI BIMBINGAN TUGAS AKHIR</p>
-                <p class="top-title-2">PROGRAM STUDI TEKNIK INFORMATIKA</p>
-                <p class="top-title-3">INSTITUT TEKNOLOGI SUMATERA</p>
-            </div> -->
         </div>
     </div>
     
 </nav>
 
 
-<h2>Disini Konten</h2>
+@yield('beranda')
 
 
 </div>

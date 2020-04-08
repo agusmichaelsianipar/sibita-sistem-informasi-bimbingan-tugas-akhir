@@ -23,6 +23,18 @@ class DosenController extends Controller
      */
     public function index()
     {
-        return view('main_dosbing');
+        return view('beranda_dosen');
+    }
+    public function profil()
+    {
+        return view('profil_dosen');
+    }
+    public function bimbingan()
+    {
+        return view('dosenbimbingan');
+    }
+    public function judul()
+    {
+        return view('pengjuduldosen');
     }
 }
