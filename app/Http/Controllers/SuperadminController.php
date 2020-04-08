@@ -70,7 +70,17 @@ class SuperadminController extends Controller
     }    
 
     public function editDosen(dosen $dosen){
-        return view('superadmin.ubahDosen',['dosen'=>$dosen,]);
+        return view('superadmin.ubahDosen',['dosen'=>$dosen]);
+    }
+
+    public function updateDosen(ErrorFormRequest $request, dosen $dosen){
+
+        dosen::where('id',$dosen->id)
+            ->update([
+                'name' => $request->nama
+            ])
+
+        return $request;
     }
 
     public function aturKoorTA(){
