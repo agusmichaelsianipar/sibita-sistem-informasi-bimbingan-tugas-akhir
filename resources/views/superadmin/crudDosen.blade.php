@@ -3,14 +3,19 @@
 
 @section('beranda')
 <h2>Data Dosen Pembimbing</h2>
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
 <div class="tabled">
 @foreach($dosen as $dosbing)
+    <div class="nomordosen">
+        {{$nomor++}}
+    </div>
     <div class="nama">
         {{$dosbing->name}}
     </div>
-    <!-- <div class="emaildosen">
-        {{$dosbing->email}}
-    </div> -->
     <div class="statusdosen">
         @if($dosbing->status)
             Koordinator TA
@@ -18,13 +23,20 @@
             Dosen Pembimbing
         @endif
     </div>
-    <div class="editdosen">
-        <button class="btn btn-success btn-sm">Ubah</button>
-    </div>
-    <div class="hapusdosen">
-        <form action="" method="post"></form>
+    <!-- <form action="/superadmin/aturdosbing/{{$dosbing->id}}" method="post">
+            {{ method_field('delete') }}
+            {{ csrf_field() }} -->
+    <div class="editdosen  d-inline">
+        <a href="/superadmin/aturdosbing/{{$dosbing->id}}/ubah" class="btn btn-success btn-sm">Ubah</a>
+    </div>    
+    <!-- </form> -->
+    <form action="/superadmin/aturdosbing/{{$dosbing->id}}" method="post">
+            {{ method_field('delete') }}
+            {{ csrf_field() }}
+    <div class="hapusdosen  d-inline">
         <button class="btn btn-danger btn-sm">Hapus</button>
-    </div>
+    </div>    
+    </form>
 @endforeach
 </div>
 <div class="tambahdosen">

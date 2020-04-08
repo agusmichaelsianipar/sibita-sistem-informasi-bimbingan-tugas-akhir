@@ -33,8 +33,8 @@ class SuperadminController extends Controller
 
     public function aturDosen(){
         $dosen = Dosen::all();
-
-        return view('superadmin.crudDosen',['dosen'=>$dosen]);
+        $nomor=1;
+        return view('superadmin.crudDosen',['dosen'=>$dosen,'nomor'=>$nomor]);
     }
     
     public function tambahDosen(){
@@ -59,8 +59,18 @@ class SuperadminController extends Controller
         $cek = $dosen->save();
 
         if($cek){
-            return redirect('/superadmin/aturdosbing');
+            return redirect('/superadmin/aturdosbing')->with('status','Data Dosen Berhasil Ditambahkann!');
         }      
+    }
+
+    public function destroyDosen(dosen $dosen){
+        dosen::destroy($dosen->id);
+
+        return redirect('/superadmin/aturdosbing')->with('status','Data Dosen Berhasil Dihapus!');
+    }    
+
+    public function editDosen(dosen $dosen){
+        return view('superadmin.ubahDosen',['dosen'=>$dosen,]);
     }
 
     public function aturKoorTA(){

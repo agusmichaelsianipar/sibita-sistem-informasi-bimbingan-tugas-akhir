@@ -1,6 +1,10 @@
 .tabled{
 }
-
+.nomordosen{
+    float: left;
+    width: 30px;
+    height: 40px;
+}
 .nama{
     float: left;
     width: 300px;
@@ -20,12 +24,21 @@
 
 }
 
-.hapusdosen{
+/* .hapusdosen{
+    margin-top:-15px;
     height: 40px;
-}
+} */
 
 .editdosen{
+    color: white;
     float: left;
+    width: 70px;
+    height: 40px;
+
+}
+.detaildosen{
+    color: white;
+    /* float: left; */
     width: 70px;
     height: 40px;
 
