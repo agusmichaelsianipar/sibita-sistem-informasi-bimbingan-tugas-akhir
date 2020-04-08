@@ -70,7 +70,28 @@ class SuperadminController extends Controller
     }    
 
     public function editDosen(dosen $dosen){
-        return view('superadmin.ubahDosen',['dosen'=>$dosen,]);
+        return view('superadmin.ubahDosen',['dosen'=>$dosen]);
+    }
+
+    public function updateDosen(ErrorFormRequest $request, dosen $dosen){
+
+        $this->validate($request,[
+            'nama' => 'required',
+            'email' => 'required|email',
+            'password'=> 'min:8|required_with:konfirmasi_password|same:konfirmasi_password',
+            'konfirmasi_password' => 'min:8',
+            'status' => 'required',
+        ]);        
+
+        dosen::where('id',$dosen->id)
+            ->update([
+                'name' => $request->nama,
+                'email' => $request->email,
+                'password' => $request->password,
+                'status' => $request->status,
+            ]);
+
+        return redirect('/superadmin/aturdosbing')->with('status','Data Dosen Berhasil Diubah!');
     }
 
     public function aturKoorTA(){
