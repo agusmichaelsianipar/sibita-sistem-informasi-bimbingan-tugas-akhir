@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Validation\Validator;
 use Auth;
 use App\bimbingan;
 use App\submissions;
@@ -41,7 +42,7 @@ class MahasiswaController extends Controller
         */
         //after i learn about the Eloquent
         
-        $raw_kartuBimbingans = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email)->get()->toArray();
+        $raw_kartuBimbingans = bimbingan::where('mahasiswa_bimbingan', auth()->user()->email)->get()->toArray();
 
         $kartuBimbingans = [];
         foreach($raw_kartuBimbingans as $raw_kartuBimbingan){
@@ -59,7 +60,7 @@ class MahasiswaController extends Controller
 
             array_push($kartuBimbingans, $tmp_kartuBimbingan);
         }
-
+        
         return view('bimbingan', ['kartuBimbingans'=>$kartuBimbingans, 'mahasiswaId'=>auth()->user()->id, '']);
         
     }
@@ -68,29 +69,18 @@ class MahasiswaController extends Controller
         return view('judul');
     }
     public function storeSubm(Request $request){
-        /*
-        #TODO
-        Do query to database submissions
-        */
-
-        // Verifying the inputs
-        $this->validate($request, [
+        //Input verify
+        $this->validate($request,[
+            'txtBimbinganOwner' => 'required',
             'txtLink' => 'required',
-            'txtLinkName' => 'required',
-            'txtOwner' => 'required'
+            'txtLinkName' => 'required'
         ]);
         
-        $txtLink = $request['txtLink'];
-        $txtLinkName = $request['txtLinkName'];
-        $txtOwner = $request['txtOwner'];
-        
-        echo $txtLink."</br>".$txtLinkName."</br>".$txtOwner;
-        
-        // add the submissions to submissions_list
-        DB::table('submissions_list')->insert([
-            'link' => $txtLink,
-            'link_name' => $txtLinkName,
-            'owner_mhs' => $txtOwner
+        //Store to database, masih menggunakan Query Builder
+        DB::table('submissions')->insert([
+            'bimbingan_parent' => $request->txtBimbinganOwner,
+            'link' => $request->txtLink,
+            'link_name' => $request->txtLinkName
         ]);
 
         return redirect('/mahasiswa/bimbingan');
@@ -100,9 +90,23 @@ class MahasiswaController extends Controller
         $this->validate($request, [
             'txtSubmId' => 'required'
         ]);
-        $txtSubmId = $request['txtSubmId'];
         
-        DB::table('submissions')->where('id', $txtSubmId)->delete();
+        DB::table('submissions')->where('id', $request['txtSubmId'])->delete();
+        return redirect('/mahasiswa/bimbingan');
+    }
+
+    public function editSubm(Request $request){
+        $this->validate($request, [
+            'txtSubmId' => 'required',
+            'txtLink' => 'required',
+            'txtLinkName' => 'required'
+        ]);
+
+        DB::table('submissions')->where('id', $request['txtSubmId'])->update([
+            'link' => $request['txtLink'],
+            'link_name' => $request['txtLinkName']
+        ]);
+        
         return redirect('/mahasiswa/bimbingan');
     }
     

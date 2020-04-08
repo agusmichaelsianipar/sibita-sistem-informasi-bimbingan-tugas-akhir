@@ -41,34 +41,36 @@
                             -->                
                             @foreach($kartuBimbingan['submissions'] as $submission)
                             <div class="subm-box">
-                                <div class="subm-link">
-                                    <a href="{{$submission['link']}}" target="blank">
-                                        <div >
-                                            {{$submission['link_name']}}
-                                        </div>
-                                    </a>
+                                <div>
+                                    <div class="subm-link">
+                                        <a href="{{$submission['link']}}" target="blank">
+                                            <div >
+                                                {{$submission['link_name']}}
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="clickAble subm-edt" data-toggle="collapse" data-target="#edtSubm{{$submission['id']}}">
+                                        Edit
+                                    </div>
+                                    <div class="subm-edt">
+                                        |
+                                    </div>
+                                    <div class="subm-edt clickAble" onclick="if(confirm('Yakin ingin menghapus submission ini?'))document.getElementById('submHapus{{$submission['id']}}').submit()">
+                                        <form hidden action="{{route('mahasiswa.hapusSubmission')}}" method="POST" id="submHapus{{$submission['id']}}">
+                                            {{ csrf_field() }}
+                                            <Input type="hidden" name="txtSubmId" value="{{$submission['id']}}">        
+                                        </form>
+                                        Delete
+                                    </div>
                                 </div>
-                                <div class="clickAble subm-edt" data-toggle="collapse" data-target="#edtSubm{{$submission['id']}}">
-                                    Edit
-                                </div>
-                                <div class="subm-edt">
-                                    |
-                                </div>
-                                <div class="subm-edt clickAble" onclick="if(confirm('Yakin ingin menghapus submission ini?')) document.getElementById('submHapus{{$submission['id']}}').submit()">
-                                    <form hidden action="{{route('mahasiswa.hapusSubmission')}}" method="POST" id="submHapus{{$submission['id']}}">
-                                        {{ csrf_field() }}
-                                        <Input type="hidden" name="txtSubmId" value="{{$submission['id']}}">        
-                                    </form>
-                                    Delete
-                                </div>
-                                <div class="collapse subm-link" id="edtSubm{{$submission['id']}}">
+                                <div class="collapse subm-edt-box" id="edtSubm{{$submission['id']}}">
                                     <form action="{{route('mahasiswa.editSubmission')}}" method="post" id="mhsEdtSubm{{$submission['id']}}">
                                         {{ csrf_field() }}
-                                        <input type="hidden" name="txtBimbinganParent" value="{{$kartuBimbingan['id']}}">
+                                        <input type="hidden" name="txtSubmId" value="{{$submission['id']}}">
                                         <label for="txtLink">Link: </label>
-                                        <input class="form-control" type="text" name="txtLink" id="txtLink">
+                                        <input class="form-control" type="text" name="txtLink" id="txtLink" value="{{$submission['link']}}">
                                         <label for="txtLinkName">Nama:</label>
-                                        <input class="form-control" type="text" name="txtLinkName" id="txtLinkText">
+                                        <input class="form-control" type="text" name="txtLinkName" id="txtLinkText" value="{{$submission['link_name']}}">
                                         <div class="subm-edt clickAble" data-toggle="collapse" data-target="#edtSubm{{$submission['id']}}">
                                             Batal
                                         </div>
@@ -76,7 +78,7 @@
                                             |
                                         </div>
                                         <div class="subm-edt clickAble" onClick="document.getElementById('mhsEdtSubm{{$submission['id']}}').submit()">
-                                            Kirim
+                                            Ubah
                                         </div>
                                     </form>
                                 </div>
@@ -92,16 +94,16 @@
                                         {{ csrf_field() }}
                                         <input type="hidden" name="txtBimbinganOwner" value="{{$kartuBimbingan['id']}}">
                                         <label for="txtLink">Link: </label>
-                                        <input class="form-control" type="text" name="txtLink" id="txtLink">
+                                        <input class="form-control" type="text" name="txtLink" id="txtLink{{$kartuBimbingan['id']}}">
                                         <label for="txtLinkName">Nama:</label>
-                                        <input class="form-control" type="text" name="txtLinkName" id="txtLinkText">
+                                        <input class="form-control" type="text" name="txtLinkName" id="txtLinkName">
                                         <div class="subm-edt clickAble" data-toggle="collapse" data-target="#adSubm{{$kartuBimbingan['id']}}">
                                             Batal
                                         </div>
                                         <div class="subm-edt">
                                             |
                                         </div>
-                                        <div class="subm-edt clickAble" onClick="document.getElementById('mhsAddSubm{{$kartuBimbingan['id']}}').submit()">
+                                        <div class="subm-edt clickAble" onClick="document.getElementById('bimbAddSubm{{$kartuBimbingan['id']}}').submit()">
                                             Kirim
                                         </div>
                                     </form>
@@ -124,16 +126,15 @@
         //link = box.innerHTML.getElementById('link');
         console.log(link);
     }
-    function hapusLink(target){
-        //code 
-        console.log("Menghapus Link");
-        if(confirm("Ingin menghapus Link?")){
-            target.parentElement.remove();
-        }
-    }
-    function editLink(){
-        //code here
-    }
+    function validURL(str) {
+        var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+        return !!pattern.test(str);
+}
 </script>
 
 <!--

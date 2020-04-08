@@ -428,7 +428,13 @@ conbar{
     margin: 2px;
 }
 
+.subm-edt-box{
+    display:inline-block;
+    padding: auto ;
+    margin: 2px;
+}
 
 .clickAble:hover{
     cursor: pointer;
 }
+
