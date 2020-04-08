@@ -332,88 +332,119 @@ a.article, a.article:hover {
 .conbar a{
     text-decoration: none;
     color: black;
-}conbar{
+}
+conbar{
     float: left;
     font-size: 1.6vw ;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}   float: left;
-    font-size: 1.6vw ;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.bartitle-2{
-	width: 9vw;
-    background: #ffbf00;
-    float: right;
-    font-size: 1.6vw;
-    margin-top: -0.85vw;
-    padding-top: 0.5vw;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.bartitle-2 a{
-    text-decoration: none;
-    color: black;
-}
-.bartitle a{
-    text-decoration: none;
-    color: black;
-}
-.conbar a{
-    text-decoration: none;
-    color: black;
-}conbar{
-    float: left;
-    font-size: 1.6vw ;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.bartitle-2{
-	width: 9vw;
-    background: #ffbf00;
-    float: right;
-    font-size: 1.6vw;
-    margin-top: -0.85vw;
-    padding-top: 0.5vw;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.bartitle-2 a{
-    text-decoration: none;
-    color: black;
-}
-.bartitle a{
-    text-decoration: none;
-    color: black;
-}
-.conbar a{
-    text-decoration: none;
-    color: black;
 }
 
-/*
-CSS bimbingan
-*/
-.kartu-bimbingan{
-    border-style: solid;
-    border-color:lightgray;
-    border-width: 1px;
-    padding: 5px;
-    margin: 20px;
+
+.bartitle-2{
+	width: 9vw;
+    background: #ffbf00;
+    float: right;
+    font-size: 1.6vw;
+    margin-top: -0.85vw;
+    padding-top: 0.5vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.bartitle-2 a{
+    text-decoration: none;
+    color: black;
+}
+.bartitle a{
+    text-decoration: none;
+    color: black;
+}
+.conbar a{
+    text-decoration: none;
+    color: black;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
-/*
-.konten-bimbingan{
-    
-}
-*/
-.dosen-bimbingan p{
-    text-align: left;
+/*CSS FOR BIMBINGAN*/
+.kartu-bimbingan{
+    padding: 5px;
+    margin: 5px;
 }
 
-/*
 .judul-kartu{
-    
+    background-color: #eee;
+    padding: 3px;
 }
-*/
+
+.judul-kartu h5{
+    padding: 5px;
+    margin: auto;
+}
 
 .judul-kartu:hover{
     cursor: pointer;
 }
+
+.konten-bimbingan{
+    padding: 20px;
+}
+
+.kb-s1{
+    overflow: hidden;
+}
+
+.kb-ch1{
+    float: left;
+    width: 50%;
+    min-width: 400px;
+}
+
+.kb-s2{
+    overflow: hidden;
+}
+
+.kb-ch2{
+    float: left;
+    min-width: 400px;
+}
+
+.dosen-bimbingan p{
+    text-align: left;
+}
+
+.subm-box{
+    color: #999;    
+    border-style: solid;
+    border-width: 1px;
+    border-color: #eee;
+    padding: 4px;
+    margin: 2px;
+    overflow: hidden;
+
+
+}
+.subm-box:hover{
+    background-color: #eef;
+}
+
+.subm-link{
+    float: left;
+    display: block;
+    padding: auto;
+    margin: 2px;
+}
+.subm-edt{
+    float: right;
+    display: block;
+    padding: auto ;
+    margin: 2px;
+}
+
+.subm-edt-box{
+    display:inline-block;
+    padding: auto ;
+    margin: 2px;
+}
+
+.clickAble:hover{
+    cursor: pointer;
+}
+
