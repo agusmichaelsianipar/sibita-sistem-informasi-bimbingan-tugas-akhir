@@ -50,5 +50,9 @@ Route::prefix('superadmin')->group(function(){
     Route::post('/login','Auth\SuperadminLoginController@login')->name('superadmin.login.submit');
     Route::get('/', 'SuperadminController@index')->name('superadmin.beranda');
     Route::get('/aturdosbing', 'SuperadminController@aturDosen')->name('superadmin.aturDosbing');
+    Route::delete('/aturdosbing/{dosen}', 'SuperadminController@destroyDosen');
+    Route::get('/aturdosbing/{dosen}/ubah', 'SuperadminController@editDosen');
+    Route::get('/tambahdosen','SuperadminController@tambahDosen')->name('superadmin.tambahDosbing');
+    Route::post('/tambahdosbing','SuperadminController@storeDosen')->name('superadmin.tambahDosen');
     Route::get('/aturkoorta', 'SuperadminController@aturKoorTA')->name('superadmin.aturKoorTA');
 });
