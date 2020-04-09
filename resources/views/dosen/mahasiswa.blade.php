@@ -2,15 +2,49 @@
 @section('title','Mahasiswa | Sibita')
 
 @section('beranda')
-@foreach($mahasiswas as $mahasiswa)
-<div class="mahasiswas-container">
-    <div class="mahasiswa-card">
-        <div class="mcard-name">
-            {{$mahasiswa['name']}}
-        </div>
-    </div>
+
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    No
+                </th>
+                <th>
+                    Nama
+                </th>
+                <th>
+                    Status & Pemberitahuan
+                </th>
+                <th>
+                    Aksi
+                </th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach($mahasiswas as $mahasiswa)
+            <tr>
+                <td>
+                    {{$counter++}}
+                </td>   
+                <td>    
+                    {{$mahasiswa['name']}}
+                </td> 
+                <td>
+    
+                </td>
+                <td>
+    
+                </td>
+            </tr>    
+            @endforeach
+        </tbody>
+    </table>
+
 </div>
-@endforeach
+
 
 
 
