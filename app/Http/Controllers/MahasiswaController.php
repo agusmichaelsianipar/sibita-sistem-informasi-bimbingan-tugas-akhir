@@ -73,7 +73,6 @@ class MahasiswaController extends Controller
     {
         return view('judul');
     }
-<<<<<<< HEAD
 
     public function storePengJudul(ErrorFormRequest $request){
         $this->validate($request,[
@@ -110,9 +109,7 @@ class MahasiswaController extends Controller
 
     }
 
-=======
   
->>>>>>> b9f7c411b3d05787ee896a0e81f0afd905d7e9ff
     public function storeSubm(Request $request){
         //Input verify
         $this->validate($request,[
@@ -154,9 +151,7 @@ class MahasiswaController extends Controller
         
         return redirect('/mahasiswa/bimbingan');
     }
-<<<<<<< HEAD
     
-=======
     public function storePengJudul(ErrorFormRequest $request){
         $this->validate($request,[
             'judul_1' => 'required',
@@ -191,5 +186,4 @@ class MahasiswaController extends Controller
         }
 
     }    
->>>>>>> b9f7c411b3d05787ee896a0e81f0afd905d7e9ff
 }
