@@ -13,6 +13,7 @@ use Auth;
 use Illuminate\Contracts\Validation\Validator;
 use App\bimbingan;
 use App\submissions;
+use DB;
 
 class MahasiswaController extends Controller
 {
@@ -39,6 +40,11 @@ class MahasiswaController extends Controller
     {
         return view('profil_mahasiswa');
     }
+
+    public function getMyBimbingans($email){
+
+    }
+    
     public function showBimbingan()
     {
         /*

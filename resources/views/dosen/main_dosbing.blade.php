@@ -34,16 +34,13 @@
                     <a href="{{ route('dosen.dashboard') }}">Beranda</a>
                 </li>
                 <li>
-                    <a href="{{ route('dosen.profile') }}">Profil</a>
-                </li>
-                <li>
-                    <a href="{{ route('dosen.bimbingan') }}">Bimbingan Mahasiswa</a>
-                </li>
-                <li>
-                    <a href="{{ route('dosen.mahasiswa') }}">Mahasiswa</a>
+                    <a href="{{ route('dosen.mahasiswa') }}">Bimbingan Mahasiswa</a>
                 </li>
                 <li>
                     <a href="{{ route('dosen.judul') }}">Pengajuan Judul</a>
+                </li>
+                <li>
+                    <a href="{{ route('dosen.profile') }}">Profil</a>
                 </li>
                 <li>
                 <a href="{{ route('logout') }}"

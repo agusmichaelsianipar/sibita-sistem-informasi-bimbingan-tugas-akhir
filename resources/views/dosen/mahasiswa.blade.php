@@ -5,6 +5,11 @@
 
 
 <div class="container">
+    @if(session('popMsg'))
+        <div class="alert alert-danger">
+            {{session('popMsg')}}
+        </div>
+    @endif
     <table class="table table-hover">
         <thead>
             <tr>
@@ -33,10 +38,38 @@
                     {{$mahasiswa['name']}}
                 </td> 
                 <td>
-    
+                    @if(is_null($mahasiswa['judul']))
+                    <span class="status pengajuan">
+                        Pengajuan
+                    </span>
+                    @else
+                    <span class="status melaksanakan">
+                        Melaksanakan TA
+                    </span>
+                    @endif
                 </td>
                 <td>
-    
+                    @if(is_null($mahasiswa['judul']))
+                    <div class="btn btn-info m-1 p-1 btn-sm text-left cekPengajuan">
+                        Cek Pengajuan
+                    </div>
+                    @else
+                    <a href="/dosen/membimbing/yan@localhost.co">
+                        <div class="btn btn-primary m-1 p-1 btn-sm text-left" onclick="this.parentElement.submit()">
+                            Bimbingan
+                        </div>
+                    </a>
+                    <a href="/dosen/ajukanseminar/yan@localhost.co">
+                        <div class="btn btn-primary m-1 p-1 btn-sm text-left" onclick="this.parentElement.submit()">
+                            Seminar
+                        </div>
+                    </a>
+                    <a href="/dosen/ajukansidang/yan@localhost.co">
+                        <div class="btn btn-primary m-1 p-1 btn-sm text-left" onclick="this.parentElement.submit()">
+                            Sidang
+                        </div>
+                    </a>
+                    @endif
                 </td>
             </tr>    
             @endforeach
@@ -49,3 +82,10 @@
 
 
 @endsection
+
+
+<script>
+    window.setTimeout(function(){
+        $(".alert")[0].classList.add('collapse');
+    }, 10000);
+</script> 

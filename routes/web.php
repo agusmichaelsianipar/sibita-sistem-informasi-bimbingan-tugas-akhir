@@ -42,6 +42,9 @@ Route::prefix('dosen')->group(function(){
     Route::get('/', 'DosenController@index')->name('dosen.dashboard');
     Route::get('/profile', 'DosenController@profil')->name('dosen.profile');
     Route::get('/bimbingan', 'DosenController@bimbingan')->name('dosen.bimbingan');
+    Route::get('/membimbing/{emailMhs}', 'DosenController@membimbing')->name('dosen.membimbing');
+    Route::post('/tambahKartu', 'DosenController@addCard')->name('dosen.tambahKartu');
+    Route::delete('/hapusKartu', 'DosenController@delCard')->name('dosen.hapusKartu');
     Route::get('/mahasiswa', 'DosenController@mahasiswa')->name('dosen.mahasiswa');
     Route::get('/judul', 'DosenController@judul')->name('dosen.judul');
 });
