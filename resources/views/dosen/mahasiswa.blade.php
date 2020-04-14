@@ -54,17 +54,17 @@
                         Cek Pengajuan
                     </div>
                     @else
-                    <a href="/dosen/membimbing/yan@localhost.co">
+                    <a href="/dosen/membimbing/{{$mahasiswa['email']}}">
                         <div class="btn btn-primary m-1 p-1 btn-sm text-left" onclick="this.parentElement.submit()">
                             Bimbingan
                         </div>
                     </a>
-                    <a href="/dosen/ajukanseminar/yan@localhost.co">
+                    <a href="/dosen/ajukanseminar/{{$mahasiswa['email']}}">
                         <div class="btn btn-primary m-1 p-1 btn-sm text-left" onclick="this.parentElement.submit()">
                             Seminar
                         </div>
                     </a>
-                    <a href="/dosen/ajukansidang/yan@localhost.co">
+                    <a href="/dosen/ajukansidang/{{$mahasiswa['email']}}">
                         <div class="btn btn-primary m-1 p-1 btn-sm text-left" onclick="this.parentElement.submit()">
                             Sidang
                         </div>

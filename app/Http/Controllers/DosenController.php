@@ -74,7 +74,41 @@ class DosenController extends Controller
             }
             return view('dosen.membimbing', ["kartuBimbingans"=>$kartuBimbingans, "mahasiswa"=>$mahasiswa, "dosbing"=>[$dosbing1, $dosbing2]]);
         }
-        
+    }
+
+    public function ajukansidang($emailMhs)
+    {
+        $mahasiswa = mahasiswa::where('email', $emailMhs)->first();
+
+        if(is_null($mahasiswa)){
+            return view('dosen.ajukansidang', ['mahasiswa'=>FALSE, 'popMsg'=>"Mahasiswa tidak ditemukan!"]);
+        }else{
+            $mahasiswa = $mahasiswa->toArray();
+        }
+
+        if(is_null($mahasiswa['judul'])){
+            return redirect()->route('dosen.ajukansidang')->with('popMsg', $mahasiswa['name']." belum dapat mengikuti bimbingan!");
+        }else{
+            return view('dosen.ajukansidang', ['mahasiswa'=>$mahasiswa]);
+        }
+
+    }
+
+    public function ajukanseminar($emailMhs)
+    {
+        $mahasiswa = mahasiswa::where('email', $emailMhs)->first();
+
+        if(is_null($mahasiswa)){
+            return view('dosen.ajukanseminar', ['mahasiswa'=>FALSE, 'popMsg'=>"Mahasiswa tidak ditemukan!"]);
+        }else{
+            $mahasiswa = $mahasiswa->toArray();
+        }
+
+        if(is_null($mahasiswa['judul'])){
+            return redirect()->route('dosen.ajukanseminar')->with('popMsg', $mahasiswa['name']." belum dapat mengikuti bimbingan!");
+        }else{
+            return view('dosen.ajukanseminar', ['mahasiswa'=>$mahasiswa]);
+        }
     }
 
     public function addCard(Request $request){
@@ -109,6 +143,7 @@ class DosenController extends Controller
     {
         return view('dosen.pengjudul');
     }
+
     public function mahasiswa(){
         $raw_mahasiswa = mahasiswa::where(function($query){
             $query->where('email_dosbing1', auth()->user()->email)
