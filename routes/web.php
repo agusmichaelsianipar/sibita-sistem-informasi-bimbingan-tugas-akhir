@@ -62,4 +62,5 @@ Route::prefix('superadmin')->group(function(){
     Route::get('/tambahdosen','SuperadminController@tambahDosen')->name('superadmin.tambahDosbing');
     Route::post('/tambahdosbing','SuperadminController@storeDosen')->name('superadmin.tambahDosen');
     Route::get('/aturkoorta', 'SuperadminController@aturKoorTA')->name('superadmin.aturKoorTA');
+    Route::get('/statistikTA', 'SuperadminController@statistikTA')->name('superadmin.statistikTA');
 });

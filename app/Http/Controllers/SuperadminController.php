@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ErrorFormRequest;
 use App\Dosen;
+use App\Mahasiswa;
 
 class SuperadminController extends Controller
 {
@@ -96,5 +97,31 @@ class SuperadminController extends Controller
 
     public function aturKoorTA(){
         return view('superadmin.updateKoorTA');
+    }
+
+    public function statistikTA(){
+        //Jumlah mahasiswa yang sedang melaksanakan TA (telah melewati tahap pengajuan)
+        //merupakan yang sudah berada di tabel mahasiswa
+        $mahasiswa_all = mahasiswa::all();
+        
+        $mahasiswa = [
+            'daftarMhs' => $mahasiswa_all->toArray(),
+            'jumlahPeserta' => $mahasiswa_all->count()
+        ];
+        
+        //Jumlah dosen TA
+        $dosen_all = dosen::all();
+
+        $dosen = [
+            'daftarDosen' => $dosen_all->toArray(),
+            'jumlahDosen' => $dosen_all->count(),
+        ];
+
+        $data = [
+            'dosen' =>$dosen,
+            'mahasiswa' =>$mahasiswa
+        ];
+
+        return view('superadmin.statistikTA', ['data'=>$data]);
     }
 }
