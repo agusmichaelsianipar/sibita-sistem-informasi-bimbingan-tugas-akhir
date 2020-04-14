@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-// namespace App\Http\Controllers\Auth;
 
 use App\Mahasiswa;
 use App\Pengjudul;
@@ -10,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ErrorFormRequest;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Validation\Validator;
 use App\bimbingan;
 use App\submissions;
@@ -115,6 +115,7 @@ class MahasiswaController extends Controller
 
     }
 
+  
     public function storeSubm(Request $request){
         //Input verify
         $this->validate($request,[
