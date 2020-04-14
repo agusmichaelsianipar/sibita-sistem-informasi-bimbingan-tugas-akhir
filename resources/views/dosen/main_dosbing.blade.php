@@ -17,6 +17,8 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/berandastyle.css') !!}">
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/mahasiswa.css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/dosbing.css') !!}">
+
     </head>
     <body>
     
@@ -32,13 +34,13 @@
                     <a href="{{ route('dosen.dashboard') }}">Beranda</a>
                 </li>
                 <li>
-                    <a href="{{ route('dosen.profile') }}">Profil</a>
-                </li>
-                <li>
-                    <a href="{{ route('dosen.bimbingan') }}">Bimbingan Mahasiswa</a>
+                    <a href="{{ route('dosen.mahasiswa') }}">Bimbingan Mahasiswa</a>
                 </li>
                 <li>
                     <a href="{{ route('dosen.judul') }}">Pengajuan Judul</a>
+                </li>
+                <li>
+                    <a href="{{ route('dosen.profile') }}">Profil</a>
                 </li>
                 <li>
                 <a href="{{ route('logout') }}"
