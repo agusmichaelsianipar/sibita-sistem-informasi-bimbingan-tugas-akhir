@@ -89,7 +89,7 @@ class DosenController extends Controller
         if(is_null($mahasiswa['judul'])){
             return redirect()->route('dosen.ajukansidang')->with('popMsg', $mahasiswa['name']." belum dapat mengikuti bimbingan!");
         }else{
-            return view('dosen.ajukansidang', ['mahasiswa'=>$mahasiswa]);
+            return view('dosen.ajukansidang', ['mahasiswa'=>$mahasiswa, 'popMsg'=>FALSE]);
         }
 
     }
@@ -107,7 +107,7 @@ class DosenController extends Controller
         if(is_null($mahasiswa['judul'])){
             return redirect()->route('dosen.ajukanseminar')->with('popMsg', $mahasiswa['name']." belum dapat mengikuti bimbingan!");
         }else{
-            return view('dosen.ajukanseminar', ['mahasiswa'=>$mahasiswa]);
+            return view('dosen.ajukanseminar', ['mahasiswa'=>$mahasiswa, 'popMsg'=>FALSE]);
         }
     }
 
