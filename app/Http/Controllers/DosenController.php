@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Pengjudul;
+use App\Mahasiswa;
 
 class DosenController extends Controller
 {
@@ -35,6 +38,23 @@ class DosenController extends Controller
     }
     public function judul()
     {
-        return view('pengjuduldosen');
+        $nomor=1;
+        $judul = DB::table('pengjuduls')
+                    ->where('cadosbing1', 'masayu.khodra@if.itera.ac.id')
+                    ->orWhere('cadosbing2', 'meida.cahyo@if.itera.ac.id')
+                    ->get();
+        // dd($judul);
+
+        $nama = DB::table("mahasiswas")->select('name','pengjuduls.id','pengjuduls.email','pengjuduls.judul1')
+                    ->leftJoin('pengjuduls','mahasiswas.email','=','pengjuduls.email')->get();    
+                                    
+        // dd($nama);
+
+        return view('pengjuduldosen',['nama' => $nama,'judul' => $judul,'nomor'=>$nomor]);
+    }
+
+    public function showJudul(pengjudul $judul){
+
+        return view('dosen.detailJudul',['judul'=>$judul]);
     }
 }

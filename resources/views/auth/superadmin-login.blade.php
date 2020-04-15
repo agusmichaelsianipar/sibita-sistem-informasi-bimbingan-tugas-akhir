@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+@section('title','LOGIN ADMIN | SIBITA')
+@section('brand','ADMINISTRATOR | SIBITA')
 @section('content')
 <div class="container">
     <div class="row">

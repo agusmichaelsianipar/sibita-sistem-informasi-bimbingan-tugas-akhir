@@ -43,6 +43,7 @@ Route::prefix('dosen')->group(function(){
     Route::get('/profile', 'DosenController@profil')->name('dosen.profile');
     Route::get('/bimbingan', 'DosenController@bimbingan')->name('dosen.bimbingan');
     Route::get('/judul', 'DosenController@judul')->name('dosen.judul');
+    Route::get('/judul/{judul}', 'DosenController@showJudul');
 });
 
 Route::prefix('superadmin')->group(function(){
@@ -56,4 +57,5 @@ Route::prefix('superadmin')->group(function(){
     Route::get('/tambahdosen','SuperadminController@tambahDosen')->name('superadmin.tambahDosbing');
     Route::post('/tambahdosbing','SuperadminController@storeDosen')->name('superadmin.tambahDosen');
     Route::get('/aturkoorta', 'SuperadminController@aturKoorTA')->name('superadmin.aturKoorTA');
+    Route::patch('/aturkoorta/{dosen}', 'SuperadminController@updateKoorTA');
 });

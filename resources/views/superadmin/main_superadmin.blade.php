@@ -30,7 +30,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="{{ route('superadmin.beranda') }}">Beranda</a>
+                    <a href="{{ route('superadmin.beranda') }}">Atur Mahasiswa</a>
                 </li>
                 <li>
                     <a href="{{ route('superadmin.aturDosbing') }}">Atur Dosen Pembimbing</a>
@@ -45,7 +45,8 @@
                         Sign-Out
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
+                        
+            {{ csrf_field() }}
                     </form>
                 </li>
             </ul>

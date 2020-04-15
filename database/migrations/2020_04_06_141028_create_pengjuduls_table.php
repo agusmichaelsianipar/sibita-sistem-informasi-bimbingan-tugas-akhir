@@ -20,14 +20,12 @@ class CreatePengjudulsTable extends Migration
             $table->foreign('email')->references('email')->on('mahasiswas');
             $table->string('judul1',200)->unique();
             $table->text('des_judul1');
-            $table->string('judul2',200)->unique();
-            $table->text('des_judul2');
-            $table->string('cadosbing1_1');
-            $table->string('cadosbing1_2');
-            $table->string('cadosbing1_3');
-            $table->string('cadosbing2_1');
-            $table->string('cadosbing2_2');
-            $table->string('cadosbing2_3');
+            $table->string('cadosbing1',255);
+            $table->index('cadosbing1');
+            $table->string('cadosbing2',255);
+            $table->index('cadosbing2');
+            $table->string('cadosbing3',255);
+            $table->index('cadosbing3');
             $table->timestamps();
         });
     }
@@ -42,6 +40,9 @@ class CreatePengjudulsTable extends Migration
         Schema::dropIfExists('pengjuduls',function (Blueprint $table){
             $table->dropForeign('email');
             $table->dropIndex('email');
+            $table->dropIndex('cadosbing1');
+            $table->dropIndex('cadosbing2');
+            $table->dropIndex('cadosbing3');
             $table->dropColumn('email');
         });
 
