@@ -14,7 +14,7 @@ class CreateMahasiswasTable extends Migration
     public function up()
     {
         Schema::create('mahasiswas',function (Blueprint $table){
-            $table->increments('id')-unique();
+            $table->increments('id')->unique();
             $table->string('name');
             $table->string('nim');
             $table->string('email')->unique();
@@ -23,7 +23,9 @@ class CreateMahasiswasTable extends Migration
             $table->string('dosen_wali');
             $table->string('judul')->nullable();
             $table->string('email_dosbing1')->nullable();
+            $table->index('email_dosbing1');
             $table->string('email_dosbing2')->nullable();
+            $table->index('email_dosbing2');
             $table->rememberToken();
             $table->timestamps();
         });

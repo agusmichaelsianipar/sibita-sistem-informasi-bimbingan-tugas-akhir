@@ -14,9 +14,10 @@ class CreateDosensTabel extends Migration
     public function up()
     {
         Schema::create('dosens', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unique();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email',255)->unique();
+            $table-primary('email');
             $table->string('password');
             $table->boolean('status');
             $table->integer('jlhmhs')->nullable();

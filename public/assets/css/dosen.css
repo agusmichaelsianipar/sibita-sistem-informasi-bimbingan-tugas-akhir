@@ -21,7 +21,6 @@
     float: left;
     width: 200px;
     height: 40px;
-
 }
 
 /* .hapusdosen{
@@ -34,14 +33,11 @@
     float: left;
     width: 70px;
     height: 40px;
-
 }
 .detaildosen{
     color: white;
-    /* float: left; */
     width: 70px;
     height: 40px;
-
 }
 
 .tambahdosen .btn{
@@ -52,8 +48,18 @@
     width: 600px;
     height: 35px;
 }
+
+.koorta{
+    float: left;
+    width: 200px;
+    height: 40px;
+}
+
 #status option{
     width: 550px;
     height: 35px;
 }
-
+#setkoorta{
+    width: 300px;
+    height: 35px;
+}
