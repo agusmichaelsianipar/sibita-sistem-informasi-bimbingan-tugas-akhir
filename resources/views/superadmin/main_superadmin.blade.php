@@ -39,6 +39,9 @@
                     <a href="{{ route('superadmin.aturKoorTA') }}">Atur Koordinator TA</a>
                 </li>
                 <li>
+                    <a href="{{ route('superadmin.statistikTA') }}">Statistik TA</a>
+                </li>
+                <li>
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">

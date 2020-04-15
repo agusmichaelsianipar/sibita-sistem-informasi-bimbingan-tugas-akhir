@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Validation\Validator;
 use App\bimbingan;
 use App\submissions;
+use DB;
 
 class MahasiswaController extends Controller
 {
@@ -39,6 +40,11 @@ class MahasiswaController extends Controller
     {
         return view('profil_mahasiswa');
     }
+
+    public function getMyBimbingans($email){
+
+    }
+    
     public function showBimbingan()
     {
         /*
@@ -68,10 +74,47 @@ class MahasiswaController extends Controller
         return view('bimbingan', ['kartuBimbingans'=>$kartuBimbingans, 'mahasiswaId'=>auth()->user()->id, '']);
         
     }
+
     public function showPengJudul()
     {
         return view('judul');
     }
+
+    public function storePengJudul(ErrorFormRequest $request){
+        $this->validate($request,[
+            'judul_1' => 'required',
+            'deskripsi_judul_1' => 'required',
+            'judul_2'=> 'required',
+            'deskripsi_judul_2' => 'required',
+            'cadosbing1_1' => 'required',
+            'cadosbing1_2' => 'required',
+            'cadosbing1_3' => 'required',
+            'cadosbing2_1' => 'required',
+            'cadosbing2_2' => 'required',
+            'cadosbing2_3' => 'required',
+        ]);
+        
+        $judul = new Pengjudul;
+        $judul->email = Auth::user()->email;
+        $judul->judul1 = $request->judul_1;
+        $judul->des_judul1 = $request->deskripsi_judul_1;
+        $judul->judul2 = $request->judul_2;
+        $judul->des_judul2 = $request->deskripsi_judul_2;
+        $judul->cadosbing1_1 = $request->cadosbing1_1;
+        $judul->cadosbing1_2 = $request->cadosbing1_2;
+        $judul->cadosbing1_3 = $request->cadosbing1_3;
+        $judul->cadosbing2_1 = $request->cadosbing2_1;
+        $judul->cadosbing2_2 = $request->cadosbing2_2;
+        $judul->cadosbing2_3 = $request->cadosbing2_3;
+
+        $cek = $judul->save();
+
+        if($cek){
+            return redirect('/mahasiswa/pengajuan-judul');
+        }
+
+    }
+
   
     public function storeSubm(Request $request){
         //Input verify
@@ -150,5 +193,5 @@ class MahasiswaController extends Controller
             return redirect('/mahasiswa/pengajuan-judul');
         }
 
-    }    
+    }   
 }

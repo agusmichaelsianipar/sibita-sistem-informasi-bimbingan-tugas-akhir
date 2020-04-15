@@ -1,4 +1,4 @@
-@extends('main_dosbing')
+@extends('dosen.main_dosbing')
 @section('title','BIMBINGAN | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
 @section('beranda')
