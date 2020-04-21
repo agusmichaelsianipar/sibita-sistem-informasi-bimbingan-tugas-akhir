@@ -23,13 +23,9 @@
             Dosen Pembimbing
         @endif
     </div>
-    <!-- <form action="/superadmin/aturdosbing/{{$dosbing->id}}" method="post">
-            {{ method_field('delete') }}
-            {{ csrf_field() }} -->
     <div class="editdosen  d-inline">
         <a href="/superadmin/aturdosbing/{{$dosbing->id}}/ubah" class="btn btn-success btn-sm">Ubah</a>
     </div>    
-    <!-- </form> -->
     <form action="/superadmin/aturdosbing/{{$dosbing->id}}" method="post">
             {{ method_field('delete') }}
             {{ csrf_field() }}

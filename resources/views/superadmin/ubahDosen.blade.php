@@ -26,7 +26,7 @@
                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Dosen" value="{{ $dosen->name}}">
                     @if ($errors->has('nama'))
                         <span class="text-danger">{{ $errors->first('nama') }}</span>
-                    @endif                       
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="email">Email Dosen</label>
@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <label for="status">Status Dosen</label> <br>
                     <select id="status" name="status" height="100%">
-                        <option value='' selected>Silahkan Ubah Status Dosen</option>
+                        <option value='' selected>Silahkan Tentukan Status Dosen</option>
                         <option value=0>Dosen Pembimbing</option>
                         <option value=1>Koordinator TA</option>
                     </select> <br>

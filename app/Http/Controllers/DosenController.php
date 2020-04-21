@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Pengjudul;
 use App\Mahasiswa;
 use App\bimbingan;
 use App\submissions;
@@ -17,7 +19,7 @@ class DosenController extends Controller
      * @return void
      */
     public function __construct()
-    {
+    {;
         $this->middleware('auth:dosen');
     }
 
@@ -28,7 +30,8 @@ class DosenController extends Controller
      */
     public function index()
     {
-        return view('dosen.beranda');
+
+        return view('dosen.beranda', ['jmlPemohon'=>$this->getJumlahPemohon(), 'jmlMhs'=>$this->getJumlahMhs()]);
     }
     public function profil()
     {
@@ -141,7 +144,27 @@ class DosenController extends Controller
 
     public function judul()
     {
-        return view('dosen.pengjudul');
+
+        $nomor=1;
+        $judul = DB::table('pengjuduls')
+                    ->where('cadosbing1', 'masayu.khodra@if.itera.ac.id')
+                    ->orWhere('cadosbing2', 'meida.cahyo@if.itera.ac.id')
+                    ->get();
+        // dd($judul);
+
+        $nama = DB::table("mahasiswas")->select('name','pengjuduls.id','pengjuduls.email','pengjuduls.judul1')
+                    ->leftJoin('pengjuduls','mahasiswas.email','=','pengjuduls.email')->get();    
+                                    
+        // dd($nama);
+
+        return view('pengjuduldosen',['nama' => $nama,'judul' => $judul,'nomor'=>$nomor]);
+    }
+
+    public function showJudul(pengjudul $judul){
+
+        return view('dosen.detailJudul',['judul'=>$judul]);
+
+        
     }
 
     public function mahasiswa(){
@@ -159,6 +182,32 @@ class DosenController extends Controller
         */
 
         return view('dosen.mahasiswa', ["mahasiswas"=>$raw_mahasiswa, "counter"=>1]);
+
+    }
+
+    public function getJumlahPemohon(){
+        $dosen = auth()->user()->email;
+        $a = pengjudul::where(function ($query) use ($dosen){
+            $query->where('cadosbing1_1', '=', $dosen)
+            ->orWhere('cadosbing1_2', '=', $dosen)
+            ->orWhere('cadosbing1_3', '=', $dosen)
+            ->orWhere('cadosbing2_1', '=', $dosen)
+            ->orWhere('cadosbing2_2', '=', $dosen)
+            ->orWhere('cadosbing2_3', '=', $dosen);
+        })->get()->count();
+        
+        return $a;
+    }
+
+
+    public function getJumlahMhs(){
+        $dosen = auth()->user()->email;
+        $a = mahasiswa::where(function ($query) use ($dosen){
+            $query->where('email_dosbing1', '=', $dosen)
+            ->orWhere('email_dosbing2', '=', $dosen);
+        })->get()->count();
+        
+        return $a;
     }
 }
 
