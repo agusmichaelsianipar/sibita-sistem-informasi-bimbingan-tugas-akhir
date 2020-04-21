@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Validation\Validator;
 use App\bimbingan;
 use App\submissions;
-use DB;
 
 class MahasiswaController extends Controller
 {
