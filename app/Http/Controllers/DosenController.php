@@ -9,7 +9,6 @@ use App\Mahasiswa;
 use App\bimbingan;
 use App\submissions;
 use App\Dosen;
-use App\Pengjudul;
 use Carbon;
 
 class DosenController extends Controller
