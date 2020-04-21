@@ -67,3 +67,9 @@ Route::prefix('superadmin')->group(function(){
     Route::get('/statistikTA', 'SuperadminController@statistikTA')->name('superadmin.statistikTA');
 
 });
+
+Route::prefix('notif')->group(function(){
+    Route::patch('/pin/{notifikasi}', 'NotifikasiController@pin');
+    Route::patch('/destroy/{notifikasi}', 'NotifikasiController@destroy');
+    
+});
