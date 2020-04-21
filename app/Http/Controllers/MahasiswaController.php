@@ -137,7 +137,7 @@ class MahasiswaController extends Controller
         $judul = new Pengjudul;
         $judul->email = Auth::user()->email;
         $judul->judul1 = $request->judul_1;
-        $judul->des_judul1 = $request->deskripsi_judul_1;
+        $judul->desjudul1 = $request->deskripsi_judul_1;
         $judul->cadosbing1 = $request->cadosbing1_1;
         $judul->cadosbing2 = $request->cadosbing1_2;
         $judul->cadosbing3 = $request->cadosbing1_3;
@@ -146,7 +146,7 @@ class MahasiswaController extends Controller
         $judul2 = new Pengjudul;
         $judul2->email = Auth::user()->email;
         $judul2->judul1 = $request->judul_2;
-        $judul2->des_judul1 = $request->deskripsi_judul_2;
+        $judul2->desjudul1 = $request->deskripsi_judul_2;
         $judul2->cadosbing1 = $request->cadosbing2_1;
         $judul2->cadosbing2 = $request->cadosbing2_2;
         $judul2->cadosbing3 = $request->cadosbing2_3;

@@ -163,7 +163,6 @@ class DosenController extends Controller
 
         return view('dosen.detailJudul',['judul'=>$judul]);
 
-        
     }
 
     public function mahasiswa(){
