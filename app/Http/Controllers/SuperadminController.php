@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ErrorFormRequest;
+use Illuminate\Support\Facades\Hash;
 use App\Dosen;
 use App\Mahasiswa;
 
@@ -54,7 +55,7 @@ class SuperadminController extends Controller
         $dosen = new Dosen;
         $dosen->name = $request->nama;
         $dosen->email = $request->email;
-        $dosen->password = $request->password;
+        $dosen->password = Hash::make($request->password);
         $dosen->status = $request->status;
 
         $cek = $dosen->save();
@@ -88,7 +89,7 @@ class SuperadminController extends Controller
             ->update([
                 'name' => $request->nama,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'status' => $request->status,
             ]);
 
@@ -96,7 +97,26 @@ class SuperadminController extends Controller
     }
 
     public function aturKoorTA(){
-        return view('superadmin.updateKoorTA');
+        $dosen = Dosen::all();
+        $nomor=1;
+        return view('superadmin.updateKoorTA',['dosen'=>$dosen,'nomor'=>$nomor]);
+    }
+
+    public function updateKoorTA(ErrorFormRequest $request, dosen $dosen){
+
+        if($dosen->status){
+            dosen::where('id',$dosen->id)
+            ->update([
+                'status' => 0,
+            ]);
+        }else{
+            dosen::where('id',$dosen->id)
+            ->update([
+                'status' => 1,
+            ]);
+        }
+        
+        return redirect('/superadmin/aturkoorta')->with('status','Data Koordinator Berhasil Dihapus!');
     }
 
     public function statistikTA(){

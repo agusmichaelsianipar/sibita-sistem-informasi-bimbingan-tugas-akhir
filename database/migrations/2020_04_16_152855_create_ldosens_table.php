@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDosensTabel extends Migration
+class CreateLdosensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,19 @@ class CreateDosensTabel extends Migration
      */
     public function up()
     {
-        Schema::create('dosens', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('ldosens', function (Blueprint $table) {
+            $table->bigInteger('id');
+            $table->index('id');
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email',255);
+            $table->primary('email');
             $table->string('password');
             $table->boolean('status');
             $table->integer('jlhmhs')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
-        
+        Schema::rename('ldosens', 'dosens');
     }
 
     /**

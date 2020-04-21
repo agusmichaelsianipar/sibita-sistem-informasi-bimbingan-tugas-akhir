@@ -18,22 +18,8 @@
                         @if ($errors->has('deskripsi_judul_1'))
                         <span class="text-danger">{{ $errors->first('deskripsi_judul_1') }}</span>
                     @endif 
-                    </div>                
-                <div class="form-group">
-                    <label for="judul2">Judul 2</label>
-                    <input type="text" class="form-control" id="judul2" placeholder="Masukkan Usulan Judul Kedua Tugas Akhir Anda" name="judul_2">
-                    @if ($errors->has('judul_2'))
-                        <span class="text-danger">{{ $errors->first('judul_2') }}</span>
-                    @endif                     
-                </div>
-                <div class="form-group">
-                        <label for="deskripsi_judul_2">Deskripsi Singkat Tentang Judul 2</label>
-                        <textarea class="form-control" id="deskripsi_judul-2" rows="4" name="deskripsi_judul_2" placeholder="Silahkan Jelaskan Secara Singkat Tentang Judul Yang Anda Ajukan"></textarea>
-                        @if ($errors->has('deskripsi_judul_2'))
-                        <span class="text-danger">{{ $errors->first('deskripsi_judul_2') }}</span>
-                    @endif                     
                     </div>
-                <div class="form-group">
+                    <div class="form-group">
                     <label for="semester">Dosen Pembimbing I</label> <br>
                     <select id="semester" name="cadosbing1_1" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 1</option>
@@ -91,7 +77,21 @@
                         <span class="text-danger">{{ $errors->first('cadosbing1_3') }}</span>
                     @endif                      
                     <br> <br>
-                </div>                
+                </div>                                     
+                <div class="form-group">
+                    <label for="judul2">Judul 2</label>
+                    <input type="text" class="form-control" id="judul2" placeholder="Masukkan Usulan Judul Kedua Tugas Akhir Anda" name="judul_2">
+                    @if ($errors->has('judul_2'))
+                        <span class="text-danger">{{ $errors->first('judul_2') }}</span>
+                    @endif                     
+                </div>
+                <div class="form-group">
+                        <label for="deskripsi_judul_2">Deskripsi Singkat Tentang Judul 2</label>
+                        <textarea class="form-control" id="deskripsi_judul-2" rows="4" name="deskripsi_judul_2" placeholder="Silahkan Jelaskan Secara Singkat Tentang Judul Yang Anda Ajukan"></textarea>
+                        @if ($errors->has('deskripsi_judul_2'))
+                        <span class="text-danger">{{ $errors->first('deskripsi_judul_2') }}</span>
+                    @endif                     
+                    </div>               
                 <div class="form-group">
                     <label for="semester">Dosen Pembimbing II</label> <br>
                     <select id="semester" name="cadosbing2_1" height="100%">
