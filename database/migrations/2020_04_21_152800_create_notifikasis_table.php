@@ -25,6 +25,7 @@ class CreateNotifikasisTable extends Migration
             $table->string('notif_owner');
             $table->string('notif_text');
             $table->string('notif_goto');
+            $table->boolean('pin');
         });
     }
 

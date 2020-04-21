@@ -9,7 +9,9 @@ use App\Mahasiswa;
 use App\bimbingan;
 use App\submissions;
 use App\Dosen;
+use App\Http\Controllers\NotifikasiController;
 use Carbon;
+
 
 class DosenController extends Controller
 {
@@ -30,8 +32,13 @@ class DosenController extends Controller
      */
     public function index()
     {
-
-        return view('dosen.beranda', ['jmlPemohon'=>$this->getJumlahPemohon(), 'jmlMhs'=>$this->getJumlahMhs()]);
+        $email = 'dos@localhost.co';
+        $notif = new NotifikasiController;
+        $notif = $notif->getMyNotif(auth()->user()->email);
+        return view('dosen.beranda',['jmlPemohon'=>$this->getJumlahPemohon(),
+                                    'jmlMhs'=>$this->getJumlahMhs(),
+                                    'notif' =>$notif,
+                                    ]);
     }
     public function profil()
     {
@@ -130,6 +137,11 @@ class DosenController extends Controller
         $cek = $newbimbingan->save();
 
         if($cek){
+            //create notification
+            $a = new NotifikasiController;
+            $a->createNotif("Sebuah kartu bimbingan baru, ".$request->txtNewJudulKartu." telah dibuat oleh ".auth()->user()->name."!",
+                            $request->emailMhs,
+                            route('mahasiswa.bimbingan'));
             return redirect()->route('dosen.membimbing', ['$emailMhs'=>$request['emailMhs']]);
         }
     }
@@ -144,7 +156,6 @@ class DosenController extends Controller
 
     public function judul()
     {
-
         $nomor=1;
         $judul = DB::table('pengjuduls')
                     ->where('cadosbing1', 'masayu.khodra@if.itera.ac.id')
@@ -174,12 +185,6 @@ class DosenController extends Controller
         })->get();
 
         $raw_mahasiswa = $raw_mahasiswa->toArray();
-        
-        /*
-        echo "<pre>";
-        print_r($raw_mahasiswa);
-        echo "</pre>";
-        */
 
         return view('dosen.mahasiswa', ["mahasiswas"=>$raw_mahasiswa, "counter"=>1]);
 
