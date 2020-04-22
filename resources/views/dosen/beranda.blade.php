@@ -10,11 +10,11 @@
                 <div class="card mb-1">
                     <div class="card-body">
                         <br>
-                        <h3>{{$jmlPemohon}}</h3>
+                        {{$jmlPemohon}}
                         <br>
                     </div>
                     <div class="card-header bg-light">
-                        Permohonan Judul & Dosbing
+                        Permohonan
                     </div>
                 </div>
             </div>
@@ -22,18 +22,18 @@
                 <div class="card mb-1">
                     <div class="card-body">
                         <br>
-                        <h3>{{$jmlMhs}}</h3>
+                        {{$jmlMhs}}
                         <br>
                     </div>
                     <div class="card-header bg-light">
-                        Mahasiswa Peserta TA Aktif
+                        Mahasiswa Aktif
                     </div>
                 </div>
             </div><div class="col-sm  float-left">
                 <div class="card mb-1">
                     <div class="card-body">
                         <br>
-                        <h3>{{$jmlMhs}}</h3>
+                        {{$jmlMhs}}
                         <br>
                     </div>
                     <div class="card-header bg-light">

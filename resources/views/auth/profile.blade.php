@@ -1,10 +1,16 @@
-@extends('dosen.main_dosbing')
-@section('title','PROFIL | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
+@extends('mahasiswa.main_mahasiswa')
+@section('title','PROFILE | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
 @section('beranda')
 
 <div class="container">
-    <h3>Profil</h3>
+    <h4>Profil 
+        @if($datum['rule']==='mahasiswa')
+            Mahasiswa
+        @elseif($datum['rule']==='dosen')
+            Dosen Pembimbing
+        @endif
+    </h4>
     <table class="table table-sm-responsive" style="overflow-x:auto; max-width:500px">
         <tbody>
             <tr>
@@ -15,13 +21,10 @@
                 <td class="col-sm-3 text-right" scope="row">Nama</td>
                 <td class="col-sm-9">{{Auth::user()->name}}</td>
             </tr>
-            <tr>
-                <td class="col-sm-3 text-right" scope="row">Status</td>
-                <td class="col-sm-9">{{$datum['status']}}</td>
-            </tr>
-        </tbody>
+            @includeWhen($datum['rule']==='mahasiswa', 'mahasiswa.profiledata', ['mahasiswa' => $datum['profile']])
+            @includeWhen($datum['rule']==='dosen', '', ['dosen' => $datum['profile']])
 
+        </tbody>
     </table>
 </div>
-
 @endsection

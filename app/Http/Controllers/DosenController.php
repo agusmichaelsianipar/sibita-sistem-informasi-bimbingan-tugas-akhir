@@ -11,6 +11,7 @@ use App\submissions;
 use App\Dosen;
 use App\Http\Controllers\NotifikasiController;
 use Carbon;
+use Auth;
 
 
 class DosenController extends Controller
@@ -32,7 +33,6 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $email = 'dos@localhost.co';
         $notif = new NotifikasiController;
         $notif = $notif->getMyNotif(auth()->user()->email);
         return view('dosen.beranda',['jmlPemohon'=>$this->getJumlahPemohon(),
@@ -42,7 +42,21 @@ class DosenController extends Controller
     }
     public function profil()
     {
-        return view('dosen.profil');
+        $status = Auth::user()->status;
+        if($status==0){
+            $status = "Pembimbing";
+        }else if($status==1){
+            $status = "Koordinator";
+        }
+
+        $a=[
+            'status'=>$status,
+        ];
+        $datum = [
+            'rule'=>'dosen',
+            'profile'=>$a
+        ];
+        return view('dosen.profil', ['datum'=>$a]);
     }
     public function bimbingan()
     {

@@ -1,4 +1,4 @@
-@extends('main_mahasiswa')
+@extends('mahasiswa.main_mahasiswa')
 @section('title','KENDALI BIMBINGAN | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
 @section('beranda')
