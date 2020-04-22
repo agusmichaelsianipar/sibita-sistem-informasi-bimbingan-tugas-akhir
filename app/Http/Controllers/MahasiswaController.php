@@ -11,8 +11,10 @@ use App\Http\Requests\ErrorFormRequest;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Validation\Validator;
+use App\Http\Controllers\NotifikasiController;
 use App\bimbingan;
 use App\submissions;
+use App\Dosen;
 
 class MahasiswaController extends Controller
 {
@@ -33,11 +35,53 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        return view('beranda_mahasiswa');
+        //ambil notifikasi
+        $notif = new NotifikasiController;
+        $notif = $notif->getMyNotif(auth()->user()->email);
+
+        //cek status
+        $s = Auth::user()->status;
+        if($s==0) $s = "validasi akun";
+        else if($s==1) $s="Pengajuan judul";
+        else if($s==2) $s="Peserta TA";
+        else $s="";
+
+        //Jumlah bimbingan
+        $b = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email)->count();
+
+
+        return view('mahasiswa.beranda',    ['notif' =>$notif,
+                                            'status' => $s,
+                                            'bimbingan' => $b,
+                                            ]);
+
     }
     public function showProfil()
     {
-        return view('profil_mahasiswa');
+        $dosbing_1 = Dosen::where('email', Auth::user()->email_dosbing1)->first();
+        $dosbing_2 = Dosen::where('email', Auth::user()->email_dosbing2)->first();
+        
+        if(isset($dosbing_1)){
+            $dosbing_1 = $dosbing_1->name;
+        }else{
+            $dosbing_1='';
+        }
+        if(isset($dosbing_2)){
+            $dosbing_2 = $dosbing_2->name;
+        }else{
+            $dosbing_2='';
+        } 
+
+        $a=['nim'=>Auth::user()->nim,
+            'dosen_wali'=>Auth::user()->dosen_wali,
+            'dosbing_1'=>$dosbing_1,
+            'dosbing_2'=>$dosbing_2,
+        ];
+
+        $datum = [
+            'profile'=>$a
+        ];
+        return view('mahasiswa.profil', ['datum'=>$a]);
     }
 
     public function getMyBimbingans($email){
@@ -70,13 +114,13 @@ class MahasiswaController extends Controller
             array_push($kartuBimbingans, $tmp_kartuBimbingan);
         }
         
-        return view('bimbingan', ['kartuBimbingans'=>$kartuBimbingans, 'mahasiswaId'=>auth()->user()->id, '']);
+        return view('mahasiswa.bimbingan', ['kartuBimbingans'=>$kartuBimbingans, 'mahasiswaId'=>auth()->user()->id, '']);
         
     }
 
     public function showPengJudul()
     {
-        return view('judul');
+        return view('mahasiswa.judul');
     }
   
     public function storeSubm(Request $request){
