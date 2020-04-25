@@ -1,0 +1,65 @@
+.tabled{
+}
+.nomordosen{
+    float: left;
+    width: 30px;
+    height: 40px;
+}
+.nama{
+    float: left;
+    width: 300px;
+    height: 40px;
+}
+
+.emaildosen{
+    float: left;
+    width: 300px;
+    height: 40px;
+}
+
+.statusdosen{
+    float: left;
+    width: 200px;
+    height: 40px;
+}
+
+/* .hapusdosen{
+    margin-top:-15px;
+    height: 40px;
+} */
+
+.editdosen{
+    color: white;
+    float: left;
+    width: 70px;
+    height: 40px;
+}
+.detaildosen{
+    color: white;
+    width: 70px;
+    height: 40px;
+}
+
+.tambahdosen .btn{
+    color:black;
+}
+
+#status{
+    width: 600px;
+    height: 35px;
+}
+
+.koorta{
+    float: left;
+    width: 200px;
+    height: 40px;
+}
+
+#status option{
+    width: 550px;
+    height: 35px;
+}
+#setkoorta{
+    width: 300px;
+    height: 35px;
+}

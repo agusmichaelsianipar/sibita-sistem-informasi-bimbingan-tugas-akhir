@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDosensTabel extends Migration
+class CreateSubmissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateDosensTabel extends Migration
      */
     public function up()
     {
-        Schema::create('dosens', function (Blueprint $table) {
+        Schema::create('submissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->boolean('status');
-            $table->integer('jlhmhs')->nullable();
-            $table->rememberToken();
             $table->timestamps();
+            $table->integer('bimbingan_parent');
+            $table->string('link');
+            $table->string('link_name');
         });
-        
     }
 
     /**
@@ -33,6 +29,6 @@ class CreateDosensTabel extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dosens');
+        Schema::dropIfExists('submissions');
     }
 }

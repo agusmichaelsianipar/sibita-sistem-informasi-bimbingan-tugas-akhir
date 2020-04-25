@@ -17,6 +17,8 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/berandastyle.css') !!}">
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/mahasiswa.css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/dosbing.css') !!}">
+
     </head>
     <body>
     
@@ -24,38 +26,36 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>SIBITA KOORDINATOR TA</h3>
+                <h3>SIBITA DOSEN PEMBIMBING</h3>
             </div>
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#" data-toggle="collapse" aria-expanded="false">Beranda</a>
+                    <a href="{{ route('dosen.dashboard') }}">Beranda</a>
                 </li>
                 <li>
-                    <a href="#">Profil</a>
+                    <a href="{{ route('dosen.mahasiswa') }}">Bimbingan Mahasiswa</a>
                 </li>
                 <li>
-                    <a href="#">Assignmen Dosbing Mahasiswa</a>
+                    <a href="{{ route('dosen.judul') }}">Pengajuan Judul</a>
                 </li>
                 <li>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                        Sign-Out
-                    </a>
+                    <a href="{{ route('dosen.profile') }}">Profil</a>
+                </li>
+                <li>
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                    Sign out
+                </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
                 </li>
             </ul>
         </nav>
 
-
-
-    <!-- @yield('bar')
-    @yield('sidebar')
-    @yield('containing') -->
     <div id="content">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -76,20 +76,11 @@
                 <p class="top-title-3">INSTITUT TEKNOLOGI SUMATERA</p>
             </div>
             </div>
-            <!-- <div class="">
-                <p class="top-title">SISTEM INFORMASI BIMBINGAN TUGAS AKHIR</p>
-                <p class="top-title-2">PROGRAM STUDI TEKNIK INFORMATIKA</p>
-                <p class="top-title-3">INSTITUT TEKNOLOGI SUMATERA</p>
-            </div> -->
         </div>
     </div>
     
 </nav>
-
-
-<h2>Disini Konten</h2>
-
-
+@yield('beranda')
 </div>
 </div>
 

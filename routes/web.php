@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/daftarta','GuestController@index');
+Route::post('/daftar','GuestController@store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -26,7 +29,11 @@ Route::prefix('mahasiswa')->group(function(){
     Route::get('/beranda', 'MahasiswaController@index')->name('mahasiswa.beranda');
     Route::get('/profil', 'MahasiswaController@showProfil')->name('mahasiswa.profil');
     Route::get('/bimbingan', 'MahasiswaController@showBimbingan')->name('mahasiswa.bimbingan');
+    Route::post('/bimbingan/addSubm', 'MahasiswaController@storeSubm')->name('mahasiswa.tambahSubmission');
+    Route::post('/bimbingan/delSubm', 'MahasiswaController@deleteSubm')->name('mahasiswa.hapusSubmission');
+    Route::post('/bimbingan/edtSubm', 'MahasiswaController@editSubm')->name('mahasiswa.editSubmission');
     Route::get('/pengajuan-judul', 'MahasiswaController@showPengJudul')->name('mahasiswa.judul');
+    Route::post('/pengajuan-judulta', 'MahasiswaController@storePengJudul');
 });
 
 Route::prefix('dosen')->group(function(){
@@ -35,12 +42,29 @@ Route::prefix('dosen')->group(function(){
     Route::get('/', 'DosenController@index')->name('dosen.dashboard');
     Route::get('/profile', 'DosenController@profil')->name('dosen.profile');
     Route::get('/bimbingan', 'DosenController@bimbingan')->name('dosen.bimbingan');
+    Route::get('/membimbing/{emailMhs}', 'DosenController@membimbing')->name('dosen.membimbing');
+    Route::get('/ajukanseminar/{emailMhs}', 'DosenController@ajukanseminar')->name('dosen.ajukansidang');
+    Route::get('/ajukansidang/{emailMhs}', 'DosenController@ajukansidang')->name('dosen.ajukanseminar');
+    Route::post('/tambahKartu', 'DosenController@addCard')->name('dosen.tambahKartu');
+    Route::delete('/hapusKartu', 'DosenController@delCard')->name('dosen.hapusKartu');
+    Route::get('/mahasiswa', 'DosenController@mahasiswa')->name('dosen.mahasiswa');
     Route::get('/judul', 'DosenController@judul')->name('dosen.judul');
+    Route::get('/judul/{judul}', 'DosenController@showJudul');
+    Route::get('/judul/{judul}/validasi', 'DosenController@validasiJudul');
 });
 
 Route::prefix('superadmin')->group(function(){
     Route::get('/login','Auth\SuperadminLoginController@showLoginForm')->name('superadmin.login');
     Route::post('/login','Auth\SuperadminLoginController@login')->name('superadmin.login.submit');
-    Route::get('/', 'SuperadminController@index')->name('superadmin.dashboard');
-});
+    Route::get('/', 'SuperadminController@index')->name('superadmin.beranda');
+    Route::get('/aturdosbing', 'SuperadminController@aturDosen')->name('superadmin.aturDosbing');
+    Route::delete('/aturdosbing/{dosen}', 'SuperadminController@destroyDosen');
+    Route::get('/aturdosbing/{dosen}/ubah', 'SuperadminController@editDosen');
+    Route::patch('/aturdosbing/{dosen}', 'SuperadminController@updateDosen');
+    Route::get('/tambahdosen','SuperadminController@tambahDosen')->name('superadmin.tambahDosbing');
+    Route::post('/tambahdosbing','SuperadminController@storeDosen')->name('superadmin.tambahDosen');
+    Route::get('/aturkoorta', 'SuperadminController@aturKoorTA')->name('superadmin.aturKoorTA');
+    Route::patch('/aturkoorta/{dosen}', 'SuperadminController@updateKoorTA');
+    Route::get('/statistikTA', 'SuperadminController@statistikTA')->name('superadmin.statistikTA');
 
+});

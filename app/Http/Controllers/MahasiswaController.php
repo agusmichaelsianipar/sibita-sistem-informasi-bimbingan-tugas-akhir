@@ -2,7 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mahasiswa;
+use App\Pengjudul;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ErrorFormRequest;
+use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Validation\Validator;
+use App\bimbingan;
+use App\submissions;
 
 class MahasiswaController extends Controller
 {
@@ -29,21 +39,123 @@ class MahasiswaController extends Controller
     {
         return view('profil_mahasiswa');
     }
+
+    public function getMyBimbingans($email){
+
+    }
+    
     public function showBimbingan()
     {
         /*
             lakukan kueri mengambil bimbingan dari database
         */
+        //after i learn about the Eloquent
+        
+        $raw_kartuBimbingans = bimbingan::where('mahasiswa_bimbingan', auth()->user()->email)->get()->toArray();
 
-        //data sementara untuk testing
-        $kartu1 = array("id"=>"1", "judul"=>"Bimbingan 1", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submission"=>"link");
-        $kartu2 = array("id"=>"2", "judul"=>"Bimbingan 2", "waktu"=>"Senin, 23 Maret 2020 09:00 ", "dosen"=>"Hafiz Budi", "catatan"=>"Sebuah catatan", "submission"=>"link");
+        $kartuBimbingans = [];
+        foreach($raw_kartuBimbingans as $raw_kartuBimbingan){
+            $tmp_kartuBimbingan = [];
 
-        $daftarBimbingan = array($kartu1, $kartu2);
-        return view('bimbingan', ['daftarBimbingan'=>$daftarBimbingan]);
+            $tmp_submissions = [];
+            $raw_submissions = submissions::where('bimbingan_parent', $raw_kartuBimbingan['id'])->get()->toArray();
+            foreach($raw_submissions as $raw_submission){
+                $tmp_submission = $raw_submission;
+                array_push($tmp_submissions, $tmp_submission);
+            }
+            $tmp_kartuBimbingan = $raw_kartuBimbingan;
+            $tmp_submissions = array("submissions"=>$tmp_submissions);
+            $tmp_kartuBimbingan = array_merge($tmp_kartuBimbingan, $tmp_submissions);
+
+            array_push($kartuBimbingans, $tmp_kartuBimbingan);
+        }
+        
+        return view('bimbingan', ['kartuBimbingans'=>$kartuBimbingans, 'mahasiswaId'=>auth()->user()->id, '']);
+        
     }
+
     public function showPengJudul()
     {
         return view('judul');
-    }    
+    }
+  
+    public function storeSubm(Request $request){
+        //Input verify
+        $this->validate($request,[
+            'txtBimbinganOwner' => 'required',
+            'txtLink' => 'required',
+            'txtLinkName' => 'required'
+        ]);
+        
+        //Store to database, masih menggunakan Query Builder
+        DB::table('submissions')->insert([
+            'bimbingan_parent' => $request->txtBimbinganOwner,
+            'link' => $request->txtLink,
+            'link_name' => $request->txtLinkName
+        ]);
+
+        return redirect('/mahasiswa/bimbingan');
+    }
+
+    public function deleteSubm(Request $request){
+        $this->validate($request, [
+            'txtSubmId' => 'required'
+        ]);
+        
+        DB::table('submissions')->where('id', $request['txtSubmId'])->delete();
+        return redirect('/mahasiswa/bimbingan');
+    }
+
+    public function editSubm(Request $request){
+        $this->validate($request, [
+            'txtSubmId' => 'required',
+            'txtLink' => 'required',
+            'txtLinkName' => 'required'
+        ]);
+
+        DB::table('submissions')->where('id', $request['txtSubmId'])->update([
+            'link' => $request['txtLink'],
+            'link_name' => $request['txtLinkName']
+        ]);
+        
+        return redirect('/mahasiswa/bimbingan');
+    }
+    public function storePengJudul(ErrorFormRequest $request){
+        $this->validate($request,[
+            'judul_1' => 'required',
+            'deskripsi_judul_1' => 'required',
+            'judul_2'=> 'required',
+            'deskripsi_judul_2' => 'required',
+            'cadosbing1_1' => 'required',
+            'cadosbing1_2' => 'required',
+            'cadosbing1_3' => 'required',
+            'cadosbing2_1' => 'required',
+            'cadosbing2_2' => 'required',
+            'cadosbing2_3' => 'required',
+        ]);
+        
+        $judul = new Pengjudul;
+        $judul->email = Auth::user()->email;
+        $judul->judul1 = $request->judul_1;
+        $judul->desjudul1 = $request->deskripsi_judul_1;
+        $judul->cadosbing1 = $request->cadosbing1_1;
+        $judul->cadosbing2 = $request->cadosbing1_2;
+        $judul->cadosbing3 = $request->cadosbing1_3;
+        $cek = $judul->save();
+
+        $judul2 = new Pengjudul;
+        $judul2->email = Auth::user()->email;
+        $judul2->judul1 = $request->judul_2;
+        $judul2->desjudul1 = $request->deskripsi_judul_2;
+        $judul2->cadosbing1 = $request->cadosbing2_1;
+        $judul2->cadosbing2 = $request->cadosbing2_2;
+        $judul2->cadosbing3 = $request->cadosbing2_3;
+        $cek2 = $judul2->save();
+
+        if($cek&&$cek2){
+            return redirect('/mahasiswa/pengajuan-judul');
+        }
+
+    }
+
 }

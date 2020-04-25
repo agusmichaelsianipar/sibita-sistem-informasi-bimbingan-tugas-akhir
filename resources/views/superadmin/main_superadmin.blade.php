@@ -11,12 +11,13 @@
 
         <!-- Fontawesome Icon's  -->
         <script src="https://kit.fontawesome.com/b3830587bc.js" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/berandastyle.css') !!}">
         <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/mahasiswa.css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/dosen.css') !!}">
     </head>
     <body>
     
@@ -24,36 +25,35 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>SIBITA DOSEN PEMBIMBING</h3>
+                <h3>SIBITA KOORDINATOR TA</h3>
             </div>
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="{{ route('dosen.dashboard') }}">Beranda</a>
+                    <a href="{{ route('superadmin.beranda') }}">Atur Mahasiswa</a>
                 </li>
                 <li>
-                    <a href="{{ route('dosen.profile') }}">Profil</a>
+                    <a href="{{ route('superadmin.aturDosbing') }}">Atur Dosen Pembimbing</a>
                 </li>
                 <li>
-                    <a href="{{ route('dosen.bimbingan') }}">Bimbingan Mahasiswa</a>
+                    <a href="{{ route('superadmin.aturKoorTA') }}">Atur Koordinator TA</a>
                 </li>
                 <li>
-                    <a href="{{ route('dosen.judul') }}">Pengajuan Judul</a>
+                    <a href="{{ route('superadmin.statistikTA') }}">Statistik TA</a>
                 </li>
                 <li>
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                    Sign out
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                        Sign-Out
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        
+            {{ csrf_field() }}
+                    </form>
                 </li>
             </ul>
         </nav>
-
     <div id="content">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -78,7 +78,11 @@
     </div>
     
 </nav>
+
+
 @yield('beranda')
+
+
 </div>
 </div>
 

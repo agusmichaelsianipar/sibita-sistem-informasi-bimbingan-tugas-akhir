@@ -1,0 +1,34 @@
+.mahasiswas-container{
+    padding: 5px;
+}
+
+.mahasiswa-card{
+    padding: 5px;
+}
+
+.mcard-no{
+}
+
+.mcard-name{
+}
+
+.goto{
+    background-color: ;
+}
+
+.infoBox{
+    float: left;
+    min-width: 400px;
+}
+
+.bimbingan-mhsInfo{
+    overflow: auto;
+}
+
+.kartuBimbinganBox{
+    max-width: 1000px;
+}
+
+.infoBoxHolder{
+    max-width: 1000px;
+}
