@@ -17,7 +17,7 @@
           <h5 class="card-title">{{$judul->judul1}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
           <p class="card-text">{{$judul->des_judul1}}</p>
-          <a href="#" class="card-link">Setuju</a>
+          <a href="/dosen/judul/{{$judul->id}}/validasi" class="card-link">Setuju</a>
           <a href="#" class="card-link">Tidak Setuju</a>
       </div>
     </div>

@@ -156,5 +156,6 @@ class MahasiswaController extends Controller
             return redirect('/mahasiswa/pengajuan-judul');
         }
 
-    }   
+    }
+
 }
