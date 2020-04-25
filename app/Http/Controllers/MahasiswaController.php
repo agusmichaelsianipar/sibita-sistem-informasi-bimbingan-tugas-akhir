@@ -15,10 +15,11 @@ use App\Http\Controllers\NotifikasiController;
 use App\bimbingan;
 use App\submissions;
 use App\Dosen;
+use App\MasaTA;
 
 class MahasiswaController extends Controller
 {
-    /**
+    /**https://stackoverflow.com/questions/3653882/how-to-count-days-between-two-dates-in-php
      * Create a new controller instance.
      *
      * @return void
@@ -47,12 +48,32 @@ class MahasiswaController extends Controller
         else $s="";
 
         //Jumlah bimbingan
-        $b = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email)->count();
+        $bimbList = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email)->get();
 
-
+        //Ambil jumlah bimbingan tiap waktu, untuk dikirim
+        $bimbTimes = [];
+        foreach($bimbList as $bimb){
+            array_push($bimbTimes, explode(" ",$bimb->waktu_bimbingan)[0]);
+        }
+        
+        //Masa TA
+        $m = MasaTA::all()->first()->toArray();
+        
+        $sisa = abs(strtotime($m['mulai'])-strtotime(date('Y/m/d')))/86400;
+        $total = abs(strtotime($m['mulai'])-strtotime($m['selesai']))/86400;
+        $m = [
+            'mulai' => $m['mulai'],
+            'selesai' => $m['selesai'],
+            'total' => $total,
+            'sisa' => $sisa
+        ];
+        
         return view('mahasiswa.beranda',    ['notif' =>$notif,
                                             'status' => $s,
-                                            'bimbingan' => $b,
+                                            'bimbingan' => $bimbList,
+                                            'bimbinganTimes' => $bimbTimes,
+                                            'masa'=>$m,
+                                            'masaTA' => MasaTA::all()->first()->toJSON()
                                             ]);
 
     }
