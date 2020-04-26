@@ -50,6 +50,7 @@ Route::prefix('dosen')->group(function(){
     Route::get('/judul/{judul}', 'DosenController@showJudul');
     Route::post('/ajukan', 'DosenController@ajukan')->name('dosen.ajukanSemSed');
     Route::post('/mahasiswa/action', 'DosenController@mhsActionHandler')->name('dosen.mahasiswa.actionHandler');
+    Route::get('/judul/{judul}/validasi', 'DosenController@validasiJudul');
 });
 
 Route::prefix('superadmin')->group(function(){

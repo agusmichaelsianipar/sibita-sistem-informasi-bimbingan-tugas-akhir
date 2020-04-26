@@ -207,7 +207,6 @@ class DosenController extends Controller
 
         return view('dosen.detailJudul',['judul'=>$judul]);
 
-        
     }
 
     public function mahasiswa(){
@@ -219,7 +218,16 @@ class DosenController extends Controller
         $raw_mahasiswa = $raw_mahasiswa->toArray();
 
         return view('dosen.mahasiswa', ["mahasiswas"=>$raw_mahasiswa, "counter"=>1]);
+    }
 
+    //Tambahkan kolom statusjudul di table pengjuduls
+    public function validasiJudul(pengjudul $judul){
+        //Kalau setuju
+            //Mengisi table status judul di database
+            //Menghapus data judul yang diajukan oleh mahasiswa tsb dari table pengjuduls
+
+        //Kalau tidak setuju
+            //Mengisi table status
     }
 
     public function getJumlahPemohon(){

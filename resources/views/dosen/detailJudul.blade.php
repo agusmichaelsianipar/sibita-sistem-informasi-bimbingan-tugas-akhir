@@ -8,18 +8,18 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>DETAIIL JUDUL</title>
   </head>
   <body>
   <div class="container">
     <div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">{{$judul->judul1}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
-        <p class="card-text">{{$judul->des_judul1}}</p>
-        <a href="#" class="card-link">Setuju</a>
-        <a href="#" class="card-link">Tidak Setuju</a>
-    </div>
+      <div class="card-body">
+          <h5 class="card-title">{{$judul->judul1}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
+          <p class="card-text">{{$judul->des_judul1}}</p>
+          <a href="/dosen/judul/{{$judul->id}}/validasi" class="card-link">Setuju</a>
+          <a href="#" class="card-link">Tidak Setuju</a>
+      </div>
     </div>
 </div>
 
