@@ -11,12 +11,15 @@ use App\Http\Requests\ErrorFormRequest;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Validation\Validator;
+use App\Http\Controllers\NotifikasiController;
 use App\bimbingan;
 use App\submissions;
+use App\Dosen;
+use App\MasaTA;
 
 class MahasiswaController extends Controller
 {
-    /**
+    /**https://stackoverflow.com/questions/3653882/how-to-count-days-between-two-dates-in-php
      * Create a new controller instance.
      *
      * @return void
@@ -33,11 +36,73 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        return view('beranda_mahasiswa');
+        //ambil notifikasi
+        $notif = new NotifikasiController;
+        $notif = $notif->getMyNotif(auth()->user()->email);
+
+        //cek status
+        $s = Auth::user()->status;
+        if($s==0) $s = "validasi akun";
+        else if($s==1) $s="Pengajuan judul";
+        else if($s==2) $s="Peserta TA";
+        else $s="";
+
+        //Jumlah bimbingan
+        $bimbList = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email)->get();
+
+        //Ambil jumlah bimbingan tiap waktu, untuk dikirim
+        $bimbTimes = [];
+        foreach($bimbList as $bimb){
+            array_push($bimbTimes, explode(" ",$bimb->waktu_bimbingan)[0]);
+        }
+        
+        //Masa TA
+        $m = MasaTA::all()->first()->toArray();
+        
+        $sisa = abs(strtotime($m['mulai'])-strtotime(date('Y/m/d')))/86400;
+        $total = abs(strtotime($m['mulai'])-strtotime($m['selesai']))/86400;
+        $m = [
+            'mulai' => $m['mulai'],
+            'selesai' => $m['selesai'],
+            'total' => $total,
+            'sisa' => $sisa
+        ];
+        
+        return view('mahasiswa.beranda',    ['notif' =>$notif,
+                                            'status' => $s,
+                                            'bimbingan' => $bimbList,
+                                            'bimbinganTimes' => $bimbTimes,
+                                            'masa'=>$m,
+                                            'masaTA' => MasaTA::all()->first()->toJSON()
+                                            ]);
+
     }
     public function showProfil()
     {
-        return view('profil_mahasiswa');
+        $dosbing_1 = Dosen::where('email', Auth::user()->email_dosbing1)->first();
+        $dosbing_2 = Dosen::where('email', Auth::user()->email_dosbing2)->first();
+        
+        if(isset($dosbing_1)){
+            $dosbing_1 = $dosbing_1->name;
+        }else{
+            $dosbing_1='';
+        }
+        if(isset($dosbing_2)){
+            $dosbing_2 = $dosbing_2->name;
+        }else{
+            $dosbing_2='';
+        } 
+
+        $a=['nim'=>Auth::user()->nim,
+            'dosen_wali'=>Auth::user()->dosen_wali,
+            'dosbing_1'=>$dosbing_1,
+            'dosbing_2'=>$dosbing_2,
+        ];
+
+        $datum = [
+            'profile'=>$a
+        ];
+        return view('mahasiswa.profil', ['datum'=>$a]);
     }
 
     public function getMyBimbingans($email){
@@ -70,13 +135,13 @@ class MahasiswaController extends Controller
             array_push($kartuBimbingans, $tmp_kartuBimbingan);
         }
         
-        return view('bimbingan', ['kartuBimbingans'=>$kartuBimbingans, 'mahasiswaId'=>auth()->user()->id, '']);
+        return view('mahasiswa.bimbingan', ['kartuBimbingans'=>$kartuBimbingans, 'mahasiswaId'=>auth()->user()->id, '']);
         
     }
 
     public function showPengJudul()
     {
-        return view('judul');
+        return view('mahasiswa.judul');
     }
   
     public function storeSubm(Request $request){

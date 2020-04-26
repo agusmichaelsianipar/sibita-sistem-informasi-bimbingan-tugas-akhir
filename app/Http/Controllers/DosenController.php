@@ -9,7 +9,10 @@ use App\Mahasiswa;
 use App\bimbingan;
 use App\submissions;
 use App\Dosen;
+use App\Http\Controllers\NotifikasiController;
 use Carbon;
+use Auth;
+
 
 class DosenController extends Controller
 {
@@ -19,7 +22,7 @@ class DosenController extends Controller
      * @return void
      */
     public function __construct()
-    {
+    {;
         $this->middleware('auth:dosen');
     }
 
@@ -30,11 +33,30 @@ class DosenController extends Controller
      */
     public function index()
     {
-        return view('dosen.beranda');
+        $notif = new NotifikasiController;
+        $notif = $notif->getMyNotif(auth()->user()->email);
+        return view('dosen.beranda',['jmlPemohon'=>$this->getJumlahPemohon(),
+                                    'jmlMhs'=>$this->getJumlahMhs(),
+                                    'notif' =>$notif,
+                                    ]);
     }
     public function profil()
     {
-        return view('dosen.profil');
+        $status = Auth::user()->status;
+        if($status==0){
+            $status = "Pembimbing";
+        }else if($status==1){
+            $status = "Koordinator";
+        }
+
+        $a=[
+            'status'=>$status,
+        ];
+        $datum = [
+            'rule'=>'dosen',
+            'profile'=>$a
+        ];
+        return view('dosen.profil', ['datum'=>$a]);
     }
     public function bimbingan()
     {
@@ -129,6 +151,11 @@ class DosenController extends Controller
         $cek = $newbimbingan->save();
 
         if($cek){
+            //create notification
+            $a = new NotifikasiController;
+            $a->createNotif("Sebuah kartu bimbingan baru, ".$request->txtNewJudulKartu." telah dibuat oleh ".auth()->user()->name."!",
+                            $request->emailMhs,
+                            route('mahasiswa.bimbingan'));
             return redirect()->route('dosen.membimbing', ['$emailMhs'=>$request['emailMhs']]);
         }
     }
@@ -143,7 +170,6 @@ class DosenController extends Controller
 
     public function judul()
     {
-
         $nomor=1;
         $judul = DB::table('pengjuduls')
                     ->where('cadosbing1', 'masayu.khodra@if.itera.ac.id')
@@ -172,12 +198,6 @@ class DosenController extends Controller
         })->get();
 
         $raw_mahasiswa = $raw_mahasiswa->toArray();
-        
-        /*
-        echo "<pre>";
-        print_r($raw_mahasiswa);
-        echo "</pre>";
-        */
 
         return view('dosen.mahasiswa', ["mahasiswas"=>$raw_mahasiswa, "counter"=>1]);
     }
@@ -190,6 +210,31 @@ class DosenController extends Controller
 
         //Kalau tidak setuju
             //Mengisi table status
+    }
+
+    public function getJumlahPemohon(){
+        $dosen = auth()->user()->email;
+        $a = pengjudul::where(function ($query) use ($dosen){
+            $query->where('cadosbing1_1', '=', $dosen)
+            ->orWhere('cadosbing1_2', '=', $dosen)
+            ->orWhere('cadosbing1_3', '=', $dosen)
+            ->orWhere('cadosbing2_1', '=', $dosen)
+            ->orWhere('cadosbing2_2', '=', $dosen)
+            ->orWhere('cadosbing2_3', '=', $dosen);
+        })->get()->count();
+        
+        return $a;
+    }
+
+
+    public function getJumlahMhs(){
+        $dosen = auth()->user()->email;
+        $a = mahasiswa::where(function ($query) use ($dosen){
+            $query->where('email_dosbing1', '=', $dosen)
+            ->orWhere('email_dosbing2', '=', $dosen);
+        })->get()->count();
+        
+        return $a;
     }
 }
 

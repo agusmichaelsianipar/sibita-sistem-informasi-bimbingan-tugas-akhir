@@ -21,6 +21,7 @@ class CreateMahasiswasTable extends Migration
             $table->string('email',255);
             $table->primary('email');
             $table->string('password');
+            $table->integer('status');
             $table->string('dosen_wali');
             $table->string('judul')->nullable();
             $table->string('email_dosbing1',255)->nullable();

@@ -32,13 +32,13 @@
                     <a href="{{ route('mahasiswa.beranda') }}">Beranda</a>
                 </li>
                 <li>
-                    <a href="{{ route('mahasiswa.profil') }}">Profil</a>
-                </li>
-                <li>
                     <a href="{{ route('mahasiswa.bimbingan') }}">Buku Kendali Bimbingan</a>
                 </li>
                 <li>
                     <a href="{{ route('mahasiswa.judul') }}">Pengajuan Judul</a>
+                </li>
+                <li>
+                    <a href="{{ route('mahasiswa.profil') }}">Profil</a>
                 </li>
                 <li>
                 <a href="{{ route('logout') }}"
