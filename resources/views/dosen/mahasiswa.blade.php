@@ -9,6 +9,7 @@
         <div class="alert alert-danger">
             {{session('popMsg')}}
         </div>
+        {{$session('popMsg')}}
     @endif
     <table class="table table-hover">
         <thead>
@@ -54,21 +55,26 @@
                         Cek Pengajuan
                     </div>
                     @else
-                    <a href="/dosen/membimbing/{{$mahasiswa['email']}}">
-                        <div class="btn btn-primary m-1 p-1 btn-sm text-left" onclick="this.parentElement.submit()">
-                            Bimbingan
-                        </div>
-                    </a>
-                    <a href="/dosen/ajukanseminar/{{$mahasiswa['email']}}">
-                        <div class="btn btn-primary m-1 p-1 btn-sm text-left" onclick="this.parentElement.submit()">
-                            Seminar
-                        </div>
-                    </a>
-                    <a href="/dosen/ajukansidang/{{$mahasiswa['email']}}">
-                        <div class="btn btn-primary m-1 p-1 btn-sm text-left" onclick="this.parentElement.submit()">
-                            Sidang
-                        </div>
-                    </a>
+                    <form id="actionHandlerForm" class="d-none" action="{{route('dosen.mahasiswa.actionHandler')}}" method="POST">
+                        {{ csrf_field() }}
+                        <input id="actionName" type="hidden" name="actionName" value="action">
+                        <input type="hidden" name="emailMhs" value="{{$mahasiswa['email']}}">
+                    </form>
+                    <div class="btn btn-primary m-1 p-1 btn-sm text-left"
+                        onclick="{getElementById('actionName').setAttribute('value', 'bimbingan');
+                                    document.getElementById('actionHandlerForm').submit();}">
+                        Bimbingan
+                    </div>
+                    <div class="btn btn-primary m-1 p-1 btn-sm text-left"
+                        onclick="{getElementById('actionName').setAttribute('value', 'seminar');
+                                    document.getElementById('actionHandlerForm').submit();}">
+                        Seminar
+                    </div>
+                    <div class="btn btn-primary m-1 p-1 btn-sm text-left"
+                        onclick="{getElementById('actionName').setAttribute('value', 'sidang');
+                                    document.getElementById('actionHandlerForm').submit();}">
+                        Sidang
+                    </div>
                     @endif
                 </td>
             </tr>    

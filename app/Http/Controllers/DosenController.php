@@ -12,7 +12,9 @@ use App\Dosen;
 use App\Http\Controllers\NotifikasiController;
 use Carbon;
 use Auth;
-
+use App\MasaTA;
+use App\Http\Controllers\PengajuanSemSidController;
+use App\PengajuanSemSid;
 
 class DosenController extends Controller
 {
@@ -33,11 +35,20 @@ class DosenController extends Controller
      */
     public function index()
     {
+        
+        $bimbList = bimbingan::where('dosen_bimbingan', Auth::user()->email)->get();
+        $bimbTimes = [];
+        foreach($bimbList as $bimb){
+            array_push($bimbTimes, explode(" ",$bimb->waktu_bimbingan)[0]);
+        }
+
         $notif = new NotifikasiController;
         $notif = $notif->getMyNotif(auth()->user()->email);
         return view('dosen.beranda',['jmlPemohon'=>$this->getJumlahPemohon(),
                                     'jmlMhs'=>$this->getJumlahMhs(),
                                     'notif' =>$notif,
+                                    'bimbinganTimes' => $bimbTimes,
+                                    'masaTA' => MasaTA::all()->first()->toJSON()
                                     ]);
     }
     public function profil()
@@ -100,38 +111,45 @@ class DosenController extends Controller
         }
     }
 
-    public function ajukansidang($emailMhs)
-    {
-        $mahasiswa = mahasiswa::where('email', $emailMhs)->first();
 
-        if(is_null($mahasiswa)){
-            return view('dosen.ajukansidang', ['mahasiswa'=>FALSE, 'popMsg'=>"Mahasiswa tidak ditemukan!"]);
-        }else{
-            $mahasiswa = $mahasiswa->toArray();
+    public function ajukan(Request $request){
+        $this->validate($request,[
+            'emailMhs' => 'required',
+            'emailDosen' => 'required',
+            'actionName' => 'required',
+        ]);
+        switch ($request['actionName']) {
+            case 'seminar':
+                $request['actionName'] = 1;
+                break;
+            case 'sidang':
+                $request['actionName'] = 2;
+                break;
+            default:
+                # code...
+                break;
         }
 
-        if(is_null($mahasiswa['judul'])){
-            return redirect()->route('dosen.ajukansidang')->with('popMsg', $mahasiswa['name']." belum dapat mengikuti bimbingan!");
-        }else{
-            return view('dosen.ajukansidang', ['mahasiswa'=>$mahasiswa, 'popMsg'=>FALSE]);
-        }
-
+        $a=new PengajuanSemSidController;
+        return $a->create($request['actionName'], $request['emailDosen'], $request['emailMhs']);
     }
 
-    public function ajukanseminar($emailMhs)
-    {
-        $mahasiswa = mahasiswa::where('email', $emailMhs)->first();
-
-        if(is_null($mahasiswa)){
-            return view('dosen.ajukanseminar', ['mahasiswa'=>FALSE, 'popMsg'=>"Mahasiswa tidak ditemukan!"]);
-        }else{
-            $mahasiswa = $mahasiswa->toArray();
-        }
-
-        if(is_null($mahasiswa['judul'])){
-            return redirect()->route('dosen.ajukanseminar')->with('popMsg', $mahasiswa['name']." belum dapat mengikuti bimbingan!");
-        }else{
-            return view('dosen.ajukanseminar', ['mahasiswa'=>$mahasiswa, 'popMsg'=>FALSE]);
+    public function mhsActionHandler(Request $request){
+        switch ($request['actionName']) {
+            case 'bimbingan':
+                return $this->membimbing($request['emailMhs']);
+                break;
+            case 'seminar':
+                $s = new PengajuanSemSidController;
+                return $s->ajukanSeminar($request['emailMhs']);
+                break;
+            case 'sidang':
+                $s = new PengajuanSemSidController;
+                return $s->ajukanSidang($request['emailMhs']);
+                break;
+            default:
+                # code...
+                break;
         }
     }
 
