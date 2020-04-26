@@ -27,13 +27,12 @@ class NotifikasiController extends Controller
      */
     public function createNotif($notif_text_, $notif_owner_, $notif_goto_)
     {
-        echo ($notif_goto_);
         $notif = new notifikasi;
         $notif->notif_text = $notif_text_;
         $notif->notif_owner = $notif_owner_;
         $notif->notif_goto = $notif_goto_;
 
-        $notif->save();
+        return $notif->save();
     }
 
     /**
