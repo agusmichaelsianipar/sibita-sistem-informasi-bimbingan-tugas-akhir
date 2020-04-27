@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Pengjudul;
+use App\Pengajudul;
 use App\Mahasiswa;
 use App\bimbingan;
 use App\submissions;
@@ -171,18 +172,18 @@ class DosenController extends Controller
     public function judul()
     {
         $nomor=1;
-        $judul = DB::table('pengjuduls')
+        $judul = DB::table('pengajuduls')
                     ->where('cadosbing1', 'masayu.khodra@if.itera.ac.id')
                     ->orWhere('cadosbing2', 'meida.cahyo@if.itera.ac.id')
                     ->get();
         // dd($judul);
 
-        $nama = DB::table("mahasiswas")->select('name','pengjuduls.id','pengjuduls.email','pengjuduls.judul1')
-                    ->leftJoin('pengjuduls','mahasiswas.email','=','pengjuduls.email')->get();    
+        $nama = DB::table("mahasiswas")->select('name','pengajuduls.id','pengajuduls.email','pengajuduls.judul1')
+                    ->leftJoin('pengajuduls','mahasiswas.email','=','pengajuduls.email')->get();    
                                     
         // dd($nama);
 
-        return view('pengjuduldosen',['nama' => $nama,'judul' => $judul,'nomor'=>$nomor]);
+        return view('pengajuduldosen',['nama' => $nama,'judul' => $judul,'nomor'=>$nomor]);
     }
 
     public function showJudul(pengjudul $judul){
@@ -206,13 +207,13 @@ class DosenController extends Controller
 
     public function getJumlahPemohon(){
         $dosen = auth()->user()->email;
-        $a = pengjudul::where(function ($query) use ($dosen){
-            $query->where('cadosbing1_1', '=', $dosen)
-            ->orWhere('cadosbing1_2', '=', $dosen)
-            ->orWhere('cadosbing1_3', '=', $dosen)
-            ->orWhere('cadosbing2_1', '=', $dosen)
-            ->orWhere('cadosbing2_2', '=', $dosen)
-            ->orWhere('cadosbing2_3', '=', $dosen);
+        $a = pengajudul::where(function ($query) use ($dosen){
+            $query->where('cadosbing11', '=', $dosen)
+            ->orWhere('cadosbing12', '=', $dosen)
+            ->orWhere('cadosbing13', '=', $dosen)
+            ->orWhere('cadosbing21', '=', $dosen)
+            ->orWhere('cadosbing22', '=', $dosen)
+            ->orWhere('cadosbing23', '=', $dosen);
         })->get()->count();
         
         return $a;

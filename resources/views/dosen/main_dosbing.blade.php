@@ -42,6 +42,12 @@
                     <a href="{{ route('dosen.judul') }}">Pengajuan Judul</a>
                 </li>
                 <li>
+                    <a href="{{ route('koorta.dataregist') }}">Data Mahasiswa Pengaju TA</a>
+                </li>
+                <li>
+                    <a href="{{ route('koorta.datajudulmhs') }}">Data Judul Mahasiswa</a>
+                </li>
+                <li>
                     <a href="{{ route('dosen.profile') }}">Profil</a>
                 </li>
                 <li>
