@@ -50,10 +50,10 @@ Route::prefix('dosen')->group(function(){
     Route::get('/judul/{judul}', 'DosenController@showJudul');
     Route::get('/koordinator/validasidaftar','KoordinatortaController@showRegistMahasiswa')->name('koorta.dataregist');
     Route::get('/koordinator/validasimhs','KoordinatortaController@showJudulMahasiswa')->name('koorta.datajudulmhs');
-    Route::get('/judul/{judul}/validasi/{attr}', 'DosenController@validasiJudul');
     Route::post('/ajukan', 'DosenController@ajukan')->name('dosen.ajukanSemSed');
     Route::post('/mahasiswa/action', 'DosenController@mhsActionHandler')->name('dosen.mahasiswa.actionHandler');
     Route::get('/judul/{judul}/validasi', 'DosenController@validasiJudul');
+    Route::post('/judul/{judul}/validasi/{attr}/{status}', 'DosenController@validasiJudul');
 });
 
 Route::prefix('superadmin')->group(function(){

@@ -12,16 +12,13 @@
   </head>
   <body>
   <div class="container">
-  {{$judul}}
-      @if($judul->statusjudul1==null)
-        @if(Auth::user()->email==$judul->cadosbing11)
+        @if((Auth::user()->email==$judul->cadosbing11)&&($judul->statusdosbing11==null))
           @php($atr = 'dosbing11')
-        @elseif(Auth::user()->email==$judul->cadosbing12)
+        @elseif((Auth::user()->email==$judul->cadosbing12)&&($judul->statusdosbing12==null))
           @php($atr = 'dosbing12')
         @elseif(Auth::user()->email==$judul->cadosbing13)
           @php($atr = 'dosbing13') 
         @endif
-      @endif
       @php($attr ='status'.$atr)
     <div class="card" style="width: 18rem;">
       <div class="card-body">
@@ -29,9 +26,19 @@
           <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{$attr}}</h6>
           {{$attr}}
-          <p class="card-text">{{$judul->des_judul1}}</p>
-          <a href="/dosen/judul/{{$judul->id}}/validasi/{{$attr}}" class="card-link">Setuju</a>
-          <a href="/dosen/judul/{{$judul->id}}/validasi" class="card-link">Tidak Setuju</a>
+          <p class="card-text">{{$judul->des_judul1}}</p> 
+            <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr}}/{{$status=1}}" method="post">
+              {{ csrf_field() }}
+              <div class="btn btn-success d-inline">
+                <button class="btn btn-succes btn-sm">Setuju</button>
+              </div>    
+            </form>
+            <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr}}/{{$status=0}}" method="post">
+              {{ csrf_field() }}
+              <div class="btn btn-danger d-inline">
+                <button class="btn btn-succes btn-sm">Tidak Setuju</button>
+              </div>    
+            </form>
       </div>
       @if($judul->judul2)
     <div class="card " style="width: 18rem;">
