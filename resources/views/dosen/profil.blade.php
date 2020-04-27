@@ -2,7 +2,6 @@
 @section('title','PROFIL | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
 @section('beranda')
-
 <div class="container">
     <h3>Profil</h3>
     <table class="table table-sm-responsive" style="overflow-x:auto; max-width:500px">

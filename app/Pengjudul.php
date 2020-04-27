@@ -6,6 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengjudul extends Model
 {
-    protected $table='pengajuduls';
-    //
+    protected $table = 'pengajuduls';
 }

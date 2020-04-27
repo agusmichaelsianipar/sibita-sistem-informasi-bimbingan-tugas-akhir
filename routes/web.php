@@ -48,6 +48,8 @@ Route::prefix('dosen')->group(function(){
     Route::get('/mahasiswa', 'DosenController@mahasiswa')->name('dosen.mahasiswa');
     Route::get('/judul', 'DosenController@judul')->name('dosen.judul');
     Route::get('/judul/{judul}', 'DosenController@showJudul');
+    Route::get('/koordinator/validasidaftar','KoordinatortaController@showRegistMahasiswa')->name('koorta.dataregist');
+    Route::get('/koordinator/validasimhs','KoordinatortaController@showJudulMahasiswa')->name('koorta.datajudulmhs');
     Route::get('/judul/{judul}/validasi/{attr}', 'DosenController@validasiJudul');
     Route::post('/ajukan', 'DosenController@ajukan')->name('dosen.ajukanSemSed');
     Route::post('/mahasiswa/action', 'DosenController@mhsActionHandler')->name('dosen.mahasiswa.actionHandler');
