@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mahasiswa;
 use App\Pengjudul;
+use App\Pengajudul;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -199,25 +200,22 @@ class MahasiswaController extends Controller
             'cadosbing2_3' => 'required',
         ]);
         
-        $judul = new Pengjudul;
+        $judul = new Pengajudul;
         $judul->email = Auth::user()->email;
         $judul->judul1 = $request->judul_1;
         $judul->desjudul1 = $request->deskripsi_judul_1;
-        $judul->cadosbing1 = $request->cadosbing1_1;
-        $judul->cadosbing2 = $request->cadosbing1_2;
-        $judul->cadosbing3 = $request->cadosbing1_3;
+        $judul->judul2 = $request->judul_2;
+        $judul->desjudul2 = $request->deskripsi_judul_2;
+        $judul->cadosbing11 = $request->cadosbing1_1;
+        $judul->cadosbing12 = $request->cadosbing1_2;
+        $judul->cadosbing13 = $request->cadosbing1_3;
+        $judul->cadosbing21 = $request->cadosbing2_1;
+        $judul->cadosbing22 = $request->cadosbing2_2;
+        $judul->cadosbing23 = $request->cadosbing2_3;
         $cek = $judul->save();
 
-        $judul2 = new Pengjudul;
-        $judul2->email = Auth::user()->email;
-        $judul2->judul1 = $request->judul_2;
-        $judul2->desjudul1 = $request->deskripsi_judul_2;
-        $judul2->cadosbing1 = $request->cadosbing2_1;
-        $judul2->cadosbing2 = $request->cadosbing2_2;
-        $judul2->cadosbing3 = $request->cadosbing2_3;
-        $cek2 = $judul2->save();
 
-        if($cek&&$cek2){
+        if($cek){
             return redirect('/mahasiswa/pengajuan-judul');
         }
 

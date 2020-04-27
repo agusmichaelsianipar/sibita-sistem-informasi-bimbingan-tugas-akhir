@@ -12,15 +12,38 @@
   </head>
   <body>
   <div class="container">
+  {{$judul}}
+      @if($judul->statusjudul1==null)
+        @if(Auth::user()->email==$judul->cadosbing11)
+          @php($atr = 'dosbing11')
+        @elseif(Auth::user()->email==$judul->cadosbing12)
+          @php($atr = 'dosbing12')
+        @elseif(Auth::user()->email==$judul->cadosbing13)
+          @php($atr = 'dosbing13') 
+        @endif
+      @endif
+      @php($attr ='status'.$atr)
     <div class="card" style="width: 18rem;">
       <div class="card-body">
           <h5 class="card-title">{{$judul->judul1}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{$attr}}</h6>
+          {{$attr}}
           <p class="card-text">{{$judul->des_judul1}}</p>
-          <a href="/dosen/judul/{{$judul->id}}/validasi" class="card-link">Setuju</a>
-          <a href="#" class="card-link">Tidak Setuju</a>
+          <a href="/dosen/judul/{{$judul->id}}/validasi/{{$attr}}" class="card-link">Setuju</a>
+          <a href="/dosen/judul/{{$judul->id}}/validasi" class="card-link">Tidak Setuju</a>
       </div>
-    </div>
+      @if($judul->judul2)
+    <div class="card " style="width: 18rem;">
+      <div class="card-body">
+          <h5 class="card-title">{{$judul->judul2}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
+          <p class="card-text">{{$judul->des_judul2}}</p>
+          <a href="/dosen/judul/{{$judul->id}}/validasi/$attr" class="card-link">Setuju</a>
+          <a href="/dosen/judul/{{$judul->id}}/validasi" class="card-link">Tidak Setuju</a>
+      </div>
+      </div>
+      @endif
 </div>
 
     <!-- Optional JavaScript -->

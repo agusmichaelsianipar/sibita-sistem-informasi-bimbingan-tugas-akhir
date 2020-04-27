@@ -24,7 +24,7 @@
                     <select id="semester" name="cadosbing1_1" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 1</option>
                         <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="rajif.agung@if.itera.ac.id">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
+                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
                         <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
                         <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
                         <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
@@ -43,7 +43,7 @@
                         <select id="semester" name="cadosbing1_2" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 1</option>
                         <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="rajif.agung@if.itera.ac.id">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
+                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
                         <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
                         <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
                         <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
@@ -61,7 +61,7 @@
                     <select id="semester" name="cadosbing1_3" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 1</option>
                         <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="rajif.agung@if.itera.ac.id">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
+                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
                         <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
                         <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
                         <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
@@ -97,7 +97,7 @@
                     <select id="semester" name="cadosbing2_1" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 2</option>
                         <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="rajif.agung@if.itera.ac.id">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
+                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
                         <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
                         <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
                         <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
@@ -116,7 +116,7 @@
                     <select id="semester" name="cadosbing2_2" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 2</option>
                         <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="rajif.agung@if.itera.ac.id">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
+                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
                         <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
                         <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
                         <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
@@ -135,7 +135,7 @@
                     <select id="semester" name="cadosbing2_3" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 2</option>
                         <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="rajif.agung@if.itera.ac.id">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
+                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
                         <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
                         <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
                         <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>

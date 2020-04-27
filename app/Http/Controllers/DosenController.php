@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Pengjudul;
+use App\Pengajudul;
 use App\Mahasiswa;
 use App\bimbingan;
 use App\submissions;
@@ -170,23 +171,23 @@ class DosenController extends Controller
 
     public function judul()
     {
+        $dosen=Auth::user();
+        $juduls = Pengajudul::all();
         $nomor=1;
-        $judul = DB::table('pengjuduls')
-                    ->where('cadosbing1', 'masayu.khodra@if.itera.ac.id')
-                    ->orWhere('cadosbing2', 'meida.cahyo@if.itera.ac.id')
-                    ->get();
-        // dd($judul);
-
-        $nama = DB::table("mahasiswas")->select('name','pengjuduls.id','pengjuduls.email','pengjuduls.judul1')
-                    ->leftJoin('pengjuduls','mahasiswas.email','=','pengjuduls.email')->get();    
-                                    
-        // dd($nama);
-
-        return view('pengjuduldosen',['nama' => $nama,'judul' => $judul,'nomor'=>$nomor]);
+        $nama = DB::table("pengajuduls")
+                ->where('cadosbing11', '=', $dosen->email)
+                ->orWhere('cadosbing12', '=', $dosen->email)
+                ->orWhere('cadosbing13', '=', $dosen->email)
+                ->orWhere('cadosbing21', '=', $dosen->email)
+                ->orWhere('cadosbing22', '=', $dosen->email)
+                ->orWhere('cadosbing23', '=', $dosen->email)
+                ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')->get();    
+                                   
+        return view('pengjuduldosen',['nama' => $nama,'nomor'=>$nomor]);
     }
 
     public function showJudul(pengjudul $judul){
-
+        // dd($judul);
         return view('dosen.detailJudul',['judul'=>$judul]);
 
     }
@@ -202,25 +203,35 @@ class DosenController extends Controller
         return view('dosen.mahasiswa', ["mahasiswas"=>$raw_mahasiswa, "counter"=>1]);
     }
 
-    //Tambahkan kolom statusjudul di table pengjuduls
-    public function validasiJudul(pengjudul $judul){
-        //Kalau setuju
-            //Mengisi table status judul di database
-            //Menghapus data judul yang diajukan oleh mahasiswa tsb dari table pengjuduls
-
-        //Kalau tidak setuju
-            //Mengisi table status
+    //Tambahkan kolom statusjudul di table pengajuduls
+    public function validasiJudul(pengjudul $judul,$attr){
+        pengjudul::where('id',$judul->id)
+        ->update([
+            'statusjudul1' => true,
+            $attr=> null
+        ]);
+        $nomor=1;
+        $dosen=Auth::user();
+        $nama = DB::table("pengajuduls")
+                ->where('cadosbing11', '=', $dosen->email)
+                ->orWhere('cadosbing12', '=', $dosen->email)
+                ->orWhere('cadosbing13', '=', $dosen->email)
+                ->orWhere('cadosbing21', '=', $dosen->email)
+                ->orWhere('cadosbing22', '=', $dosen->email)
+                ->orWhere('cadosbing23', '=', $dosen->email)
+                ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')->get();   
+        return view('pengjuduldosen',['nama' => $nama,'nomor'=>$nomor]);
     }
 
     public function getJumlahPemohon(){
         $dosen = auth()->user()->email;
         $a = pengjudul::where(function ($query) use ($dosen){
-            $query->where('cadosbing1_1', '=', $dosen)
-            ->orWhere('cadosbing1_2', '=', $dosen)
-            ->orWhere('cadosbing1_3', '=', $dosen)
-            ->orWhere('cadosbing2_1', '=', $dosen)
-            ->orWhere('cadosbing2_2', '=', $dosen)
-            ->orWhere('cadosbing2_3', '=', $dosen);
+            $query->where('cadosbing11', '=', $dosen)
+            ->orWhere('cadosbing12', '=', $dosen)
+            ->orWhere('cadosbing13', '=', $dosen)
+            ->orWhere('cadosbing21', '=', $dosen)
+            ->orWhere('cadosbing22', '=', $dosen)
+            ->orWhere('cadosbing23', '=', $dosen);
         })->get()->count();
         
         return $a;

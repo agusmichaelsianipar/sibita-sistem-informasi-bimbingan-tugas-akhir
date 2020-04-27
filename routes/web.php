@@ -50,7 +50,7 @@ Route::prefix('dosen')->group(function(){
     Route::get('/mahasiswa', 'DosenController@mahasiswa')->name('dosen.mahasiswa');
     Route::get('/judul', 'DosenController@judul')->name('dosen.judul');
     Route::get('/judul/{judul}', 'DosenController@showJudul');
-    Route::get('/judul/{judul}/validasi', 'DosenController@validasiJudul');
+    Route::get('/judul/{judul}/validasi/{attr}', 'DosenController@validasiJudul');
 });
 
 Route::prefix('superadmin')->group(function(){
