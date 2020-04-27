@@ -2,11 +2,6 @@
 @section('title','BERANDA | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
 @section('beranda')
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif
 <div class="container">
     <div class="">
         <div class="row m-2 text-center">

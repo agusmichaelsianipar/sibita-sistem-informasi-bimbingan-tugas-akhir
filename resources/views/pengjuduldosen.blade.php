@@ -4,15 +4,13 @@
 @section('beranda')
 <h2>Data Mahasiswa Yang Mengajukan Judul dan Dosen Pembimbing</h2>
 @foreach($nama as $name)
-  @if($name->statusjudul1==null)
-    @if(Auth::user()->email==$name->cadosbing11)
+    @if(Auth::user()->email==$name->cadosbing11&&$name->statusdosbing11==null)
       @php($atr = 'cadosbing11')
     @elseif(Auth::user()->email==$name->cadosbing12)
       @php($atr = 'cadosbing12')
     @elseif(Auth::user()->email==$name->cadosbing13)
       @php($atr = 'cadosbing13')
     @endif
-  @endif
 @endforeach
 
 <div class="table-responsive">

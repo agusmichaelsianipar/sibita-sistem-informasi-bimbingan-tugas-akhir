@@ -222,11 +222,10 @@ class DosenController extends Controller
     }
 
     //Tambahkan kolom statusjudul di table pengajuduls
-    public function validasiJudul(pengjudul $judul,$attr){
+    public function validasiJudul(pengjudul $judul,$attr,$status){
         pengjudul::where('id',$judul->id)
         ->update([
-            'statusjudul1' => true,
-            $attr=> null
+            $attr=> $status
         ]);
         $nomor=1;
         $dosen=Auth::user();
@@ -237,8 +236,8 @@ class DosenController extends Controller
                 ->orWhere('cadosbing21', '=', $dosen->email)
                 ->orWhere('cadosbing22', '=', $dosen->email)
                 ->orWhere('cadosbing23', '=', $dosen->email)
-                ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')->get();   
-        return view('pengjuduldosen',['nama' => $nama,'nomor'=>$nomor]);
+                ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')->get();
+        return redirect()->route('dosen.judul',['nama' => $nama,'nomor'=>$nomor]);
     }
 
     public function getJumlahPemohon(){
