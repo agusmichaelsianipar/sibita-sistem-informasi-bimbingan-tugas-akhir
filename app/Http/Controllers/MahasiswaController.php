@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mahasiswa;
 use App\Pengjudul;
+use App\Pengajudul;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -15,10 +16,11 @@ use App\Http\Controllers\NotifikasiController;
 use App\bimbingan;
 use App\submissions;
 use App\Dosen;
+use App\MasaTA;
 
 class MahasiswaController extends Controller
 {
-    /**
+    /**https://stackoverflow.com/questions/3653882/how-to-count-days-between-two-dates-in-php
      * Create a new controller instance.
      *
      * @return void
@@ -47,12 +49,32 @@ class MahasiswaController extends Controller
         else $s="";
 
         //Jumlah bimbingan
-        $b = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email)->count();
+        $bimbList = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email)->get();
 
-
+        //Ambil jumlah bimbingan tiap waktu, untuk dikirim
+        $bimbTimes = [];
+        foreach($bimbList as $bimb){
+            array_push($bimbTimes, explode(" ",$bimb->waktu_bimbingan)[0]);
+        }
+        
+        //Masa TA
+        $m = MasaTA::all()->first()->toArray();
+        
+        $sisa = abs(strtotime($m['mulai'])-strtotime(date('Y/m/d')))/86400;
+        $total = abs(strtotime($m['mulai'])-strtotime($m['selesai']))/86400;
+        $m = [
+            'mulai' => $m['mulai'],
+            'selesai' => $m['selesai'],
+            'total' => $total,
+            'sisa' => $sisa
+        ];
+        
         return view('mahasiswa.beranda',    ['notif' =>$notif,
                                             'status' => $s,
-                                            'bimbingan' => $b,
+                                            'bimbingan' => $bimbList,
+                                            'bimbinganTimes' => $bimbTimes,
+                                            'masa'=>$m,
+                                            'masaTA' => MasaTA::all()->first()->toJSON()
                                             ]);
 
     }
@@ -178,27 +200,25 @@ class MahasiswaController extends Controller
             'cadosbing2_3' => 'required',
         ]);
         
-        $judul = new Pengjudul;
+        $judul = new Pengajudul;
         $judul->email = Auth::user()->email;
         $judul->judul1 = $request->judul_1;
-        $judul->des_judul1 = $request->deskripsi_judul_1;
-        $judul->cadosbing1 = $request->cadosbing1_1;
-        $judul->cadosbing2 = $request->cadosbing1_2;
-        $judul->cadosbing3 = $request->cadosbing1_3;
+        $judul->desjudul1 = $request->deskripsi_judul_1;
+        $judul->judul2 = $request->judul_2;
+        $judul->desjudul2 = $request->deskripsi_judul_2;
+        $judul->cadosbing11 = $request->cadosbing1_1;
+        $judul->cadosbing12 = $request->cadosbing1_2;
+        $judul->cadosbing13 = $request->cadosbing1_3;
+        $judul->cadosbing21 = $request->cadosbing2_1;
+        $judul->cadosbing22 = $request->cadosbing2_2;
+        $judul->cadosbing23 = $request->cadosbing2_3;
         $cek = $judul->save();
 
-        $judul2 = new Pengjudul;
-        $judul2->email = Auth::user()->email;
-        $judul2->judul1 = $request->judul_2;
-        $judul2->des_judul1 = $request->deskripsi_judul_2;
-        $judul2->cadosbing1 = $request->cadosbing2_1;
-        $judul2->cadosbing2 = $request->cadosbing2_2;
-        $judul2->cadosbing3 = $request->cadosbing2_3;
-        $cek2 = $judul2->save();
 
-        if($cek&&$cek2){
+        if($cek){
             return redirect('/mahasiswa/pengajuan-judul');
         }
 
-    }   
+    }
+
 }

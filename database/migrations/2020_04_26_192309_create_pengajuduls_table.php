@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePengjudulsTable extends Migration
+class CreatePengajudulsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePengjudulsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengjuduls', function (Blueprint $table) {
+        Schema::create('pengajuduls', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email',255);
             $table->index('email');
@@ -51,17 +51,16 @@ class CreatePengjudulsTable extends Migration
             $table->string('cadosbing22',255);
             $table->index('cadosbing22');
             $table->foreign('cadosbing22')->references('email')->on('dosens');
-            $table->boolean('statusdosbing22');
+            $table->boolean('statusdosbing22')->nullable();
             
             $table->string('cadosbing23',255);
             $table->index('cadosbing23');
             $table->foreign('cadosbing23')->references('email')->on('dosens');
             $table->boolean('statusdosbing23')->nullable();
-            
             $table->timestamps();
         });
     }
-            //Kolom yang banyak akan digunakan pada controller ketika penentuan judul
+
     /**
      * Reverse the migrations.
      *
@@ -69,7 +68,8 @@ class CreatePengjudulsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengjuduls',function (Blueprint $table){
+        
+        Schema::dropIfExists('pengajuduls',function (Blueprint $table){
             $table->dropForeign('email');
             $table->dropIndex('email');
             $table->dropIndex('cadosbing11');
@@ -80,6 +80,5 @@ class CreatePengjudulsTable extends Migration
             $table->dropIndex('cadosbing23');
             $table->dropColumn('email');
         });
-
     }
 }

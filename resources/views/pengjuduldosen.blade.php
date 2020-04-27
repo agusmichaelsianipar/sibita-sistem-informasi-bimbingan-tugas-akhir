@@ -3,33 +3,45 @@
 
 @section('beranda')
 <h2>Data Mahasiswa Yang Mengajukan Judul dan Dosen Pembimbing</h2>
-
-<!-- @foreach($nama as $nam =>$n)
-{{$n->name}}
-@endforeach -->
+@foreach($nama as $name)
+  @if($name->statusjudul1==null)
+    @if(Auth::user()->email==$name->cadosbing11)
+      @php($atr = 'cadosbing11')
+    @elseif(Auth::user()->email==$name->cadosbing12)
+      @php($atr = 'cadosbing12')
+    @elseif(Auth::user()->email==$name->cadosbing13)
+      @php($atr = 'cadosbing13')
+    @endif
+  @endif
+@endforeach
 
 <div class="table-responsive">
   <table class="table">
     <thead>
         <tr>
-        <th scope="col">No</th>
-        <th scope="col">Nama</th>
-        <th scope="col">Email</th>
-        <th scope="col">Judul</th>
-        <th scope="col">Aksi</th>
+          <th scope="col">No</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Judul 1</th>
+          <th scope="col">Judul 2</th>
+          <th scope="col">Aksi</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($nama as $nam =>$n)
-    <tr>
+      @foreach($nama as $nam =>$n)
+      <tr>
       <th scope="row">{{$nomor++}}</th>
         <td>{{$n->name}}</td>
-      <td>{{$n->email}}</td>
-      <td>{{$n->judul1}}</td>
-      <td><a href="/dosen/judul/{{$n->id}}" class="btn btn-info btn-sm">Detail</a></td>
-    </tr>
-        @endforeach      
-  </tbody>
+        <td>{{$n->judul1}}</td>
+        <td>        
+          @if(!$n->judul2)
+            -
+          @else
+            {{$n->judul2}}
+          @endif</td>
+        <td><a href="/dosen/judul/{{$n->id}}" class="btn btn-info btn-sm">Detail</a></td>
+      </tr>
+      @endforeach      
+    </tbody>
   </table>
 </div>
 @endsection

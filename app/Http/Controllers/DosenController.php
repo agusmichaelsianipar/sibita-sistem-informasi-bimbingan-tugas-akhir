@@ -13,7 +13,9 @@ use App\Dosen;
 use App\Http\Controllers\NotifikasiController;
 use Carbon;
 use Auth;
-
+use App\MasaTA;
+use App\Http\Controllers\PengajuanSemSidController;
+use App\PengajuanSemSid;
 
 class DosenController extends Controller
 {
@@ -34,11 +36,20 @@ class DosenController extends Controller
      */
     public function index()
     {
+        
+        $bimbList = bimbingan::where('dosen_bimbingan', Auth::user()->email)->get();
+        $bimbTimes = [];
+        foreach($bimbList as $bimb){
+            array_push($bimbTimes, explode(" ",$bimb->waktu_bimbingan)[0]);
+        }
+
         $notif = new NotifikasiController;
         $notif = $notif->getMyNotif(auth()->user()->email);
         return view('dosen.beranda',['jmlPemohon'=>$this->getJumlahPemohon(),
                                     'jmlMhs'=>$this->getJumlahMhs(),
                                     'notif' =>$notif,
+                                    'bimbinganTimes' => $bimbTimes,
+                                    'masaTA' => MasaTA::all()->first()->toJSON()
                                     ]);
     }
     public function profil()
@@ -101,38 +112,45 @@ class DosenController extends Controller
         }
     }
 
-    public function ajukansidang($emailMhs)
-    {
-        $mahasiswa = mahasiswa::where('email', $emailMhs)->first();
 
-        if(is_null($mahasiswa)){
-            return view('dosen.ajukansidang', ['mahasiswa'=>FALSE, 'popMsg'=>"Mahasiswa tidak ditemukan!"]);
-        }else{
-            $mahasiswa = $mahasiswa->toArray();
+    public function ajukan(Request $request){
+        $this->validate($request,[
+            'emailMhs' => 'required',
+            'emailDosen' => 'required',
+            'actionName' => 'required',
+        ]);
+        switch ($request['actionName']) {
+            case 'seminar':
+                $request['actionName'] = 1;
+                break;
+            case 'sidang':
+                $request['actionName'] = 2;
+                break;
+            default:
+                # code...
+                break;
         }
 
-        if(is_null($mahasiswa['judul'])){
-            return redirect()->route('dosen.ajukansidang')->with('popMsg', $mahasiswa['name']." belum dapat mengikuti bimbingan!");
-        }else{
-            return view('dosen.ajukansidang', ['mahasiswa'=>$mahasiswa, 'popMsg'=>FALSE]);
-        }
-
+        $a=new PengajuanSemSidController;
+        return $a->create($request['actionName'], $request['emailDosen'], $request['emailMhs']);
     }
 
-    public function ajukanseminar($emailMhs)
-    {
-        $mahasiswa = mahasiswa::where('email', $emailMhs)->first();
-
-        if(is_null($mahasiswa)){
-            return view('dosen.ajukanseminar', ['mahasiswa'=>FALSE, 'popMsg'=>"Mahasiswa tidak ditemukan!"]);
-        }else{
-            $mahasiswa = $mahasiswa->toArray();
-        }
-
-        if(is_null($mahasiswa['judul'])){
-            return redirect()->route('dosen.ajukanseminar')->with('popMsg', $mahasiswa['name']." belum dapat mengikuti bimbingan!");
-        }else{
-            return view('dosen.ajukanseminar', ['mahasiswa'=>$mahasiswa, 'popMsg'=>FALSE]);
+    public function mhsActionHandler(Request $request){
+        switch ($request['actionName']) {
+            case 'bimbingan':
+                return $this->membimbing($request['emailMhs']);
+                break;
+            case 'seminar':
+                $s = new PengajuanSemSidController;
+                return $s->ajukanSeminar($request['emailMhs']);
+                break;
+            case 'sidang':
+                $s = new PengajuanSemSidController;
+                return $s->ajukanSidang($request['emailMhs']);
+                break;
+            default:
+                # code...
+                break;
         }
     }
 
@@ -171,26 +189,25 @@ class DosenController extends Controller
 
     public function judul()
     {
+        $dosen=Auth::user();
+        $juduls = Pengajudul::all();
         $nomor=1;
-        $judul = DB::table('pengajuduls')
-                    ->where('cadosbing1', 'masayu.khodra@if.itera.ac.id')
-                    ->orWhere('cadosbing2', 'meida.cahyo@if.itera.ac.id')
-                    ->get();
-        // dd($judul);
-
-        $nama = DB::table("mahasiswas")->select('name','pengajuduls.id','pengajuduls.email','pengajuduls.judul1')
-                    ->leftJoin('pengajuduls','mahasiswas.email','=','pengajuduls.email')->get();    
-                                    
-        // dd($nama);
-
-        return view('pengajuduldosen',['nama' => $nama,'judul' => $judul,'nomor'=>$nomor]);
+        $nama = DB::table("pengajuduls")
+                ->where('cadosbing11', '=', $dosen->email)
+                ->orWhere('cadosbing12', '=', $dosen->email)
+                ->orWhere('cadosbing13', '=', $dosen->email)
+                ->orWhere('cadosbing21', '=', $dosen->email)
+                ->orWhere('cadosbing22', '=', $dosen->email)
+                ->orWhere('cadosbing23', '=', $dosen->email)
+                ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')->get();    
+                                   
+        return view('pengjuduldosen',['nama' => $nama,'nomor'=>$nomor]);
     }
 
     public function showJudul(pengjudul $judul){
-
+        // dd($judul);
         return view('dosen.detailJudul',['judul'=>$judul]);
 
-        
     }
 
     public function mahasiswa(){
@@ -202,12 +219,31 @@ class DosenController extends Controller
         $raw_mahasiswa = $raw_mahasiswa->toArray();
 
         return view('dosen.mahasiswa', ["mahasiswas"=>$raw_mahasiswa, "counter"=>1]);
+    }
 
+    //Tambahkan kolom statusjudul di table pengajuduls
+    public function validasiJudul(pengjudul $judul,$attr){
+        pengjudul::where('id',$judul->id)
+        ->update([
+            'statusjudul1' => true,
+            $attr=> null
+        ]);
+        $nomor=1;
+        $dosen=Auth::user();
+        $nama = DB::table("pengajuduls")
+                ->where('cadosbing11', '=', $dosen->email)
+                ->orWhere('cadosbing12', '=', $dosen->email)
+                ->orWhere('cadosbing13', '=', $dosen->email)
+                ->orWhere('cadosbing21', '=', $dosen->email)
+                ->orWhere('cadosbing22', '=', $dosen->email)
+                ->orWhere('cadosbing23', '=', $dosen->email)
+                ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')->get();   
+        return view('pengjuduldosen',['nama' => $nama,'nomor'=>$nomor]);
     }
 
     public function getJumlahPemohon(){
         $dosen = auth()->user()->email;
-        $a = pengajudul::where(function ($query) use ($dosen){
+        $a = pengjudul::where(function ($query) use ($dosen){
             $query->where('cadosbing11', '=', $dosen)
             ->orWhere('cadosbing12', '=', $dosen)
             ->orWhere('cadosbing13', '=', $dosen)
