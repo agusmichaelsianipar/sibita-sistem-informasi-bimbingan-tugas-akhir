@@ -2,6 +2,11 @@
 @section('title','PROFIL | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
 @section('beranda')
+@if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+@endif
 <div class="container">
     <h3>Profil</h3>
     <table class="table table-sm-responsive" style="overflow-x:auto; max-width:500px">

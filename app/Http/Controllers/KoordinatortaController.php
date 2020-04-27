@@ -36,14 +36,14 @@ class KoordinatortaController extends Controller
         if(Auth::user()->status)
             return view('dosen.tampilDaftarCaMhs');
         else
-            return redirect('/dosen')->with('status','Maaf Anda Bukan Seorang Koordinator Tugas Akhir Prodi');
+            return redirect('/dosen/profile')->with('status','Maaf Anda Bukan Seorang Koordinator Tugas Akhir Prodi');
     }
     public function showJudulMahasiswa()
     {
         if(Auth::user()->status)
             return view('dosen.tampilDaftarJudul');
         else
-            return redirect('/dosen')->with('status','Maaf Anda Bukan Seorang Koordinator Tugas Akhir Prodi');
+            return redirect('/dosen/profile')->with('status','Maaf Anda Bukan Seorang Koordinator Tugas Akhir Prodi');
     }
     public function edit($id)
     {
