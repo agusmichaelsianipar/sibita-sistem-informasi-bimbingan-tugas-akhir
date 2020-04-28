@@ -8,8 +8,10 @@
           @php($atr = 'dosbing11')
         @elseif((Auth::user()->email==$judul->cadosbing12)&&($judul->statusdosbing12==null))
           @php($atr = 'dosbing12')
-        @elseif(Auth::user()->email==$judul->cadosbing13)
+        @elseif((Auth::user()->email==$judul->cadosbing13)&&($judul->statusdosbing13==null))
           @php($atr = 'dosbing13') 
+        @else
+          @php($atr = 'wait')
         @endif
       @php($attr ='status'.$atr)
 
@@ -19,12 +21,17 @@
           @php($atr2 = 'dosbing21')
         @elseif((Auth::user()->email==$judul->cadosbing22)&&($judul->statusdosbing22==null))
           @php($atr2 = 'dosbing22')
-        @elseif((Auth::user()->email==$judul->cadosbing23)&&($judul->statusdosbing22==null))
+        @elseif((Auth::user()->email==$judul->cadosbing23)&&($judul->statusdosbing23==null))
           @php($atr2 = 'dosbing23')
+        @else
+          @php($atr2 = 'wait')
         @endif
       @php($attr2 ='status'.$atr2)
       @endif
-      
+<!-- 
+  @if(($judul->statusdosbing21!=null)&&($judul->statusdosbing22!=null)&&($judul->statusdosbing23!=null))
+    @php($attr2 ='statuswait')
+  @endif   -->
       <div class="row row-cols-1 row-cols-md-2">
   <div class="col mb-4">
     <div class="card">
@@ -33,6 +40,7 @@
           <p class="card-text">{{$judul->desjudul1}}</p>
         <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{$attr}}</h6>
+          @if($judul->$attr==null&&$attr!='statuswait')
           <div class="btn-group mr-2" role="group" aria-label="Basic example">
           <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr}}/{{$status=1}}" method="post">
             {{ csrf_field() }}
@@ -48,7 +56,17 @@
               <button class="btn btn-succes btn-sm">Tidak Setuju</button>
             </div>    
             </form>
-          </div>          
+          </div>
+            @else
+            <div class="btn-group mr-2" role="group" aria-label="Basic example">
+              <form action="" method="post">
+                {{ csrf_field() }}
+                <div class="btn d-inline">
+                  <button class="btn btn-info btn-sm" disabled>Menunggu Persetujuan Koordinator TA</button>
+                </div>    
+              </form>
+            @endif
+        </div>          
       </div>
     </div>
   </div>
@@ -60,7 +78,7 @@
         <p class="card-text">{{$judul->desjudul2}}</p>
         <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{$attr2}}</h6>
-          @if($judul->$attr2==null)
+          @if(($judul->$attr2==null)&&($attr2!='statuswait'))
           <div class="btn-group mr-2" role="group" aria-label="Basic example">
           <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr2}}/{{$status=1}}" method="post">
               {{ csrf_field() }}
@@ -81,7 +99,7 @@
           <div class="btn-group mr-2" role="group" aria-label="Basic example">
             <form action="" method="post">
               {{ csrf_field() }}
-              <div class="btn btn-danger d-inline">
+              <div class="btn d-inline">
                 <button class="btn btn-info btn-sm" disabled>Menunggu Persetujuan Koordinator TA</button>
               </div>    
             </form>
