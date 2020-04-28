@@ -1,62 +1,116 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('dosen.main_dosbing')
+@section('title','VALIDASI | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <title>DETAIIL JUDUL</title>
-  </head>
-  <body>
+@section('beranda')
   <div class="container">
+      @php($attr =null)
         @if((Auth::user()->email==$judul->cadosbing11)&&($judul->statusdosbing11==null))
           @php($atr = 'dosbing11')
         @elseif((Auth::user()->email==$judul->cadosbing12)&&($judul->statusdosbing12==null))
           @php($atr = 'dosbing12')
-        @elseif(Auth::user()->email==$judul->cadosbing13)
+        @elseif((Auth::user()->email==$judul->cadosbing13)&&($judul->statusdosbing13==null))
           @php($atr = 'dosbing13') 
+        @else
+          @php($atr = 'wait')
         @endif
       @php($attr ='status'.$atr)
-    <div class="card" style="width: 18rem;">
+
+      @php($attr2 =null)
+      @if($judul->judul2)
+        @if((Auth::user()->email==$judul->cadosbing21)&&($judul->statusdosbing21==null))
+          @php($atr2 = 'dosbing21')
+        @elseif((Auth::user()->email==$judul->cadosbing22)&&($judul->statusdosbing22==null))
+          @php($atr2 = 'dosbing22')
+        @elseif((Auth::user()->email==$judul->cadosbing23)&&($judul->statusdosbing23==null))
+          @php($atr2 = 'dosbing23')
+        @else
+          @php($atr2 = 'wait')
+        @endif
+      @php($attr2 ='status'.$atr2)
+      @endif
+<!-- 
+  @if(($judul->statusdosbing21!=null)&&($judul->statusdosbing22!=null)&&($judul->statusdosbing23!=null))
+    @php($attr2 ='statuswait')
+  @endif   -->
+      <div class="row row-cols-1 row-cols-md-2">
+  <div class="col mb-4">
+    <div class="card">
       <div class="card-body">
-          <h5 class="card-title">{{$judul->judul1}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
+        <h5 class="card-title">{{$judul->judul1}}</h5>
+          <p class="card-text">{{$judul->desjudul1}}</p>
+        <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
           <h6 class="card-subtitle mb-2 text-muted">{{$attr}}</h6>
-          {{$attr}}
-          <p class="card-text">{{$judul->des_judul1}}</p> 
-            <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr}}/{{$status=1}}" method="post">
+          @if($judul->$attr==null&&$attr!='statuswait')
+          <div class="btn-group mr-2" role="group" aria-label="Basic example">
+          <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr}}/{{$status=1}}" method="post">
+            {{ csrf_field() }}
+            <div class="btn btn-success d-inline">
+              <button class="btn btn-succes btn-sm">Setuju</button>
+            </div>    
+            </form>
+          </div>  
+          <div class="btn-group mr-2" role="group" aria-label="Basic example">
+            <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr}}/{{$status=0}}" method="post">
+            {{ csrf_field() }}
+            <div class="btn btn-danger d-inline">
+              <button class="btn btn-succes btn-sm">Tidak Setuju</button>
+            </div>    
+            </form>
+          </div>
+            @else
+            <div class="btn-group mr-2" role="group" aria-label="Basic example">
+              <form action="" method="post">
+                {{ csrf_field() }}
+                <div class="btn d-inline">
+                  <button class="btn btn-info btn-sm" disabled>Menunggu Persetujuan Koordinator TA</button>
+                </div>    
+              </form>
+            @endif
+        </div>          
+      </div>
+    </div>
+  </div>
+      @if($judul->judul2)
+      <div class="col mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{$judul->judul2}}</h5>
+        <p class="card-text">{{$judul->desjudul2}}</p>
+        <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{$attr2}}</h6>
+          @if(($judul->$attr2==null)&&($attr2!='statuswait'))
+          <div class="btn-group mr-2" role="group" aria-label="Basic example">
+          <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr2}}/{{$status=1}}" method="post">
               {{ csrf_field() }}
               <div class="btn btn-success d-inline">
                 <button class="btn btn-succes btn-sm">Setuju</button>
               </div>    
             </form>
-            <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr}}/{{$status=0}}" method="post">
+            </div>
+          <div class="btn-group mr-2" role="group" aria-label="Basic example">
+            <form action="/dosen/judul/{{$judul->id}}/validasi/{{$attr2}}/{{$status=0}}" method="post">
               {{ csrf_field() }}
               <div class="btn btn-danger d-inline">
                 <button class="btn btn-succes btn-sm">Tidak Setuju</button>
               </div>    
+            </form>   
+            </div>
+            @else
+          <div class="btn-group mr-2" role="group" aria-label="Basic example">
+            <form action="" method="post">
+              {{ csrf_field() }}
+              <div class="btn d-inline">
+                <button class="btn btn-info btn-sm" disabled>Menunggu Persetujuan Koordinator TA</button>
+              </div>    
             </form>
+          @endif
       </div>
-      @if($judul->judul2)
-    <div class="card " style="width: 18rem;">
-      <div class="card-body">
-          <h5 class="card-title">{{$judul->judul2}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{$judul->email}}</h6>
-          <p class="card-text">{{$judul->des_judul2}}</p>
-          <a href="/dosen/judul/{{$judul->id}}/validasi/$attr" class="card-link">Setuju</a>
-          <a href="/dosen/judul/{{$judul->id}}/validasi" class="card-link">Tidak Setuju</a>
-      </div>
-      </div>
+    </div>
+  </div>
       @endif
-</div>
+    </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
-</html>
+</div>
+@endsection
+
+
