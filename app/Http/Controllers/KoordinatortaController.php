@@ -40,14 +40,19 @@ class KoordinatortaController extends Controller
     }
     public function showJudulMahasiswa()
     {
-        if(Auth::user()->status)
-            return view('dosen.tampilDaftarJudul');
+        if(Auth::user()->status){
+            $nomor=1;
+            $nama = DB::table("pengajuduls")
+                    ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')->get();
+            return view('dosen.tampilDaftarJudul',['nama'=>$nama,'nomor'=>$nomor]);
+        }
         else
             return redirect('/dosen/profile')->with('status','Maaf Anda Bukan Seorang Koordinator Tugas Akhir Prodi');
     }
-    public function edit($id)
+    public function showDetailJudul(pengjudul $judul)
     {
-        //
+            $nama = DB::table("mahasiswas")->where('email', $judul->email)->get();
+        return view('dosen.detailJudulKoorta',['judul'=>$judul,'mahasiswa'=>$nama]);
     }
 
     public function update(Request $request, $id)
