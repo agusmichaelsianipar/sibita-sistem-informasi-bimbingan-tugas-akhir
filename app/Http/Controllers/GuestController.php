@@ -50,7 +50,7 @@ class GuestController extends Controller
         ]);
 
         $guest = new Guest;
-        $guest->name = $request->nama;
+        $guest->nama = $request->nama;
         $guest->nim = $request->nim;
         $guest->email = $request->email;
         $guest->password = Hash::make($request->password);
@@ -60,7 +60,7 @@ class GuestController extends Controller
         $cek = $guest->save();
 
         if($cek){
-            return redirect('/daftarta');
+            return redirect('/daftarta')->with('status','Sukses! Silahkan Menunggu Persetujuan Koordinator TA');
         }
 
     }

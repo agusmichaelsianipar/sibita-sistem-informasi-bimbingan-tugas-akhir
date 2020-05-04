@@ -54,6 +54,16 @@ a, a:hover, a:focus {
     height: 35px;
 }
 
+#semesterr{
+    width: 450px;
+    height: 35px;
+}
+#semesterr option{
+    width: 350px;
+    height: 35px;
+}
+
+
 
 /* ---------------------------------------------------
     SIDEBAR STYLE

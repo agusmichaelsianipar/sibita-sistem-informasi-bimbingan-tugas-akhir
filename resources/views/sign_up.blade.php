@@ -1,6 +1,11 @@
 @extends('layouts/main')
 @section('title','SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 @section('bar')
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
     <div class="navbarberanda">
         <div class="container">
             <div class="wrapbar">
