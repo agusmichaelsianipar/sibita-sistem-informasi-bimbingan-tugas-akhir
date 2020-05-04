@@ -50,7 +50,7 @@ class GuestController extends Controller
         ]);
 
         $guest = new Guest;
-        $guest->name = $request->nama;
+        $guest->nama = $request->nama;
         $guest->nim = $request->nim;
         $guest->email = $request->email;
         $guest->password = Hash::make($request->password);
