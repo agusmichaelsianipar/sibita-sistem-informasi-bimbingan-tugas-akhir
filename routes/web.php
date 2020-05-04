@@ -71,6 +71,8 @@ Route::prefix('superadmin')->group(function(){
     Route::get('/tambahdosen','SuperadminController@tambahDosen')->name('superadmin.tambahDosbing');
     Route::get('/tambahmahasiswa','SuperadminController@tambahMahasiswa')->name('superadmin.tambahMahasiswa');
     Route::post('/tambahmahasiswa','SuperadminController@inputTambahMahasiswa')->name('superadmin.ITambahMahasiswa');
+    Route::get('/{mahasiswa}/ubahmahasiswa','SuperadminController@ubahMahasiswa')->name('superadmin.ubahMahasiswa');
+    Route::patch('/{mahasiswa}/ubahmahasiswa','SuperadminController@inputUbahMahasiswa')->name('superadmin.IUbahMahasiswa');
     Route::post('/tambahdosbing','SuperadminController@storeDosen')->name('superadmin.tambahDosen');
     Route::get('/aturkoorta', 'SuperadminController@aturKoorTA')->name('superadmin.aturKoorTA');
     Route::patch('/aturkoorta/{dosen}', 'SuperadminController@updateKoorTA');

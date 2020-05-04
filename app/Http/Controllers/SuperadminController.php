@@ -76,6 +76,33 @@ class SuperadminController extends Controller
             return redirect('/superadmin')->with('status','Data Mahasiswa Berhasil Ditambahkann!');
         }         
     }
+
+    public function ubahMahasiswa(mahasiswa $mahasiswa){
+        return view('superadmin.ubahMahasiswa',['mahasiswa'=>$mahasiswa]);
+    }
+
+    public function inputUbahMahasiswa(ErrorFormRequest $request, mahasiswa $mahasiswa){
+        $this->validate($request,[
+            'nama' => 'required',
+            'nim' => 'required',
+            'email' => 'required|email',
+            'password'=> 'min:8|required_with:konfirmasi_password|same:konfirmasi_password',
+            'konfirmasi_password' => 'min:8',
+            'dosen_wali' => 'required',
+        ]);
+
+        $cek=mahasiswa::where('id',$mahasiswa->id)
+            ->update([
+                'name' => $request->nama,
+                'nim' => $request->nim,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'dosen_wali' => $request->dosen_wali,
+            ]);
+        if($cek){
+            return redirect('/superadmin')->with('status','Data Mahasiswa Berhasil Diubah!');
+        }
+    }
     
     public function destroyMahasiswa(mahasiswa $mahasiswa){
         if(mahasiswa::destroy($mahasiswa->id))
