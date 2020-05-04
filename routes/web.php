@@ -51,6 +51,7 @@ Route::prefix('dosen')->group(function(){
     Route::get('/judul/{judul}/validasi', 'DosenController@validasiJudul');
     Route::post('/judul/{judul}/validasi/{attr}/{status}', 'DosenController@validasiJudul');
     Route::get('/koordinator/validasidaftar','KoordinatortaController@showRegistMahasiswa')->name('koorta.dataregist');
+    Route::post('/koordinator/validasidaftar','KoordinatortaController@validasiRegistMahasiswa')->name('koorta.validregist');
     Route::get('/koordinator/validasimhs','KoordinatortaController@showJudulMahasiswa')->name('koorta.datajudulmhs');
     Route::get('/koordinator/detail/{judul}','KoordinatortaController@showDetailJudul')->name('koorta.detailjudulmhs');
     Route::post('/koordinator/detail/{judul}/{opsi}','KoordinatortaController@validasiDetailJudul')->name('koorta.validjudulmhs');

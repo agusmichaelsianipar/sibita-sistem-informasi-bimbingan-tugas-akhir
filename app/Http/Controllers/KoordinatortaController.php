@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ErrorFormRequest;
 use App\Pengjudul;
 use App\Pengajudul;
+use App\Guest;
 use App\Mahasiswa;
 use App\Dosen;
 use Auth;
@@ -34,10 +35,39 @@ class KoordinatortaController extends Controller
 
     public function showRegistMahasiswa()
     {
-        if(Auth::user()->status)
-            return view('dosen.tampilDaftarCaMhs');
+        if(Auth::user()->status){
+            $nomor=1;
+            $guests = Guest::all();
+            return view('dosen.tampilDaftarCaMhs',['guest'=>$guests,'nomor'=>$nomor]);
+        }
         else
             return redirect('/dosen/profile')->with('status','Maaf Anda Bukan Seorang Koordinator Tugas Akhir Prodi');
+    }
+    public function validasiRegistMahasiswa(Request $request){
+        $ids=$request->get('ids');
+        for($i=0;$i<count($ids);$i++){
+            $tamu=DB::table("guests")->where('id', $ids[$i])->get();
+            // dd($tamu);
+            $mahas=DB::table("mahasiswas")->select("name")->get()->count();
+            $mahasi=$mahas+1;
+            //Tambah Data Mahasiswa
+            $mhs = new Mahasiswa;
+            $mhs->id = $mahasi;
+            $mhs->name = $tamu[$i]->nama;
+            $mhs->nim = $tamu[$i]->nim;
+            $mhs->email = $tamu[$i]->email;
+            $mhs->password = $tamu[$i]->password;
+            $mhs->dosen_wali = $tamu[$i]->dosenwali;
+
+            $cek = $mhs->save();
+
+        //Hapus Data Guests
+            if($cek){
+                guest::destroy($tamu[$i]->id);
+            }
+            return redirect('/dosen/koordinator/validasidaftar')->with('status','Sukses Menambahkan Mahasiswa');
+
+        }
     }
     public function showJudulMahasiswa()
     {
@@ -68,8 +98,6 @@ class KoordinatortaController extends Controller
 
     public function validasiDetailJudul(ErrorFormRequest $request, pengjudul $judul,$opsi)
     {
-        // dd($judul);
-
         //Update data Judul dan Dosen Pembimbing ke Tabel Mahasiswas
         if($opsi==1){
             $this->validate($request,[
@@ -106,8 +134,4 @@ class KoordinatortaController extends Controller
 
     }
 
-    public function destroy($id)
-    {
-        //
-    }
 }
