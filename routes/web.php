@@ -65,6 +65,7 @@ Route::prefix('superadmin')->group(function(){
     Route::get('/', 'SuperadminController@index')->name('superadmin.beranda');
     Route::get('/aturdosbing', 'SuperadminController@aturDosen')->name('superadmin.aturDosbing');
     Route::delete('/aturdosbing/{dosen}', 'SuperadminController@destroyDosen');
+    Route::delete('/{mahasiswa}', 'SuperadminController@destroyMahasiswa');
     Route::get('/aturdosbing/{dosen}/ubah', 'SuperadminController@editDosen');
     Route::patch('/aturdosbing/{dosen}', 'SuperadminController@updateDosen');
     Route::get('/tambahdosen','SuperadminController@tambahDosen')->name('superadmin.tambahDosbing');

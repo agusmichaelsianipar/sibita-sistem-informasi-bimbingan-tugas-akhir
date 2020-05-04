@@ -30,8 +30,17 @@ class SuperadminController extends Controller
      */
     public function index()
     {
-        return view('superadmin.berandaAdmin');
-    }
+        $mhs = Mahasiswa::all();
+        $nomor=1;
+        return view('superadmin.berandaAdmin',['mhs'=>$mhs,'nomor'=>$nomor]);
+    }    
+    
+    public function destroyMahasiswa(mahasiswa $mahasiswa){
+        if(mahasiswa::destroy($mahasiswa->id))
+            return redirect('/superadmin')->with('status','Data Mahasiswa Berhasil Dihapus!');
+        else
+            dd($mahasiswa);
+    }  
 
     public function aturDosen(){
         $dosen = Dosen::all();
