@@ -154,5 +154,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Ajukan</button>
                 </form>        
-
+@verbatim
+document.getElementByName("cadosbing1_1").value = "agus@dosen.com"; 
+endverbatim
 @endsection

@@ -5,6 +5,12 @@
 <h4>DATA JUDUL MAHASISWA</h4>
 <h4>YANG MENGAJUKAN JUDUL</h4>
 <div class="container">
+<h2>Data Dosen Pembimbing</h2>
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
 <div class="table-responsive">
   <table class="table">
     <thead>
