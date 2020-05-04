@@ -48,10 +48,11 @@ class PengajuanSemSidController extends Controller
                         'namaMhs' => Mahasiswa::where('email', $pengajuan->mahasiswa)->first()->name,
                         'tanggal' => explode(" ",$pengajuan->created_at)[0],
                         'status' => $pengajuan->status,
+                        'jenis' => $pengajuan->tipe_pengajuan,
                     ];
                     return view('dosen.statusPengajuan')->with([
                         'pengajuan' =>$dataPengajuan,
-                        'popMsg'=>'Terdapat pengajuan sidang yang masih aktif.',
+                        'popMsg'=>'Terdapat pengajuan yang masih aktif.',
                         'popLevel' => 'warning',
                     ]);
                 }else{
@@ -100,10 +101,11 @@ class PengajuanSemSidController extends Controller
                         'namaMhs' => Mahasiswa::where('email', $pengajuan->mahasiswa)->first()->name,
                         'tanggal' => explode(" ",$pengajuan->created_at)[0],
                         'status' => $pengajuan->status,
+                        'jenis' => $pengajuan->tipe_pengajuan,
                     ];
                     return view('dosen.statusPengajuan')->with([
                         'pengajuan' =>$dataPengajuan,
-                        'popMsg'=>'Terdapat pengajuan seminar yang masih aktif.',
+                        'popMsg'=>'Terdapat pengajuan yang masih aktif.',
                         'popLevel' => 'warning',
                     ]);
                 }else{
@@ -140,14 +142,20 @@ class PengajuanSemSidController extends Controller
                 'namaMhs' => Mahasiswa::where('email', $emailMhs)->first()->name,
                 'tanggal' => explode(" ",$pengajuan->created_at)[0],
                 'status' => $pengajuan->status,
+                'jenis' => $pengajuan->tipe_pengajuan,
             ];
         }
 
         //create notification
         //notif to Mahasiswa
+        if($pengajuan->tipe_pengajuan==1){
+            $tipe_pengajuan = "seminar";
+        }else if($pengajuan->tipe_pengajuan==2){
+            $tipe_pengajuan = "sidang";
+        }
         $n = new NotifikasiController;
         $n->createNotif(
-            "Anda telah diajukan untuk melakukan !",
+            "Anda telah diajukan untuk melakukan ".$tipe_pengajuan."!",
             $emailMhs,
             "#"
         );
@@ -165,6 +173,27 @@ class PengajuanSemSidController extends Controller
             'popMsg'=>'Pengajuan berhasil!',
             'popLevel'=>'success'
         ]);
+    }
+
+    public function ajukan(Request $request){
+        $this->validate($request,[
+            'emailMhs' => 'required',
+            'emailDosen' => 'required',
+            'actionName' => 'required',
+        ]);
+        switch ($request['actionName']) {
+            case 'seminar':
+                $request['actionName'] = 1;
+                break;
+            case 'sidang':
+                $request['actionName'] = 2;
+                break;
+            default:
+                # code...
+                break;
+        }
+
+        return $this->create($request['actionName'], $request['emailDosen'], $request['emailMhs']);
     }
 
     /**

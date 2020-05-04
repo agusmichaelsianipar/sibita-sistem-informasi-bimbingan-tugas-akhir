@@ -17,6 +17,7 @@ class CreateNotifikasisTable extends Migration
         notif_owner >> email pemilik email
         notif_text >> teks notifikasi
         notif_goto >> link rujukan
+        pin >> pin: 0:tidak dipin, 1:dipin
         */
 
          Schema::create('notifikasis', function (Blueprint $table) {
@@ -25,7 +26,7 @@ class CreateNotifikasisTable extends Migration
             $table->string('notif_owner');
             $table->string('notif_text');
             $table->string('notif_goto');
-            $table->boolean('pin');
+            $table->boolean('pin')->default('0');
         });
     }
 

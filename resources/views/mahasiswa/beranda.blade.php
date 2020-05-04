@@ -28,7 +28,7 @@
             </div><div class="col-sm  float-left">
                 <div class="card mb-1">
                     <div class="card-body" id="jmlBimbinganV">
-                        <div id="jmlBimbinganV">{{$bimbingan->count()}}</div>
+                        <div id="jmlBimbinganV">{{$bimbingan}}</div>
                         <div>Kartu</div>
                     </div>
                     <div class="card-header bg-light">

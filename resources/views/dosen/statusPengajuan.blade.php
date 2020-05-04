@@ -24,6 +24,16 @@
                             <td class="col-sm-9">{{$pengajuan['tanggal']}}</td>
                         </tr>
                         <tr>
+                            <td class="col-sm-3 text-right" scope="row">Jenis Pengajuan</td>
+                            <td class="col-sm-9">
+                                @if($pengajuan['jenis']==1)
+                                    Seminar
+                                @elseif($pengajuan['jenis']==2)
+                                    Sidang
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="col-sm-3 text-right" scope="row">Status Pengajuan</td>
                             <td class="col-sm-9">
                                 @if($pengajuan['status']==0)

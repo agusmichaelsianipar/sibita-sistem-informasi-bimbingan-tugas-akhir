@@ -43,14 +43,27 @@ class DosenController extends Controller
             array_push($bimbTimes, explode(" ",$bimb->waktu_bimbingan)[0]);
         }
 
-        $notif = new NotifikasiController;
-        $notif = $notif->getMyNotif(auth()->user()->email);
-        return view('dosen.beranda',['jmlPemohon'=>$this->getJumlahPemohon(),
+        //Ambil masa TA yang berlaku
+        $m = MasaTA::all()->first();
+        if(isset($m->id)){
+            $notif = new NotifikasiController;
+            $notif = $notif->getMyNotif(auth()->user()->email);
+            return view('dosen.beranda',['jmlPemohon'=>$this->getJumlahPemohon(),
+                                        'jmlMhs'=>$this->getJumlahMhs(),
+                                        'notif' =>$notif,
+                                        'bimbinganTimes' => $bimbTimes,
+                                        'masaTA' => MasaTA::all()->first()->toJSON()
+                                        ]);
+        }else{
+            $notif = new NotifikasiController;
+            $notif = $notif->getMyNotif(auth()->user()->email);
+            return view('dosen.beranda',['jmlPemohon'=>$this->getJumlahPemohon(),
                                     'jmlMhs'=>$this->getJumlahMhs(),
                                     'notif' =>$notif,
                                     'bimbinganTimes' => $bimbTimes,
-                                    'masaTA' => MasaTA::all()->first()->toJSON()
+                                    'masaTA' => 'null',
                                     ]);
+        }
     }
     public function profil()
     {
@@ -113,28 +126,6 @@ class DosenController extends Controller
     }
 
 
-    public function ajukan(Request $request){
-        $this->validate($request,[
-            'emailMhs' => 'required',
-            'emailDosen' => 'required',
-            'actionName' => 'required',
-        ]);
-        switch ($request['actionName']) {
-            case 'seminar':
-                $request['actionName'] = 1;
-                break;
-            case 'sidang':
-                $request['actionName'] = 2;
-                break;
-            default:
-                # code...
-                break;
-        }
-
-        $a=new PengajuanSemSidController;
-        return $a->create($request['actionName'], $request['emailDosen'], $request['emailMhs']);
-    }
-
     public function mhsActionHandler(Request $request){
         switch ($request['actionName']) {
             case 'bimbingan':
@@ -172,9 +163,19 @@ class DosenController extends Controller
         if($cek){
             //create notification
             $a = new NotifikasiController;
-            $a->createNotif("Sebuah kartu bimbingan baru, ".$request->txtNewJudulKartu." telah dibuat oleh ".auth()->user()->name."!",
+            $a->createNotif("Sebuah kartu bimbingan baru \"".$request->txtNewJudulKartu."\" telah dibuat oleh ".auth()->user()->name."!",
                             $request->emailMhs,
                             route('mahasiswa.bimbingan'));
+            
+            $a->createNotif("Sebuah kartu bimbingan baru \"".$request->txtNewJudulKartu.
+                            "\" untuk ".mahasiswa::where('email', $request->emailMhs)->first()->name." telah dibuat oleh ".auth()->user()->name."!",
+                            mahasiswa::where('email', $request->emailMhs)->first()->email_dosbing1,
+                            "#"); 
+                               
+            $a->createNotif("Sebuah kartu bimbingan baru \"".$request->txtNewJudulKartu.
+                            "\" untuk ".mahasiswa::where('email', $request->emailMhs)->first()->name." telah dibuat oleh ".auth()->user()->name."!",
+                            mahasiswa::where('email', $request->emailMhs)->first()->email_dosbing2,
+                            "#"); 
             return redirect()->route('dosen.membimbing', ['$emailMhs'=>$request['emailMhs']]);
         }
     }

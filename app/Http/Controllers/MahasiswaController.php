@@ -40,6 +40,7 @@ class MahasiswaController extends Controller
         //ambil notifikasi
         $notif = new NotifikasiController;
         $notif = $notif->getMyNotif(auth()->user()->email);
+        
 
         //cek status
         $s = Auth::user()->status;
@@ -47,6 +48,7 @@ class MahasiswaController extends Controller
         else if($s==1) $s="Pengajuan judul";
         else if($s==2) $s="Peserta TA";
         else $s="";
+
 
         //Jumlah bimbingan
         $bimbList = bimbingan::where('mahasiswa_bimbingan', Auth::user()->email)->get();
@@ -56,27 +58,42 @@ class MahasiswaController extends Controller
         foreach($bimbList as $bimb){
             array_push($bimbTimes, explode(" ",$bimb->waktu_bimbingan)[0]);
         }
-        
+
         //Masa TA
-        $m = MasaTA::all()->first()->toArray();
-        
-        $sisa = abs(strtotime($m['mulai'])-strtotime(date('Y/m/d')))/86400;
-        $total = abs(strtotime($m['mulai'])-strtotime($m['selesai']))/86400;
-        $m = [
-            'mulai' => $m['mulai'],
-            'selesai' => $m['selesai'],
-            'total' => $total,
-            'sisa' => $sisa
-        ];
-        
-        return view('mahasiswa.beranda',    ['notif' =>$notif,
+        //cek apakah ada
+        $m = MasaTA::all()->first();
+        if(isset($m->id)){
+            $m = $m->toArray();
+            $sisa = abs(strtotime($m['mulai'])-strtotime(date('Y/m/d')))/86400;
+            $total = abs(strtotime($m['mulai'])-strtotime($m['selesai']))/86400;
+            $m = [
+                'mulai' => $m['mulai'],
+                'selesai' => $m['selesai'],
+                'total' => $total,
+                'sisa' => $sisa
+            ];
+            return view('mahasiswa.beranda',    ['notif' =>$notif,
                                             'status' => $s,
-                                            'bimbingan' => $bimbList,
+                                            'bimbingan' => count($bimbList),
                                             'bimbinganTimes' => $bimbTimes,
                                             'masa'=>$m,
                                             'masaTA' => MasaTA::all()->first()->toJSON()
                                             ]);
-
+        }else{
+            $m = [
+                'mulai' => '',
+                'selesai' => '',
+                'total' => '',
+                'sisa' => ''
+            ];
+            return view('mahasiswa.beranda',    ['notif' =>$notif,
+                                            'status' => $s,
+                                            'bimbingan' => '',
+                                            'bimbinganTimes' => '',
+                                            'masa'=>$m,
+                                            'masaTA' => ''
+                                            ]);
+        }
     }
     public function showProfil()
     {
