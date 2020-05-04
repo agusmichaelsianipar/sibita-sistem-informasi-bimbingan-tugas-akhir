@@ -21,7 +21,13 @@ class CreateMahasiswasTable extends Migration
             $table->string('email',255);
             $table->primary('email');
             $table->string('password');
-            $table->integer('status');
+            /*
+            status
+            0 > Akun baru
+            1 > Pengajuan judul
+            2 > Peserta TA
+            */
+            $table->integer('status')->default('0');
             $table->string('dosen_wali');
             $table->string('judul')->nullable();
             $table->string('email_dosbing1',255)->nullable();

@@ -41,12 +41,22 @@
                 <li>
                     <a href="{{ route('dosen.judul') }}">Pengajuan Judul</a>
                 </li>
+                @if(Auth::user()->status==1)
+                <hr>
+                <div class="container">
+                    <small>Perangkat Koordinator</small>
+                </div>
+                <li>
+                    <a href="{{route('koorta.pengaturanta')}}">Pengaturan Masa TA</a>
+                </li>
                 <li>
                     <a href="{{ route('koorta.dataregist') }}">Data Mahasiswa Pengaju TA</a>
                 </li>
                 <li>
                     <a href="{{ route('koorta.datajudulmhs') }}">Data Judul Mahasiswa</a>
                 </li>
+                @endif
+                <hr>
                 <li>
                     <a href="{{ route('dosen.profile') }}">Profil</a>
                 </li>

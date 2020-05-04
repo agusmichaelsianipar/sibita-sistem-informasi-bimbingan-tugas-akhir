@@ -37,11 +37,11 @@
                             bg-success text-white
                     @endif" 
                     onclick="document.getElementById('pin{{$pemberitahuan->id}}').submit()">
-                    <small>p</small>
+                    <small>pin</small>
                 </div>
                 <div role="button" class="col-1 m-0 p-0 clickAble btn btn-sm"
                     onclick="document.getElementById('del{{$pemberitahuan->id}}').submit()">
-                    <small>x</small>
+                    <small>del</small>
                 </div>
             </div>
             <div class="row m-0 p-0">

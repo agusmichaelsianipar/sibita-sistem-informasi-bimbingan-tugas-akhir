@@ -54,6 +54,7 @@ Route::prefix('dosen')->group(function(){
     Route::post('/koordinator/validasidaftar','KoordinatortaController@validasiRegistMahasiswa')->name('koorta.validregist');
     Route::get('/koordinator/validasimhs','KoordinatortaController@showJudulMahasiswa')->name('koorta.datajudulmhs');
     Route::get('/koordinator/detail/{judul}','KoordinatortaController@showDetailJudul')->name('koorta.detailjudulmhs');
+    Route::get('/koordinator/pengaturanta','KoordinatortaController@pengaturanta')->name('koorta.pengaturanta');
     Route::post('/ajukan', 'PengajuanSemSidController@ajukan')->name('dosen.ajukanSemSed');
     Route::post('/koordinator/detail/{judul}/{opsi}','KoordinatortaController@validasiDetailJudul')->name('koorta.validjudulmhs');
     Route::post('/mahasiswa/action', 'DosenController@mhsActionHandler')->name('dosen.mahasiswa.actionHandler');

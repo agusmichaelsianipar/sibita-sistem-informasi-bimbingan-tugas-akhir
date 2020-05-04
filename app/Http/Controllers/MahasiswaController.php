@@ -44,7 +44,7 @@ class MahasiswaController extends Controller
 
         //cek status
         $s = Auth::user()->status;
-        if($s==0) $s = "validasi akun";
+        if($s==0) $s = "Akun Baru";
         else if($s==1) $s="Pengajuan judul";
         else if($s==2) $s="Peserta TA";
         else $s="";

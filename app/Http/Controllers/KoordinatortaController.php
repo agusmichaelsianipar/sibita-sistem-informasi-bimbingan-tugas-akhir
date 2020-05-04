@@ -10,7 +10,9 @@ use App\Pengajudul;
 use App\Guest;
 use App\Mahasiswa;
 use App\Dosen;
+use App\notifikasi;
 use Auth;
+use App\Http\Controllers\NotifikasiController;
 
 class KoordinatortaController extends Controller
 {
@@ -60,6 +62,14 @@ class KoordinatortaController extends Controller
             $mhs->dosen_wali = $tamu[$i]->dosenwali;
 
             $cek = $mhs->save();
+
+            $notif = new NotifikasiController;
+            // Notifikasi ke mahasiswa
+            $notif->createNotif(
+                "Selamat datang ".$mhs->name."! Silakan melakukan pengajuan judul dan dosen pembimbng",
+                $mhs->email,
+                route('mahasiswa.judul')
+            );
 
         //Hapus Data Guests
             if($cek){

@@ -87,26 +87,31 @@
 
     bimbTimes = {!!json_encode($bimbinganTimes)!!};
     
-    bimbTimes.forEach((e, i) => {
-        bimbTimes[i] = [parseInt(e.split('-')[0]), parseInt(e.split('-')[1])];
-    });
-    
-    tmpBimb = [];
-    for(i=0; i<=bimbTimes[bimbTimes.length-1][0]-bimbTimes[0][0]; i++){
-        tmpBimbT = [];
-        bimbTimes.forEach(e => {
-            if(e[0]==bimbTimes[i][0]){
-                tmpBimbT.push(e);
-
-            }
+    if(bimbTimes.length>0){
+        bimbTimes.forEach((e, i) => {
+            bimbTimes[i] = [parseInt(e.split('-')[0]), parseInt(e.split('-')[1])];
         });
-        tmpBimb.push(tmpBimbT);
+        
+        tmpBimb = [];
+        for(i=0; i<=bimbTimes[bimbTimes.length-1][0]-bimbTimes[0][0]; i++){
+            tmpBimbT = [];
+            bimbTimes.forEach(e => {
+                if(e[0]==bimbTimes[i][0]){
+                    tmpBimbT.push(e);
 
+                }
+            });
+            tmpBimb.push(tmpBimbT);
+
+        }
+        tmpBimbNew = [];
+        for(i=0; i<tmpBimb.length; i++){
+            tmpBimbNew = tmpBimbNew.concat(tmpBimb[i]);
+        }
+    }else{
+        tmpBimbNew = [];
     }
-    tmpBimbNew = [];
-    for(i=0; i<tmpBimb.length; i++){
-        tmpBimbNew = tmpBimbNew.concat(tmpBimb[i]);
-    }
+    
 
     jmlPBln = [];
     for(i=bulanMulai; i<=durasiB+bulanMulai; i++){
@@ -121,9 +126,14 @@
         }
     }
 
+
     chartData = [];
-    for(i=0; i<jmlPBln.length; i++){
-        chartData.push(jmlPBln[i][1]);
+    if(bimbTimes.length>0){
+        for(i=0; i<jmlPBln.length; i++){
+            chartData.push(jmlPBln[i][1]);
+        }
+    }else{
+        chartData = [];
     }
 
     chartLabel=[''];
