@@ -32,3 +32,8 @@
 .infoBoxHolder{
     max-width: 1000px;
 }
+
+#tbl{
+    float: right;
+    width: 100px;
+}

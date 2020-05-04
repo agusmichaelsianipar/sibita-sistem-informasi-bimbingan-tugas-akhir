@@ -60,7 +60,7 @@ class GuestController extends Controller
         $cek = $guest->save();
 
         if($cek){
-            return redirect('/daftarta');
+            return redirect('/daftarta')->with('status','Sukses! Silahkan Menunggu Persetujuan Koordinator TA');
         }
 
     }

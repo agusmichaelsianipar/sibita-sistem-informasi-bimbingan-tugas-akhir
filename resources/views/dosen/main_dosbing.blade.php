@@ -98,7 +98,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
@@ -106,6 +107,26 @@
                 $(this).toggleClass('active');
             });
         });
+
+        $('.selectall').click(function(){
+            $('.selectbox').prop('checked',$(this).prop('checked'));
+            $('.selectall2').prop('checked',$(this).prop('checked'));
+        })
+        $('.selectall2').click(function(){
+            $('.selectbox').prop('checked',$(this).prop('checked'));
+            $('.selectall').prop('checked',$(this).prop('checked'));
+        })
+        $('.selectbox').change(function(){
+            var total = $('.selectbox').length;
+            var number = $('.selectbox.checked').length;
+            if(total ==number){
+                $('.selectall').prop('checked',true);
+                $('.selectall2').prop('checked',true);
+            }else{
+                $('.selectall').prop('checked',false);
+                $('.selectall2').prop('checked',false);
+            }
+        })
     </script>
     </body>
 </html>
