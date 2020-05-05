@@ -65,9 +65,14 @@ Route::prefix('superadmin')->group(function(){
     Route::get('/', 'SuperadminController@index')->name('superadmin.beranda');
     Route::get('/aturdosbing', 'SuperadminController@aturDosen')->name('superadmin.aturDosbing');
     Route::delete('/aturdosbing/{dosen}', 'SuperadminController@destroyDosen');
+    Route::delete('/{mahasiswa}', 'SuperadminController@destroyMahasiswa');
     Route::get('/aturdosbing/{dosen}/ubah', 'SuperadminController@editDosen');
     Route::patch('/aturdosbing/{dosen}', 'SuperadminController@updateDosen');
     Route::get('/tambahdosen','SuperadminController@tambahDosen')->name('superadmin.tambahDosbing');
+    Route::get('/tambahmahasiswa','SuperadminController@tambahMahasiswa')->name('superadmin.tambahMahasiswa');
+    Route::post('/tambahmahasiswa','SuperadminController@inputTambahMahasiswa')->name('superadmin.ITambahMahasiswa');
+    Route::get('/{mahasiswa}/ubahmahasiswa','SuperadminController@ubahMahasiswa')->name('superadmin.ubahMahasiswa');
+    Route::patch('/{mahasiswa}/ubahmahasiswa','SuperadminController@inputUbahMahasiswa')->name('superadmin.IUbahMahasiswa');
     Route::post('/tambahdosbing','SuperadminController@storeDosen')->name('superadmin.tambahDosen');
     Route::get('/aturkoorta', 'SuperadminController@aturKoorTA')->name('superadmin.aturKoorTA');
     Route::patch('/aturkoorta/{dosen}', 'SuperadminController@updateKoorTA');

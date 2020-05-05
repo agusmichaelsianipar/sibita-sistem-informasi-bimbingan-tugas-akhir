@@ -60,7 +60,7 @@
                     @endif                                                                
                 </div>
                 <div class="tombol">
-                    <button type="submit" class="btn btn-outline-primary">Tambah Dosen</button>
+                    <button type="submit" class="btn btn-outline-primary">Tambah Mahasiswa</button>
                 </div>                                
             </form>
         </div>

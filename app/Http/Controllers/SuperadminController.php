@@ -30,8 +30,86 @@ class SuperadminController extends Controller
      */
     public function index()
     {
-        return view('superadmin.berandaAdmin');
+        $mhs = Mahasiswa::all();
+        $nomor=1;
+        return view('superadmin.berandaAdmin',['mhs'=>$mhs,'nomor'=>$nomor]);
     }
+    
+    public function tambahMahasiswa(){
+        return view('superadmin.tambahMahasiswa');
+    }
+
+    public function inputTambahMahasiswa(ErrorFormRequest $request){
+        $this->validate($request,[
+            'nama' => 'required',
+            'nim' => 'required|unique:mahasiswas,nim',
+            'email' => 'required|unique:mahasiswas,email|email',
+            'password'=> 'min:8|required_with:konfirmasi_password|same:konfirmasi_password',
+            'konfirmasi_password' => 'min:8',
+            'dosen_wali' => 'required',
+        ]);
+
+        function maxID(){
+            $maha=Mahasiswa::all();
+            $max=0;
+            foreach($maha as $mahas){
+                if($mahas->id > $max){
+                    $max=$mahas->id;
+                }
+            }
+            return $max;
+        }
+        $IDmax=maxID();
+        $IDmax=$IDmax+1;
+        
+        $mhs = new Mahasiswa;
+        $mhs->id = $IDmax;
+        $mhs->name = $request->nama;
+        $mhs->nim = $request->nim;
+        $mhs->email = $request->email;
+        $mhs->password = Hash::make($request->password);
+        $mhs->dosen_wali = $request->dosen_wali;
+
+        $cek = $mhs->save();
+
+        if($cek){
+            return redirect('/superadmin')->with('status','Data Mahasiswa Berhasil Ditambahkann!');
+        }         
+    }
+
+    public function ubahMahasiswa(mahasiswa $mahasiswa){
+        return view('superadmin.ubahMahasiswa',['mahasiswa'=>$mahasiswa]);
+    }
+
+    public function inputUbahMahasiswa(ErrorFormRequest $request, mahasiswa $mahasiswa){
+        $this->validate($request,[
+            'nama' => 'required',
+            'nim' => 'required',
+            'email' => 'required|email',
+            'password'=> 'min:8|required_with:konfirmasi_password|same:konfirmasi_password',
+            'konfirmasi_password' => 'min:8',
+            'dosen_wali' => 'required',
+        ]);
+
+        $cek=mahasiswa::where('id',$mahasiswa->id)
+            ->update([
+                'name' => $request->nama,
+                'nim' => $request->nim,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'dosen_wali' => $request->dosen_wali,
+            ]);
+        if($cek){
+            return redirect('/superadmin')->with('status','Data Mahasiswa Berhasil Diubah!');
+        }
+    }
+    
+    public function destroyMahasiswa(mahasiswa $mahasiswa){
+        if(mahasiswa::destroy($mahasiswa->id))
+            return redirect('/superadmin')->with('status','Data Mahasiswa Berhasil Dihapus!');
+        else
+            dd($mahasiswa);
+    }  
 
     public function aturDosen(){
         $dosen = Dosen::all();
