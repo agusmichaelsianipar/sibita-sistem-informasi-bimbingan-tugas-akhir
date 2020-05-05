@@ -1,30 +1,14 @@
-@extends('layouts/main')
-@section('title','SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
-@section('bar')
+@extends('mainlayout')
+@section('beranda')
 @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
 @endif
-    <div class="navbarberanda">
-        <div class="container">
-            <div class="wrapbar">
-                <div class="conbar">
-                <a href="{{ url('/') }}"><i class="fas fa-arrow-left"></i></a>
-                </div>
-                <div class="bartitle">
-                    <p>SIGN-UP <i class="fas fa-clipboard-list"></i></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-@endsection
-@section('containing')
-
 <div class="container">
     <div class="row">
         <div class="col-6">
+            <div class="isi">
             <h2 class="mt-3">Form Tambah Data Guest</h1>
 
             <form method="post" action="/daftar">
@@ -86,8 +70,10 @@
                 </div>                
 
                 <button type="submit" class="btn btn-primary">Daftar TA</button>
-                </form>        
+                </form>
+                </div>        
         </div>
     </div>
+    <br><br><br><br><br><br><br>
 </div>
     @endsection

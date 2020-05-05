@@ -8,57 +8,11 @@
                 justify-content: center;
             }
 
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif; 
-                font-weight: 100;
-                height: 100vh;
-                margin-top: 50vh;
-                margin-right:-10vw;
-            }
-
             .title {
                 font-size: 44px;
                 margin-top:-5vw;
             }
-
-            .judul{
-                font-size: smaller;
-            }
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-                font-family: 'Raleway', sans-serif; 
-            }
-
-            .m-b-md {
-                margin-bottom: 500px;
-            }
-            .btn a{
-                text-decoration:none;
-                color:black;
-            }
-            .btn a:hover{
-                text-decoration:none;
-                color:black;
-            } */
+*/
             
     .bg {
       background: url('/assets/image/jbtron.png') no-repeat center center;
@@ -72,8 +26,13 @@
 
     .affix{
         background: transparent;
+        font-family: 'Capriola', sans-serif;
     }
-
+    p.lead{
+        margin-top: -2vh;
+        color:white;
+        font-family: 'Capriola', sans-serif;
+    }
     .jumbo {
     margin:20px;
     height: 10px;
@@ -97,23 +56,16 @@
         opacity: 100%;
         margin-top: 150px;
         border-radius: 10%;
-    }    
-    .keterangana{
-        font-family: 'Capriola', sans-serif;
-        width: 500px;
-        height: 500px;
-        opacity: 10%;
-        margin-top: 150px;
-        border-radius: 10%;
     }
-    .logo{
-        margin-bottom: 10px;
+    .logoo{
+        margin-bottom: -0px;
+        padding-top: 50px;
     }
-    img.center{
+    img.centerr{
         display: block;
         margin: 0 auto;
     }
-    .center{
+    .centerr{
         height:7vw;
         width:7vw;
     }
@@ -123,19 +75,29 @@
         display: block;
         margin: 0 auto;
         text-align: justify;
+        float: left;
+        color:white;
+        line-height: 210%;
     }
 
     .login{
         margin-top: 10vh;
+        float: left;
     }    
     .daftar{
         margin-bottom: 1vh;
         float: right;
     }    
     .dosen{
-        margin-top: -10vh;
+        margin-top: -13vh;
         margin-right: 4vw;
         float: right;
+    }
+
+    .isi{
+        margin-top: 18vh;
+        color:white;
+        font-family:'Capriola',sans-serif;
     }
 
     a.button1{
