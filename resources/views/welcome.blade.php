@@ -9,108 +9,54 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                /* background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif; 
-                font-weight: 100;
-                height: 100vh;
-                margin: 0; */
+        <link href="{!! asset('assets/css/welcome.css') !!}" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css2?family=Capriola&display=swap" rel="stylesheet">  
+        <script>
+        var jumboHeight = $('.jumbotron').outerHeight();
+            function parallax(){
+                var scrolled = $(window).scrollTop();
+                $('.bg').css('height', (jumboHeight-scrolled) + 'px');
             }
 
-            .full-height {
-                height: 100vh;
-            }
+            $(window).scroll(function(e){
+                parallax();
+            });
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        </script>
 
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif; 
-                font-weight: 100;
-                height: 100vh;
-                margin-top: 50vh;
-                margin-right:-10vw;
-            }
-
-            .title {
-                font-size: 44px;
-                margin-top:-5vw;
-            }
-
-            .judul{
-                font-size: smaller;
-            }
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-                font-family: 'Raleway', sans-serif; 
-            }
-
-            .m-b-md {
-                margin-bottom: 500px;
-            }
-            .logo{
-                float:left;
-                margin-left:-15vw;
-                margin-top:1vw;
-            }
-            .logoi{
-                height:15vw;
-                width:15vw;
-            }
-            
-            .btn a{
-                text-decoration:none;
-                color:black;
-            }
-            .btn a:hover{
-                text-decoration:none;
-                color:black;
-            }
-            
-        </style>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                <div class="logo">
-                <img class="logoi" src="{!! asset('assets/image/logo-itera.png') !!}" alt="">
-                </div>
-                <div class="judul">
-                SISTEM INFORMASI BIMBINGAN TUGAS AKHIR <br>
-                PROGRAM STUDI TEKNIK INFORMATIKA <br>
-                INSTITUT TEKNOLOGI SUMATERA
-                </div>
-                <button type="button" class="btn btn-success"><a text-decoration="none" class="lgnbtn" href="{{ route('mahasiswa.login') }}"><b>LOGIN</b></a></button>
-                </div>
+        <div class="container">
+        <div class="bg"></div>
+    <div class="jumbo affix">
+      <h1>SIBITA ITERA</h1>
+      <p class="lead">SISTEM INFORMASI BIMBINGAN TUGAS AKHIR<br>INSTITUT TEKNOLOGI SUMATERA</p>
+            <div class="dosen">
+            <a href="{{ route('dosen.login') }}" class="button2">DOSEN</a>
+            </div>
+    </div>
+
+    <div class="keterangan">
+            <div class="logo">
+                <img class="center" src="{!! asset('assets/image/logo-itera.png') !!}">
+            </div>
+            <div class="daftar">
+            <a href="/daftarta" class="button1">DAFTAR</a>
+            </div>
+            <div class="deskripsi">
+                Selamat Datang Di SIBITA <br>
+                Sistem Informasi Bimbingan Tugas Akhir Adalah Media <br> yang Mempertemukan 
+                Mahasiswa dan Dosen Secara Daring dan memfasilitas Dosen dan Mahasiswa
+                melakukan bimbingan secara Daring.  
+            </div>
+            <div class="login">
+            <a href="{{ route('mahasiswa.login') }}" class="button1">MASUK</a>
+            </div>
+    </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
             </div>
             @if (Route::has('login'))
@@ -121,10 +67,10 @@
                         <a href="{{ route('mahasiswa.login') }}">Login</a>
                         <a href="#">Register</a>
                         <!-- {{ url('/register') }} -->
-                        @endif
+                        <!-- @endif
                 </div>
             @endif
 
-        </div>
+        </div>  -->
     </body>
 </html>
