@@ -75,6 +75,7 @@
         display: block;
         margin: 0 auto;
         text-align: justify;
+        font-size: large;
         float: left;
         color:white;
         line-height: 210%;
@@ -98,7 +99,20 @@
         margin-top: 18vh;
         color:white;
         font-family:'Capriola',sans-serif;
+    }   
+    
+    .bungkus{
+        margin-top:25vh;
+        font-family:'Capriola',sans-serif;
+        color:white;
     }
+    #judulatas{
+        margin-left: 3vw;
+        margin-bottom: 1vw;
+        margin-top: -2vw;
+        font-size: 30px;
+        display: block;
+    }  
 
     a.button1{
         display:inline-block;
@@ -149,5 +163,4 @@
         display:block;
         margin:0.4em auto;
          }
-    }    
-    
+    }  

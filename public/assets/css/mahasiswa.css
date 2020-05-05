@@ -9,6 +9,12 @@ body {
     background: #fafafa;
 }
 
+.bungkuss{
+    padding-top: 2vh;
+    color:white;
+    font-family: 'Capriola', sans-serif;
+}
+
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
@@ -23,13 +29,47 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+.bg {
+    background: url('/assets/image/jbtron.png') no-repeat center center;
+    position: fixed;
+    opacity: 80%;
+    width: 100%;
+    min-height: 100%; /*same height as jumbotron */
+    top:0;
+    left:0;
+    z-index: -1;
+  }
+
+  .bgdsn {
+    background: url('/assets/image/sibita.png') no-repeat center top;
+    margin-top: -5vh;
+    position: fixed;
+    opacity: 60%;
+    width: 100%;
+    min-height: 120%; /*same height as jumbotron */
+    top:0;
+    left:0;
+    z-index: -1;
+  }    
+  .bgmhs {
+    background: url('/assets/image/mhs.png') no-repeat center top;
+    margin-top: -5vh;
+    position: fixed;
+    opacity: 60%;
+    width: 100%;
+    min-height: 120%; /*same height as jumbotron */
+    top:0;
+    left:0;
+    z-index: -1;
+  }  
+
 .navbar {
     padding: 15px 10px;
-    background: #fff;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    font-family: 'Capriola', sans-serif;
 }
 
 .navbar-btn {
@@ -85,7 +125,9 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 150px;
     max-width: 250px;
-    background: #7386D5;
+    background: transparent;
+    font-family: 'Capriola', sans-serif;
+    font-size: medium;
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -98,7 +140,7 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: transparent;
 }
 
 #sidebar ul.components {
@@ -113,7 +155,7 @@ a, a:hover, a:focus {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     display: block;
 }
 #sidebar ul li a:hover {
@@ -177,6 +219,7 @@ a.article, a.article:hover {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    background: transparent;
 }
 
 #sidebarCollapse {
@@ -184,6 +227,7 @@ a.article, a.article:hover {
     height: 40px;
     background: #f5f5f5;
     cursor: pointer;
+    background: transparent;
 }
 
 #sidebarCollapse span {
@@ -258,27 +302,35 @@ a.article, a.article:hover {
     float: left;
     margin-right: -20px;
     margin-left: -20px;
+    background: transparent;
+}
+h2.jud{
+    color: white;
+    font-family: 'Capriola', sans-serif;
 }
 .judul{
     float: right;
     margin-left: -5px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
     color : black;
+    background: transparent;
+    font-family: 'Capriola', sans-serif;
 }
 .top-title{
     font-size: 2.4vw;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color : black;
+    font-family: 'Capriola', sans-serif;
+    color : white;
 }
 .top-title-2{
     margin-top: -1.9vw;
     font-size: 1.8vw;
-    color : black;
+    color : white;
+    font-family: 'Capriola', sans-serif;
 }
 .top-title-3{
     margin-top: -1vw;
     font-size: 1.4vw;
-    /* color : black; */
+    color:white;
+    font-family: 'Capriola', sans-serif;
 }
 .navbarberanda{
     width: 100%;
@@ -348,13 +400,6 @@ a.article, a.article:hover {
     text-decoration: none;
     color: black;
 }
-conbar{
-    float: left;
-    font-size: 1.6vw ;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-
 .bartitle-2{
 	width: 9vw;
     background: #ffbf00;

@@ -2,6 +2,8 @@
 @section('title','PENGAJUAN JUDUL | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
 @section('beranda')
+<div class="container">
+<div class="bungkuss">
 <h2>Halaman Pengajuan Judul</h2>
 <form method="post" action="/mahasiswa/pengajuan-judulta">
             {{ csrf_field() }}
@@ -153,8 +155,7 @@
                      <br> <br>                                             
                 </div>
                 <button type="submit" class="btn btn-primary">Ajukan</button>
-                </form>        
-@verbatim
-document.getElementByName("cadosbing1_1").value = "agus@dosen.com"; 
-endverbatim
+                </form>
+</div>        
+</div>        
 @endsection
