@@ -2,7 +2,8 @@
 @section('title','JUDUL | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
 @section('beranda')
-<h2>Data Mahasiswa Yang Mengajukan Judul dan Dosen Pembimbing</h2>
+<div class="container">
+<h2 class="jud">Data Mahasiswa Yang Mengajukan Judul dan Dosen Pembimbing</h2>
 @foreach($nama as $name)
     @if(Auth::user()->email==$name->cadosbing11&&$name->statusdosbing11==null)
       @php($atr = 'cadosbing11')
@@ -41,5 +42,6 @@
       @endforeach      
     </tbody>
   </table>
+</div>
 </div>
 @endsection

@@ -1,13 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.login_layout')
 @section('title','LOGIN ADMIN | SIBITA')
 @section('brand','ADMINISTRATOR | SIBITA')
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="bungkus">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login Super Admin</div>
-
+            <div class="panel-heading"><label id="judulatas" class="control-label">LOGIN ADMIN</label></div>    
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('superadmin.login.submit') }}">
                         {{ csrf_field() }}

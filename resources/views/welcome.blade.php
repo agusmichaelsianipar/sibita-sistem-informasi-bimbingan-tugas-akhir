@@ -6,7 +6,7 @@
             <a href="{{ route('dosen.login') }}" class="button2">DOSEN</a>
             </div>
     <div class="keterangan">
-            @if (Auth::check())
+            @if (!Auth::check())
             <div class="daftar">
             <a href="/daftarta" class="button1">DAFTAR</a>
             </div>
@@ -16,11 +16,11 @@
             </div>
             <div class="deskripsi">
                 Selamat Datang Di SIBITA <br>
-                Sistem Informasi Bimbingan Tugas Akhir Adalah Media <br> yang Mempertemukan 
+                Sistem Informasi Bimbingan Tugas Akhir Adalah Media yang Mempertemukan 
                 Mahasiswa dan Dosen Secara Daring dan memfasilitas Dosen dan Mahasiswa
                 melakukan bimbingan secara Daring.  
             </div>
-            @if (Auth::check())
+            @if (!Auth::check())
             <div class="login">
             <a href="{{ route('mahasiswa.login') }}" class="button1">MASUK</a>
             </div>

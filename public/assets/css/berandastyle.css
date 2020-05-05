@@ -1,3 +1,10 @@
+body{
+    
+    font-family: 'Capriola' !important, sans-serif;
+}
+.container{
+    font-family: 'Capriola' , sans-serif !important;
+}
 .atas{
     width: 9vw;
     height: 9vw;
@@ -7,19 +14,22 @@
     margin-right: 3vw;
 }
 .judul{
-    margin-left: 3vw;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: -5px;
+    font-family: 'Capriola', sans-serif;
 }
 .top-title{
     font-size: 2.4vw;
+    font-family: 'Capriola', sans-serif;
 }
 .top-title-2{
     margin-top: -1.9vw;
     font-size: 1.8vw;
+    font-family: 'Capriola', sans-serif;
 }
 .top-title-3{
     margin-top: -1vw;
     font-size: 1.4vw;
+    font-family: 'Capriola', sans-serif;
 }
 .navbarberanda{
     width: 100%;
