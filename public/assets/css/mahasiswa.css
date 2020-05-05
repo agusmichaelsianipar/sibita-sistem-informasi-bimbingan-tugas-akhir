@@ -46,21 +46,26 @@ a, a:hover, a:focus {
 }
 
 #semester{
-    width: 600px;
+    width: 540px;
     height: 35px;
+    font-family: 'Capriola', sans-serif;
 }
 #semester option{
     width: 550px;
     height: 35px;
+    font-family: 'Capriola', sans-serif;
+
 }
 
 #semesterr{
     width: 450px;
     height: 35px;
+    font-family: 'Capriola', sans-serif;
 }
 #semesterr option{
     width: 350px;
     height: 35px;
+    font-family: 'Capriola', sans-serif;
 }
 
 

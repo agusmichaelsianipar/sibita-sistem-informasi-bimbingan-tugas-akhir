@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.login_layout')
 @section('title','LOGIN MAHASISWA | SIBITA')
 @section('brand','MAHASISWA | SIBITA')
 @section('content')
