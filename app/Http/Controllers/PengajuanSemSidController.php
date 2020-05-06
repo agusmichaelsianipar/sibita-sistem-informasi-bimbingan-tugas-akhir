@@ -44,6 +44,7 @@ class PengajuanSemSidController extends Controller
         }else{
             $pengajuan = DB::table('pengajuan_sem_sids')->where('mahasiswa', $mahasiswa['email'])
                                                         ->Where('pengaju', Auth::user()->email)
+                                                        ->where('tipe_pengajuan', '2')
                                                         ->first();
             
             //jika ada pengajuan aktif, maka alihkan ke halaman status pengajuan                                                   
@@ -57,7 +58,7 @@ class PengajuanSemSidController extends Controller
                     ];
                     return view('dosen.statusPengajuan')->with([
                         'pengajuan' =>$dataPengajuan,
-                        'popMsg'=>'Terdapat pengajuan yang masih aktif.',
+                        'popMsg'=>'Terdapat pengajuan sidang yang masih aktif.',
                         'popLevel' => 'warning',
                     ]);
                 }else{

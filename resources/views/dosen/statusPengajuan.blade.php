@@ -4,13 +4,14 @@
 @section('beranda')
 
 <div class="container">
-    @if($popMsg)
-    <div class="alert alert-{{$popLevel}}">
-        {{$popMsg}}
-    </div>
-    @endif
     <div>
         <h5>Status pengajuan</h5>
+        @if($popMsg)
+        <div class="alert alert-{{$popLevel}}">
+            {{$popMsg}}
+        </div>
+        @endif
+        <hr>
         <div class="card mb-1" style="max-width:800px">
             <div class="card-body" >
                 <table class="table table-md table-md-responsive m-0">

@@ -5,25 +5,25 @@ Dasbor Koordinator | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR'
 @section('beranda')
 
 <div class="container">
-    @if($popMsg)
-    <div class="alert alert-danger">
-        {{$popMsg}}
-    </div>
-    @endif
-    
     <div class="">
-        <div class="row mx-2 my-0">
+        <div class="row mx-2 my-0 p-0">
             <div class="col mx-2 my-0">
                 <div class="row mx-2 my-0">
                     <div class="col mx-2 my-0">
                         <h5>
                             Dasbor Koordinator TA
                         </h5>
+                        @if($popMsg)
+                        <div class="alert alert-danger">
+                            {{$popMsg}}
+                        </div>
+                        @endif
+                        <hr>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row m-2">
+        <div class="row m-2 p-0">
             <div class="col m-2">
                 <div class="row m-2">
                     <div class="col sm">

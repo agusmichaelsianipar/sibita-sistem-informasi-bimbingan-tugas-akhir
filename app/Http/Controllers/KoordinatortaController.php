@@ -82,8 +82,9 @@ class KoordinatortaController extends Controller
             if($cek){
                 guest::destroy($tamu[$i]->id);
             }
-            return redirect('/dosen/koordinator/validasidaftar')->with('status','Sukses Menambahkan Mahasiswa');
 
+
+            return redirect('/dosen/koordinator/validasidaftar')->with('status','Sukses Menambahkan Mahasiswa');
         }
     }
     public function showJudulMahasiswa()
@@ -99,6 +100,7 @@ class KoordinatortaController extends Controller
     }
     public function showDetailJudul(pengjudul $judul)
     {
+        
             $nama = DB::table("mahasiswas")->where('email', $judul->email)->get();
             $emaildosbing = array($judul->cadosbing11,$judul->cadosbing12,$judul->cadosbing13,$judul->cadosbing21,$judul->cadosbing22,$judul->cadosbing23);
             $namadosbing = array(6);

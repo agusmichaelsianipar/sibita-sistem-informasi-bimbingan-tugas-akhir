@@ -3,6 +3,8 @@
 
 @section('beranda')
 <div class="container">
+    <h4>Beranda Mahasiswa</h4>
+    <hr>
     <div class="">
         <div class="row m-2 text-center">
             <div class="col-sm float-left">
