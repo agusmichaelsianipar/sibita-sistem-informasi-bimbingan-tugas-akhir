@@ -15,9 +15,13 @@ class PengajuanSemSidController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($request)
+    public function __construct()
     {
-        
+        $this->middleware('auth:dosen');
+    }
+
+    function PengajuanSemSidController(){
+        return new $this->class;
     }
 
     public function ajukanSidang($emailMhs)
@@ -34,8 +38,9 @@ class PengajuanSemSidController extends Controller
         //jika judul==null, berarti judul belum disetujui
         if(is_null($mahasiswa['judul'])){
             //jika judul belum disetujui, belum dapat seminar
-            return route('dosen.mahasiswa');
-            return view('dosen.maha')->with('popMsg', $mahasiswa['name']." belum dapat melakukan sidang!");
+            return redirect()->route('dosen.mahasiswa')->with([
+                'popMsg'=> $mahasiswa['name']." belum dapat melakukan sidang! Judul belum disetujui"
+            ]);
         }else{
             $pengajuan = DB::table('pengajuan_sem_sids')->where('mahasiswa', $mahasiswa['email'])
                                                         ->Where('pengaju', Auth::user()->email)
@@ -86,8 +91,9 @@ class PengajuanSemSidController extends Controller
         //jika judul==null, berarti judul belum disetujui
         if(is_null($mahasiswa['judul'])){
             //jika judul belum disetujui, belum dapat seminar
-            return route('dosen.mahasiswa');
-            return view('dosen.maha')->with('popMsg', $mahasiswa['name']." belum dapat melakukan seminar!");
+            return redirect()->route('dosen.mahasiswa')->with([
+                'popMsg'=> $mahasiswa['name']." belum dapat melakukan seminar! Judul belum disetujui"
+            ]);
         }else{
             $pengajuan = DB::table('pengajuan_sem_sids')->where('mahasiswa', $mahasiswa['email'])
                                                         ->Where('pengaju', Auth::user()->email)
@@ -168,6 +174,7 @@ class PengajuanSemSidController extends Controller
             "#"
         );
         
+        //echo Auth::user()->name;
         return view('dosen.statusPengajuan')->with([
             'pengajuan' =>$dataPengajuan,
             'popMsg'=>'Pengajuan berhasil!',
@@ -192,63 +199,16 @@ class PengajuanSemSidController extends Controller
                 # code...
                 break;
         }
-
         return $this->create($request['actionName'], $request['emailDosen'], $request['emailMhs']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function getPengSeminarCount()
     {
-        //
+        return PengajuanSemSid::where('tipe_pengajuan', '1')->where('status', '0')->count();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\PengajuanSemSid  $pengajuanSemSid
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PengajuanSemSid $pengajuanSemSid)
+    public function getPengSidangCount()
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\PengajuanSemSid  $pengajuanSemSid
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PengajuanSemSid $pengajuanSemSid)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PengajuanSemSid  $pengajuanSemSid
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PengajuanSemSid $pengajuanSemSid)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\PengajuanSemSid  $pengajuanSemSid
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PengajuanSemSid $pengajuanSemSid)
-    {
-        //
+        return PengajuanSemSid::where('tipe_pengajuan', '2')->where('status', '0')->count();
     }
 }

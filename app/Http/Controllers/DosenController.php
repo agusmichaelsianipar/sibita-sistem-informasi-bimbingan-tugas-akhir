@@ -91,14 +91,18 @@ class DosenController extends Controller
     {
         $mahasiswa = mahasiswa::where('email', $emailMhs)->first();
 
+        // apakah mahasiswa tersebut ada (ini hanya fitur mencegah error)
         if(is_null($mahasiswa)){
             return redirect()->route('dosen.mahasiswa')->with('popMsg', "Mahasiswa tidak ditemukan!");
         }else{
             $mahasiswa = $mahasiswa->toArray();
         }
         
-        if(is_null($mahasiswa['judul'])){
-            return redirect()->route('dosen.mahasiswa')->with('popMsg', $mahasiswa['name']." belum dapat mengikuti bimbingan!");
+        if(is_null($mahasiswa['judul']) || $mahasiswa['status']!=2){
+            echo "okeo ke";
+            return redirect()->route('dosen.mahasiswa')->with([
+                    'popMsg'=> $mahasiswa['name']." belum dapat mengikuti bimbingan! Judul belum disetujui"
+                ]);
         }else{
             $dosbing1 = dosen::where('email', $mahasiswa['email_dosbing1'])->first();
             $dosbing2 = dosen::where('email', $mahasiswa['email_dosbing2'])->first();
@@ -219,7 +223,20 @@ class DosenController extends Controller
 
         $raw_mahasiswa = $raw_mahasiswa->toArray();
 
-        return view('dosen.mahasiswa', ["mahasiswas"=>$raw_mahasiswa, "counter"=>1]);
+        for($i=0; $i<count($raw_mahasiswa); $i++){
+            $s = $raw_mahasiswa[$i]['status'];
+            if($s==0) $s = "Akun Baru";
+            else if($s==-1) $s="Menunggu Persetujuan";
+            else if($s==1) $s="Pengajuan judul";
+            else if($s==2) $s="Peserta TA";
+            else $s="";
+            $raw_mahasiswa[$i]['status']=$s;
+        }
+        
+        return view('dosen.mahasiswa')->with([
+                "mahasiswas"=>$raw_mahasiswa,
+                "counter"=>1
+            ]);
     }
 
     //Tambahkan kolom statusjudul di table pengajuduls

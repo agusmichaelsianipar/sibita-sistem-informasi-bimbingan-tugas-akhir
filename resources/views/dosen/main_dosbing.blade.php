@@ -47,7 +47,7 @@
                     <small>Perangkat Koordinator</small>
                 </div>
                 <li>
-                    <a href="{{route('koorta.pengaturanta')}}">Pengaturan Masa TA</a>
+                    <a href="{{route('koorta.dasborKoorta')}}">Dasbor Koordinator</a>
                 </li>
                 <li>
                     <a href="{{ route('koorta.dataregist') }}">Data Mahasiswa Pengaju TA</a>

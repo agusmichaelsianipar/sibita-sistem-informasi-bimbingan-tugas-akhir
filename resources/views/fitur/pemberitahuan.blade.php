@@ -19,7 +19,7 @@
                         method="post">
                     {{ method_field('patch') }}
                     {{ csrf_field() }}
-                    <input type="hidden" name="from" value="mahasiswa.dashboard">
+                    <input type="hidden" name="from" value="{{\Request::url()}}">
                 </form>
                 <form id="del{{$pemberitahuan['id']}}"
                         class="d-none"
@@ -27,7 +27,7 @@
                         method="post">
                     {{ method_field('patch') }}
                     {{ csrf_field() }}
-                    <input type="hidden" name="from" value="mahasiswa.dashboard">
+                    <input type="hidden" name="from" value="{{\Request::url()}}">
                 </form>
                 <div class="col-10 m-0 p-0 btn-sm">
                     <small>{{$pemberitahuan->created_at}}</small>
