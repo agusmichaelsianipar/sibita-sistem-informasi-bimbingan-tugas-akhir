@@ -50,15 +50,9 @@
                     <a href="{{ route('mahasiswa.profil') }}">Profil</a>
                 </li>
                 <li>
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
+                <a href="{{ route('mahasiswa.logout') }}">
                     Sign Out
                 </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
                 </li>
             </ul>
         </nav>

@@ -8,7 +8,7 @@ use Auth;
 class SuperadminLoginController extends Controller
 {
     public function __construct(){
-        $this->middleware('guest:superadmin');
+        $this->middleware('guest:superadmin',['except'=>['logout']]);
     }
 
     public function showLoginForm(){
@@ -30,8 +30,14 @@ class SuperadminLoginController extends Controller
 
         //If unsuccesfull, then redirect back to the login with the form data
         return redirect()->back()->withInput($request->only('email','remember'));
-
-
     }
+
+    public function logout()
+    {
+        Auth::guard('superadmin')->logout();
+
+        return redirect('/');
+    }
+
 
 }

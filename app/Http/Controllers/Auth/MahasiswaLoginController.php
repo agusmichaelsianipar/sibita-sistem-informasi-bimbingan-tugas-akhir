@@ -8,7 +8,7 @@ use Auth;
 class MahasiswaLoginController extends Controller
 {
     public function __construct(){
-        $this->middleware('guest:mahasiswa');
+        $this->middleware('guest:mahasiswa',['except'=>['logout']]);
     }
 
     public function showLoginForm(){
@@ -28,5 +28,12 @@ class MahasiswaLoginController extends Controller
 
         //If Unsuccesfull, then redirect back to the login with the form data
         return redirect()->back()->withInput($request->only('email','remember'));
+    }
+
+    public function logout()
+    {
+        Auth::guard('mahasiswa')->logout();
+
+        return redirect('/');
     }
 }

@@ -9,7 +9,7 @@ use Auth;
 class DosenLoginController extends Controller
 {
     public function __construct(){
-        $this->middleware('guest:dosen');
+        $this->middleware('guest:dosen',['except'=>['logout']]);
     }
 
     public function showLoginForm(){
@@ -32,5 +32,12 @@ class DosenLoginController extends Controller
         //If unsuccesfull, then redirect back to the login with the form data
         return redirect()->back()->withInput($request->only('email','remember'));
 
+    }
+
+    public function logout()
+    {
+        Auth::guard('dosen')->logout();
+
+        return redirect('/');
     }
 }
