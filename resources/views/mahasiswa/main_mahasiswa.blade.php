@@ -33,12 +33,14 @@
                 <li>
                     <a href="{{ route('mahasiswa.beranda') }}">Beranda</a>
                 </li>
-                <li>
-                    <a href="{{ route('mahasiswa.bimbingan') }}">Buku Kendali Bimbingan</a>
-                </li>
-                <li>
-                    <a href="{{ route('mahasiswa.judul') }}">Pengajuan Judul</a>
-                </li>
+                @if (Auth::user()->status != -1)
+                    <li>
+                        <a href="{{ route('mahasiswa.bimbingan') }}">Buku Kendali Bimbingan</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('mahasiswa.judul') }}">Pengajuan Judul</a>
+                    </li>
+                @endif
                 <li>
                     <a href="{{ route('mahasiswa.profil') }}">Profil</a>
                 </li>

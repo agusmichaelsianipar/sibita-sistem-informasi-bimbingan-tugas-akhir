@@ -9,7 +9,6 @@
         <div class="alert alert-danger">
             {{session('popMsg')}}
         </div>
-        {{$session('popMsg')}}
     @endif
     <table class="table table-hover">
         <thead>
@@ -39,18 +38,12 @@
                     {{$mahasiswa['name']}}
                 </td> 
                 <td>
-                    @if(is_null($mahasiswa['judul']))
-                    <span class="status pengajuan">
-                        Pengajuan
+                    <span class="status">
+                        {{$mahasiswa['status']}}
                     </span>
-                    @else
-                    <span class="status melaksanakan">
-                        Melaksanakan TA
-                    </span>
-                    @endif
                 </td>
                 <td>
-                    @if(is_null($mahasiswa['judul']))
+                    @if($mahasiswa['status']=='Menunggu Persetujuan')
                     <div class="btn btn-info m-1 p-1 btn-sm text-left cekPengajuan">
                         Cek Pengajuan
                     </div>

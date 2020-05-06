@@ -44,7 +44,8 @@ class MahasiswaController extends Controller
 
         //cek status
         $s = Auth::user()->status;
-        if($s==0) $s = "validasi akun";
+        if($s==0) $s = "Akun Baru";
+        else if($s==-1) $s="Menunggu Persetujuan";
         else if($s==1) $s="Pengajuan judul";
         else if($s==2) $s="Peserta TA";
         else $s="";
@@ -159,7 +160,10 @@ class MahasiswaController extends Controller
 
     public function showPengJudul()
     {
-        return view('mahasiswa.judul');
+        $dosen = Dosen::all();
+        return view('mahasiswa.judul')->with([
+            'dosens' => $dosen
+        ]);
     }
   
     public function storeSubm(Request $request){

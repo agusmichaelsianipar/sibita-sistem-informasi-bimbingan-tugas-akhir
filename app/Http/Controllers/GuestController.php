@@ -8,6 +8,8 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ErrorFormRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Mahasiswa;
+use App\Dosen;
 
 class GuestController extends Controller
 {
@@ -18,7 +20,11 @@ class GuestController extends Controller
      */
     public function index()
     {
-        return view('sign_up');
+        $dosens = Dosen::all();
+
+        return view('sign_up')->with([
+            'dosens' => $dosens
+        ]);
     }
 
     /**
@@ -56,6 +62,15 @@ class GuestController extends Controller
         $guest->password = Hash::make($request->password);
         $guest->dosenwali = $request->dosen_wali;
         $guest->semester = $request->semester;
+
+        $mhs = new Mahasiswa;
+        $mhs->name = $request->nama;
+        $mhs->nim = $request->nim;
+        $mhs->email = $request->email;
+        $mhs->dosen_wali = $request->dosen_wali;
+        $mhs->password = Hash::make($request->password);
+        $mhs->status = -1;  //statusnya menunggu validasi
+        $mhs->save();
 
         $cek = $guest->save();
 

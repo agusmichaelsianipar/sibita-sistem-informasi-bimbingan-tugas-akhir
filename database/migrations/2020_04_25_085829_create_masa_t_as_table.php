@@ -19,6 +19,11 @@ class CreateMasaTAsTable extends Migration
             $table->string('nama', 100);
             $table->date('mulai');
             $table->date('selesai');
+            /*
+            1 > aktif
+            2 > selesai
+            */
+            $table->smallInteger('status');
         });
     }
 

@@ -58,23 +58,15 @@ class NotifikasiController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\notifikasi  $notifikasi
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(notifikasi $notifikasi, Request $request)
     {
         //
-        echo "Notif tobe destroyed".$notifikasi->id;
         notifikasi::destroy($notifikasi->id);
 
-        return redirect()->route($request['from']);
+        return redirect($request['from']);
     }
 
     public function pin(notifikasi $notifikasi, Request  $request){
-        echo "Notif tobe pinned: ".$notifikasi->id;
         if($notifikasi->pin==0){
             //toggle pin status
             notifikasi::where('id', $notifikasi->id)
@@ -95,6 +87,6 @@ class NotifikasiController extends Controller
             ]);
         }
 
-        return redirect()->route($request['from']);
+        return redirect($request['from']);
     }
 }

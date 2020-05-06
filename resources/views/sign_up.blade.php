@@ -47,7 +47,11 @@
                 </div>
                 <div class="form-group">
                     <label for="dosenwali">Dosen Wali</label>
-                    <input type="text" class="form-control" id="dosenwali" placeholder="Masukkan Dosen Wali" name="dosen_wali">
+                    <br>
+                    <select id="semester" name="dosen_wali" id="dosenwali" height="100%">
+                        <option value='' selected>Pilih dosen wali</option>
+                        @include('fitur.dosenOption')
+                    </select>
                     @if ($errors->has('dosen_wali'))
                         <span class="text-danger">{{ $errors->first('dosen_wali') }}</span>
                     @endif                         

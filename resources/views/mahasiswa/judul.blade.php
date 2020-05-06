@@ -25,55 +25,28 @@
                     <label for="semester">Dosen Pembimbing I</label> <br>
                     <select id="semester" name="cadosbing1_1" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 1</option>
-                        <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
-                        <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
-                        <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
-                        <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
-                        <option value="imam.ekowicaksono@if.itera.ac.id">Imam Ekowicaksono, S.Si., M.Si</option>
-                        <option value="arkham.zahri@if.itera.ac.id">Arkham Zahri Rakhman, S.Kom., M.Eng.</option>
-                        <option value="wayan.wiprayoga@if.itera.ac.id">I Wayan Wiprayoga Wisesa, S.Kom., M.Kom</option>
-                        <option value="ahmad.luky@if.itera.ac.id">Ahmad Luky Ramdani, S.Komp., M.Kom.</option>
-                        <option value="amirul.iqbal@if.itera.ac.id">Amirul Iqbal, S.Kom., M.Eng</option>
-                        <option value="martin.clinton@if.itera.ac.id">Martin Clinton Tosima Manullang, S.T., M.T.</option>
-                        <option value="meida.cahyo@if.itera.ac.id">Meida Cahyo Untoro, S.Kom.,M.Kom.</option>
+                        @foreach ($dosens as $option)
+                            <option value='{{$option->email}}'>{{$option->name}}</option>
+                        @endforeach
                     </select> <br>
                     @if ($errors->has('cadosbing1_1'))
                         <span class="text-danger">{{ $errors->first('cadosbing1_1') }}</span>
                     @endif                      
                     <br> <br>
-                        <select id="semester" name="cadosbing1_2" height="100%">
-                        <option value='' selected>Pilih Calon Dosen Pembimbing 1</option>
-                        <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
-                        <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
-                        <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
-                        <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
-                        <option value="imam.ekowicaksono@if.itera.ac.id">Imam Ekowicaksono, S.Si., M.Si</option>
-                        <option value="arkham.zahri@if.itera.ac.id">Arkham Zahri Rakhman, S.Kom., M.Eng.</option>
-                        <option value="wayan.wiprayoga@if.itera.ac.id">I Wayan Wiprayoga Wisesa, S.Kom., M.Kom</option>
-                        <option value="ahmad.luky@if.itera.ac.id">Ahmad Luky Ramdani, S.Komp., M.Kom.</option>
-                        <option value="amirul.iqbal@if.itera.ac.id">Amirul Iqbal, S.Kom., M.Eng</option>
-                        <option value="martin.clinton@if.itera.ac.id">Martin Clinton Tosima Manullang, S.T., M.T.</option>
-                        <option value="meida.cahyo@if.itera.ac.id">Meida Cahyo Untoro, S.Kom.,M.Kom.</option>
+                    <select id="semester" name="cadosbing1_2" height="100%">
+                            <option value='' selected>Pilih Calon Dosen Pembimbing 1</option>
+                            @foreach ($dosens as $option)
+                                <option value='{{$option->email}}'>{{$option->name}}</option>
+                            @endforeach
                     </select> <br>
                     @if ($errors->has('cadosbing1_2'))
                         <span class="text-danger">{{ $errors->first('cadosbing1_2') }}</span>
                     @endif                      <br> <br>
                     <select id="semester" name="cadosbing1_3" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 1</option>
-                        <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
-                        <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
-                        <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
-                        <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
-                        <option value="imam.ekowicaksono@if.itera.ac.id">Imam Ekowicaksono, S.Si., M.Si</option>
-                        <option value="arkham.zahri@if.itera.ac.id">Arkham Zahri Rakhman, S.Kom., M.Eng.</option>
-                        <option value="wayan.wiprayoga@if.itera.ac.id">I Wayan Wiprayoga Wisesa, S.Kom., M.Kom</option>
-                        <option value="ahmad.luky@if.itera.ac.id">Ahmad Luky Ramdani, S.Komp., M.Kom.</option>
-                        <option value="amirul.iqbal@if.itera.ac.id">Amirul Iqbal, S.Kom., M.Eng</option>
-                        <option value="martin.clinton@if.itera.ac.id">Martin Clinton Tosima Manullang, S.T., M.T.</option>
-                        <option value="meida.cahyo@if.itera.ac.id">Meida Cahyo Untoro, S.Kom.,M.Kom.</option>
+                        @foreach ($dosens as $option)
+                            <option value='{{$option->email}}'>{{$option->name}}</option>
+                        @endforeach
                     </select> <br>
                     @if ($errors->has('cadosbing1_3'))
                         <span class="text-danger">{{ $errors->first('cadosbing1_3') }}</span>
@@ -98,18 +71,9 @@
                     <label for="semester">Dosen Pembimbing II</label> <br>
                     <select id="semester" name="cadosbing2_1" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 2</option>
-                        <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
-                        <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
-                        <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
-                        <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
-                        <option value="imam.ekowicaksono@if.itera.ac.id">Imam Ekowicaksono, S.Si., M.Si</option>
-                        <option value="arkham.zahri@if.itera.ac.id">Arkham Zahri Rakhman, S.Kom., M.Eng.</option>
-                        <option value="wayan.wiprayoga@if.itera.ac.id">I Wayan Wiprayoga Wisesa, S.Kom., M.Kom</option>
-                        <option value="ahmad.luky@if.itera.ac.id">Ahmad Luky Ramdani, S.Komp., M.Kom.</option>
-                        <option value="amirul.iqbal@if.itera.ac.id">Amirul Iqbal, S.Kom., M.Eng</option>
-                        <option value="martin.clinton@if.itera.ac.id">Martin Clinton Tosima Manullang, S.T., M.T.</option>
-                        <option value="meida.cahyo@if.itera.ac.id">Meida Cahyo Untoro, S.Kom.,M.Kom.</option>
+                        @foreach ($dosens as $option)
+                            <option value='{{$option->email}}'>{{$option->name}}</option>
+                        @endforeach
                     </select> <br>
                     @if ($errors->has('cadosbing2_1'))
                         <span class="text-danger">{{ $errors->first('cadosbing2_1') }}</span>
@@ -117,18 +81,9 @@
                     <br> <br>
                     <select id="semester" name="cadosbing2_2" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 2</option>
-                        <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
-                        <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
-                        <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
-                        <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
-                        <option value="imam.ekowicaksono@if.itera.ac.id">Imam Ekowicaksono, S.Si., M.Si</option>
-                        <option value="arkham.zahri@if.itera.ac.id">Arkham Zahri Rakhman, S.Kom., M.Eng.</option>
-                        <option value="wayan.wiprayoga@if.itera.ac.id">I Wayan Wiprayoga Wisesa, S.Kom., M.Kom</option>
-                        <option value="ahmad.luky@if.itera.ac.id">Ahmad Luky Ramdani, S.Komp., M.Kom.</option>
-                        <option value="amirul.iqbal@if.itera.ac.id">Amirul Iqbal, S.Kom., M.Eng</option>
-                        <option value="martin.clinton@if.itera.ac.id">Martin Clinton Tosima Manullang, S.T., M.T.</option>
-                        <option value="meida.cahyo@if.itera.ac.id">Meida Cahyo Untoro, S.Kom.,M.Kom.</option>
+                        @foreach ($dosens as $option)
+                            <option value='{{$option->email}}'>{{$option->name}}</option>
+                        @endforeach
                     </select> <br>
                     @if ($errors->has('cadosbing2_2'))
                         <span class="text-danger">{{ $errors->first('cadosbing2_2') }}</span>
@@ -136,18 +91,9 @@
                     <br> <br>
                     <select id="semester" name="cadosbing2_3" height="100%">
                         <option value='' selected>Pilih Calon Dosen Pembimbing 2</option>
-                        <option value="agus@dosen.com">Dr. Masayu Leylia Khodra, ST., MT.</option>
-                        <option value="michael@dosen.com">Rajif Agung Yunmar, S.Kom., M.Cs.</option>
-                        <option value="raidah.hanifah@if.itera.ac.id">Raidah Hanifah, S.T., M.T.</option>
-                        <option value="rahman.indra@if.itera.ac.id">Rahman Indra Kesuma, S.Kom., M.Cs.</option>
-                        <option value="hafiz.budi@if.itera.ac.id">Hafiz Budi Firmansyah, S.Kom., M.Sc.</option>
-                        <option value="imam.ekowicaksono@if.itera.ac.id">Imam Ekowicaksono, S.Si., M.Si</option>
-                        <option value="arkham.zahri@if.itera.ac.id">Arkham Zahri Rakhman, S.Kom., M.Eng.</option>
-                        <option value="wayan.wiprayoga@if.itera.ac.id">I Wayan Wiprayoga Wisesa, S.Kom., M.Kom</option>
-                        <option value="ahmad.luky@if.itera.ac.id">Ahmad Luky Ramdani, S.Komp., M.Kom.</option>
-                        <option value="amirul.iqbal@if.itera.ac.id">Amirul Iqbal, S.Kom., M.Eng</option>
-                        <option value="martin.clinton@if.itera.ac.id">Martin Clinton Tosima Manullang, S.T., M.T.</option>
-                        <option value="meida.cahyo@if.itera.ac.id">Meida Cahyo Untoro, S.Kom.,M.Kom.</option>
+                        @foreach ($dosens as $option)
+                            <option value='{{$option->email}}'>{{$option->name}}</option>
+                        @endforeach
                     </select> <br>                                  
                     @if ($errors->has('cadosbing2_3'))
                         <span class="text-danger">{{ $errors->first('cadosbing2_3') }}</span>
