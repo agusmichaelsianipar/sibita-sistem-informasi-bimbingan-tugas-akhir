@@ -5,6 +5,8 @@
 
 
 <div class="container">
+    <h4>Bimbingan Mahasiswa</h4>
+    <hr>
     @if(session('popMsg'))
         <div class="alert alert-danger">
             {{session('popMsg')}}

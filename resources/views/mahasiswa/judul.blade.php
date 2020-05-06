@@ -4,7 +4,8 @@
 @section('beranda')
 <div class="container">
 <div class="bungkuss">
-<h2>Halaman Pengajuan Judul</h2>
+<h4>Halaman Pengajuan Judul</h4>
+<hr>
 <form method="post" action="/mahasiswa/pengajuan-judulta">
             {{ csrf_field() }}
                 <div class="form-group">

@@ -3,6 +3,8 @@
 
 @section('beranda')
 <div class="container">
+  <h4>Pengajuan Mengikuti TA / Validasi akun mahasiswa</h4>
+  <hr>
   <form method="post">
     {{ csrf_field() }}
 <div class="table-responsive">

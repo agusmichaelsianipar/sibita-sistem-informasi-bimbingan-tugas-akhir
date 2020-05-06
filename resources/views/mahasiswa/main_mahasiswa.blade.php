@@ -33,14 +33,19 @@
                 <li>
                     <a href="{{ route('mahasiswa.beranda') }}">Beranda</a>
                 </li>
+                <hr>
                 @if (Auth::user()->status != -1)
+                    @if (Auth::user()->status==2)
                     <li>
                         <a href="{{ route('mahasiswa.bimbingan') }}">Buku Kendali Bimbingan</a>
-                    </li>
+                    </li>    
+                    @elseif(Auth::user()->status==1 || Auth::user()->status==0)
                     <li>
                         <a href="{{ route('mahasiswa.judul') }}">Pengajuan Judul</a>
                     </li>
+                    @endif
                 @endif
+                <hr>
                 <li>
                     <a href="{{ route('mahasiswa.profil') }}">Profil</a>
                 </li>
@@ -83,12 +88,7 @@
 </nav>
 
 
-@yield('beranda')
-
-
-</div>
-</div>
-
+@yield('beranda')log
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->

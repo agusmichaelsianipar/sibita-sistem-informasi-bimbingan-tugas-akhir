@@ -5,13 +5,12 @@ Setup Masa TA | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR'
 @section('beranda')
 
 <div class="container">
+    <h4>Setup Masa TA</h4>
     @if($popMsg)
     <div class="alert alert-danger">
         {{$popMsg}}
     </div>
     @endif
-    
-    <h4>Setup Masa TA</h4>
     <div class="container">
         <form  method="POST" action="{{route('koorta.setmasa')}}">
             {{ csrf_field() }}

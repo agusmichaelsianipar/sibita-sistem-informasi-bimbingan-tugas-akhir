@@ -4,7 +4,8 @@
 @section('beranda')
 
 <div class="container">
-    <h3>Profil</h3>
+    <h4>Profil</h4>
+    <hr>
     <table class="table table-sm-responsive" style="overflow-x:auto; max-width:500px">
         <tbody>
             <tr>

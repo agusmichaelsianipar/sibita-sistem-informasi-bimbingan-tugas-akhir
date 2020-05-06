@@ -52,10 +52,10 @@
                     <a href="{{route('koorta.dasborKoorta')}}">Dasbor Koordinator</a>
                 </li>
                 <li>
-                    <a href="{{ route('koorta.dataregist') }}">Data Mahasiswa Pengaju TA</a>
+                    <a href="{{ route('koorta.dataregist') }}">Pengajuan Mengikuti TA</a>
                 </li>
                 <li>
-                    <a href="{{ route('koorta.datajudulmhs') }}">Data Judul Mahasiswa</a>
+                    <a href="{{ route('koorta.datajudulmhs') }}">Pengajuan Judul Mahasiswa</a>
                 </li>
                 @endif
                 <hr>

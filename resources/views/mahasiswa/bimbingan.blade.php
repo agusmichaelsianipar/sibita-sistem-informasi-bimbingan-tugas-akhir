@@ -2,9 +2,13 @@
 @section('title','KENDALI BIMBINGAN | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR')
 
 @section('beranda')
-<h2>Kartu Kendali Bimbingan</h2>
+<h4>Buku Kendali Bimbingan</h4>
 <hr>
 
+@if (count($kartuBimbingans)==0)
+<h5>Belum ada kartu bimbingan</h5>
+    
+@endif
 <div class="container">
 
         @foreach($kartuBimbingans as $kartuBimbingan)
