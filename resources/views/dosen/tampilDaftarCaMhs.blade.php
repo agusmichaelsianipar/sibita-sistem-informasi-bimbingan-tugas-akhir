@@ -23,10 +23,10 @@
     @foreach($guest as $tamu)
       <tr>
       <th scope="row">{{$nomor++}}</th>
-        <td>{{$tamu->nama}}</td>
+        <td>{{$tamu->name}}</td>
         <td>{{$tamu->nim}}</td>
-        <td>{{$tamu->dosenwali}}</td>
-        <td>{{$tamu->semester}}</td>
+        <td>{{$tamu->dosen_wali}}</td>
+        <td>tes</td>
         <td><input type="checkbox" name="ids[]" class="selectbox" value="{{$tamu->id}}"></td>
       </tr>
       @endforeach

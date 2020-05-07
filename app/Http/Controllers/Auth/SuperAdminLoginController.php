@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
 use Auth;
 class SuperadminLoginController extends Controller
 {
     public function __construct(){
-        $this->middleware('guest:superadmin');
+        $this->middleware('guest:superadmin',['except'=>['logout']]);
     }
 
     public function showLoginForm(){
+        if(session('gagal')){
+            Alert::error('Login Gagal','Terdapat Kesalahan Pada Email atau Password Anda');
+        }
         return view('auth.superadmin-login');
     }
 
@@ -29,9 +33,15 @@ class SuperadminLoginController extends Controller
         }
 
         //If unsuccesfull, then redirect back to the login with the form data
-        return redirect()->back()->withInput($request->only('email','remember'));
-
-
+        return redirect()->back()->withInput($request->only('email','remember'))->with('gagal','Gagal Ditambahkan!');
     }
+
+    public function logout()
+    {
+        Auth::guard('superadmin')->logout();
+
+        return redirect('/');
+    }
+
 
 }

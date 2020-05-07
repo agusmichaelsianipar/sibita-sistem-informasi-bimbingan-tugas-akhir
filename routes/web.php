@@ -1,4 +1,5 @@
 <?php
+use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,13 @@
 */
 
 Route::get('/', function () {
+    Alert::success('Success Title', 'Success Message');
     return view('welcome');
+});
+
+Route::get('/exception/read',function(){
+    Alert::error('Gagal', 'Success Message');
+    return view('sign_up');
 });
 
 Route::get('/daftarta','GuestController@index');
@@ -25,6 +32,14 @@ Route::get('/home', 'HomeController@index');
 Route::prefix('mahasiswa')->group(function(){
     Route::get('/login','Auth\MahasiswaLoginController@showLoginForm')->name('mahasiswa.login');
     Route::post('/login','Auth\MahasiswaLoginController@login')->name('mahasiswa.login.submit');
+    Route::get('/logout','Auth\MahasiswaLoginController@logout')->name('mahasiswa.logout');
+
+    //Password Reset Route
+    Route::post('/password/email','Auth\MahasiswaForgotPasswordController@sendResetLinkEmail')->name('mahasiswa.password.email');
+    Route::get('/password/reset','Auth\MahasiswaForgotPasswordController@showLinkRequestForm')->name('mahasiswa.password.request');
+    Route::post('/password/reset','Auth\MahasiswaResetPasswordController@reset')->name('mahasiswa.password.request');
+    Route::get('/password/reset/{token}','Auth\MahasiswaResetPasswordController@showResetForm')->name('mahasiswa.password.reset');
+
     Route::get('/', 'MahasiswaController@index')->name('mahasiswa.dashboard');
     Route::get('/beranda', 'MahasiswaController@index')->name('mahasiswa.beranda');
     Route::get('/profil', 'MahasiswaController@showProfil')->name('mahasiswa.profil');
@@ -36,9 +51,17 @@ Route::prefix('mahasiswa')->group(function(){
     Route::post('/pengajuan-judulta', 'MahasiswaController@storePengJudul');
 });
 
-Route::prefix('dosen')->group(function(){
+    Route::prefix('dosen')->group(function(){
     Route::get('/login','Auth\DosenLoginController@showLoginForm')->name('dosen.login');
     Route::post('/login','Auth\DosenLoginController@login')->name('dosen.login.submit');
+    Route::get('/logout','Auth\DosenLoginController@logout')->name('dosen.logout');
+
+    //Password Reset Route
+    Route::post('/password/email','Auth\DosenForgotPasswordController@sendResetLinkEmail')->name('dosen.password.email');
+    Route::get('/password/reset','Auth\DosenForgotPasswordController@showLinkRequestForm')->name('dosen.password.request');
+    Route::post('/password/reset','Auth\DosenResetPasswordController@reset')->name('dosen.password.request');
+    Route::get('/password/reset/{token}','Auth\DosenResetPasswordController@showResetForm')->name('dosen.password.reset');
+
     Route::get('/', 'DosenController@index')->name('dosen.dashboard');
     Route::get('/profile', 'DosenController@profil')->name('dosen.profile');
     Route::get('/bimbingan', 'DosenController@bimbingan')->name('dosen.bimbingan');
@@ -68,6 +91,14 @@ Route::prefix('dosen')->group(function(){
 Route::prefix('superadmin')->group(function(){
     Route::get('/login','Auth\SuperadminLoginController@showLoginForm')->name('superadmin.login');
     Route::post('/login','Auth\SuperadminLoginController@login')->name('superadmin.login.submit');
+    Route::get('/logout','Auth\SuperadminLoginController@logout')->name('superadmin.logout');
+
+    //Password Reset Route
+    Route::post('/password/email','Auth\SuperadminForgotPasswordController@sendResetLinkEmail')->name('superadmin.password.email');
+    Route::get('/password/reset','Auth\SuperadminForgotPasswordController@showLinkRequestForm')->name('superadmin.password.request');
+    Route::post('/password/reset','Auth\SuperadminResetPasswordController@reset')->name('superadmin.password.request');
+    Route::get('/password/reset/{token}','Auth\SuperadminResetPasswordController@showResetForm')->name('superadmin.password.reset');
+
     Route::get('/', 'SuperadminController@index')->name('superadmin.beranda');
     Route::get('/aturdosbing', 'SuperadminController@aturDosen')->name('superadmin.aturDosbing');
     Route::delete('/aturdosbing/{dosen}', 'SuperadminController@destroyDosen');
@@ -91,3 +122,5 @@ Route::prefix('notif')->group(function(){
     Route::patch('/destroy/{notifikasi}', 'NotifikasiController@destroy');
     
 });
+
+Route::get('/reset','GuestController@resetpass');

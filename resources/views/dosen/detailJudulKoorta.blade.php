@@ -74,6 +74,8 @@
                                 <div class="form-group col">
                                     @if($judul->statusdosbing11)
                                         <span class="badge badge-success">Calon Dosen Pembimbing Pertama Menyetujui</span>
+                                    @elseif($judul->statusdosbing11==null)
+                                        <span class="badge badge-info">Calon Dosen Pembimbing Pertama Belum Menyetujui</span>
                                     @else
                                         <span class="badge badge-danger">Calon Dosen Pembimbing Pertama Tidak Menyetujui</span>
                                     @endif
@@ -86,9 +88,11 @@
                                 <div class="form-group col">
                                 @if($judul->statusdosbing12)
                                         <span class="badge badge-success">Calon Dosen Pembimbing Kedua Menyetujui</span>
-                                @else
-                                        <span class="badge badge-danger">Calon Dosen Pembimbing Kedua Tidak Menyetujui</span>
-                                @endif
+                                    @elseif($judul->statusdosbing12==null)
+                                        <span class="badge badge-info">Calon Dosen Pembimbing Pertama Belum Menyetujui</span>
+                                    @else
+                                        <span class="badge badge-danger">Calon Dosen Pembimbing Pertama Tidak Menyetujui</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -98,9 +102,11 @@
                                 <div class="form-group col">
                                 @if($judul->statusdosbing13)
                                         <span class="badge badge-success">Calon Dosen Pembimbing Ketiga Menyetujui</span>
-                                @else
-                                        <span class="badge badge-danger">Calon Dosen Pembimbing Ketiga Tidak Menyetujui</span>
-                                @endif
+                                    @elseif($judul->statusdosbing13==null)
+                                        <span class="badge badge-info">Calon Dosen Pembimbing Pertama Belum Menyetujui</span>
+                                    @else
+                                        <span class="badge badge-danger">Calon Dosen Pembimbing Pertama Tidak Menyetujui</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="card">
@@ -181,9 +187,11 @@
                                 <div class="form-group col">
                                 @if($judul->statusdosbing21)
                                         <span class="badge badge-success">Calon Dosen Pembimbing Pertama Menyetujui</span>
-                                @else
+                                    @elseif($judul->statusdosbing21==null)
+                                        <span class="badge badge-info">Calon Dosen Pembimbing Pertama Belum Menyetujui</span>
+                                    @else
                                         <span class="badge badge-danger">Calon Dosen Pembimbing Pertama Tidak Menyetujui</span>
-                                @endif
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -193,21 +201,24 @@
                                 <div class="form-group col">
                                 @if($judul->statusdosbing22)
                                         <span class="badge badge-success">Calon Dosen Pembimbing Kedua Menyetujui</span>
-                                @else
-                                        <span class="badge badge-danger">Calon Dosen Pembimbing Kedua Tidak Menyetujui</span>
-                                </div>
-                                @endif
+                                    @elseif($judul->statusdosbing22==null)
+                                        <span class="badge badge-info">Calon Dosen Pembimbing Pertama Belum Menyetujui</span>
+                                    @else
+                                        <span class="badge badge-danger">Calon Dosen Pembimbing Pertama Tidak Menyetujui</span>
+                                    @endif
                             </div>
                             <div class="row">
                                 <div class="form-group col">
                                     <input disabled type="text" class="form-control" id="semesterr" value="{{$dosen[5]}}" name="cadosbing23">
                                 </div>
                                 <div class="form-group col">
-                                @if($judul->statusdosbing23)
+                                    @if($judul->statusdosbing23)
                                         <span class="badge badge-success">Calon Dosen Pembimbing Ketiga Menyetujui</span>
-                                @else
-                                        <span class="badge badge-danger">Calon Dosen Pembimbing Ketiga Tidak Menyetujui</span>
-                                @endif
+                                    @elseif($judul->statusdosbing23==null)
+                                        <span class="badge badge-info">Calon Dosen Pembimbing Pertama Belum Menyetujui</span>
+                                    @else
+                                        <span class="badge badge-danger">Calon Dosen Pembimbing Pertama Tidak Menyetujui</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="card">

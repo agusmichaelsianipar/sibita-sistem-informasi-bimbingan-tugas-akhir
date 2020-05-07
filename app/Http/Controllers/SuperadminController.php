@@ -129,8 +129,22 @@ class SuperadminController extends Controller
             'konfirmasi_password' => 'min:8',
             'status' => 'required',
         ]);
-        
+
+        function maxID(){
+            $maha=Dosen::all();
+            $max=0;
+            foreach($maha as $mahas){
+                if($mahas->id > $max){
+                    $max=$mahas->id;
+                }
+            }
+            return $max;
+        }
+        $IDmax=maxID();
+        $IDmax=$IDmax+1;
+
         $dosen = new Dosen;
+        $dosen->id = $IDmax;
         $dosen->name = $request->nama;
         $dosen->email = $request->email;
         $dosen->password = Hash::make($request->password);

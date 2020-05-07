@@ -8,8 +8,13 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ErrorFormRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Exceptions\CustomException;
+use Exception;
 use App\Mahasiswa;
 use App\Dosen;
+// use UxWeb\SweetAlert\SweetAlert as Alert;
+use RealRashid\SweetAlert\Facades\Alert;
+// use Alert;
 
 class GuestController extends Controller
 {
@@ -19,9 +24,13 @@ class GuestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
+        
         $dosens = Dosen::all();
-
+        
+        if(session('gagal')){
+            Alert::error('Gagal Melakukan Pendaftaran','Akun Mungkin Sudah Ada Silahkan Hubungi Koordinator TA');
+        }
         return view('sign_up')->with([
             'dosens' => $dosens
         ]);
@@ -45,7 +54,7 @@ class GuestController extends Controller
      */
     public function store(ErrorFormRequest $request)
     {
-        $this->validate($request,[
+        $validasi=$this->validate($request,[
             'nama' => 'required',
             'nim' => 'min:8|required',
             'email'=> 'required|unique:guests,email|email',
@@ -55,28 +64,39 @@ class GuestController extends Controller
             'semester' => 'required',
         ]);
 
-        $guest = new Guest;
-        $guest->nama = $request->nama;
-        $guest->nim = $request->nim;
-        $guest->email = $request->email;
-        $guest->password = Hash::make($request->password);
-        $guest->dosenwali = $request->dosen_wali;
-        $guest->semester = $request->semester;
+            function maxID(){
+                $maha=Mahasiswa::all();
+                $max=0;
+                foreach($maha as $mahas){
+                    if($mahas->id > $max){
+                        $max=$mahas->id;
+                    }
+                }
+                return $max;
+            }
+            $IDmax=maxID();
+            $IDmax=$IDmax+1;
+    
+            try{
+            $mhs = new Mahasiswa;
+            $mhs->id = $IDmax;
+            $mhs->name = $request->nama;
+            $mhs->nim = $request->nim;
+            $mhs->email = $request->email;
+            $mhs->dosen_wali = $request->dosen_wali;
+            $mhs->password = Hash::make($request->password);
+            $mhs->status = -1;  //statusnya menunggu validasi
+            $cek2 = $mhs->save();
+            if($cek2){
+                return redirect('/mahasiswa/login')->with('sukses','Berhasil Ditambahkan! Silahkan Login');
+                //Harusnya langsung login
+            }
 
-        $mhs = new Mahasiswa;
-        $mhs->name = $request->nama;
-        $mhs->nim = $request->nim;
-        $mhs->email = $request->email;
-        $mhs->dosen_wali = $request->dosen_wali;
-        $mhs->password = Hash::make($request->password);
-        $mhs->status = -1;  //statusnya menunggu validasi
-        $mhs->save();
+            }catch(Exception $exception){
+            throw new CustomException($exception->getMessage());
+            }
+    
 
-        $cek = $guest->save();
-
-        if($cek){
-            return redirect('/daftarta')->with('status','Sukses! Silahkan Menunggu Persetujuan Koordinator TA');
-        }
 
     }
 
@@ -125,3 +145,5 @@ class GuestController extends Controller
         //
     }
 }
+
+// php artisan vendor:publish --provider="RealRashid\SweetAlert\SweetAlertServiceProvider

@@ -98,6 +98,7 @@ class MahasiswaController extends Controller
     }
     public function showProfil()
     {
+        // dd(Auth::user()->status);
         $dosbing_1 = Dosen::where('email', Auth::user()->email_dosbing1)->first();
         $dosbing_2 = Dosen::where('email', Auth::user()->email_dosbing2)->first();
         
