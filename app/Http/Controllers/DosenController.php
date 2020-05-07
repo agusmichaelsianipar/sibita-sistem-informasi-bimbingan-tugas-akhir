@@ -81,6 +81,9 @@ class DosenController extends Controller
             'rule'=>'dosen',
             'profile'=>$a
         ];
+        if(session('dosbing')){
+            Alert::warning('Akses Ditolak','Maaf Anda Bukan Seorang Koordinator Tugas Akhir Prodi');
+        }
         return view('dosen.profil', ['datum'=>$a]);
     }
     public function bimbingan()

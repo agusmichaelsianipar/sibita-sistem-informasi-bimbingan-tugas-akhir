@@ -55,7 +55,7 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link" href="{{ route('superadmin.password.request') }}">
                                     Forgot Your Password?
                                 </a>
                             </div>
@@ -66,4 +66,5 @@
         </div>
     </div>
 </div>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 @endsection

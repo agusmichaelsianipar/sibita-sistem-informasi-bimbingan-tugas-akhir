@@ -41,51 +41,41 @@ class KoordinatortaController extends Controller
         if(Auth::user()->status){
             $nomor=1;
             $guests = Guest::all();
-            return view('dosen.tampilDaftarCaMhs',['guest'=>$guests,'nomor'=>$nomor]);
+            $maha=DB::table("mahasiswas")->where('status', -1)->get();
+            return view('dosen.tampilDaftarCaMhs',['guest'=>$maha,'nomor'=>$nomor]);
         }
         else
-            return redirect('/dosen/profile')->with('status','Maaf Anda Bukan Seorang Koordinator Tugas Akhir Prodi');
+            return redirect('/dosen/profile')->with('dosbing');
     }
     public function validasiRegistMahasiswa(Request $request){
         $ids=$request->get('ids');
-        for($i=0;$i<count($ids);$i++){
-            $tamu=DB::table("guests")->where('id', $ids[$i])->get();
-            
-            // dd($tamu);
-            // $mahas=DB::table("mahasiswas")->select("name")->get()->count();
-            // $mahasi=$mahas+1;
-            // >tabel mahasiswas id nya autoincrement
+        $idm=count($ids);
+        // for($i=0;$i<$idm;$i++){
+            foreach($ids as $idt){
+            $nama=DB::table("mahasiswas")->select('name')->where('id', $idt)->get();
+            $email=DB::table("mahasiswas")->select('email')->where('id', $idt)->get();
 
             // Update data mahasiswa
-            $cek = Mahasiswa::where('email', $tamu[$i]->email)
+            $cek = Mahasiswa::where('id', $idt)
                     ->update([
                         'status' => 0
                     ]);
 
-            // $mhs = new Mahasiswa;
-            // $mhs->id = $mahasi;
-            // $mhs->name = $tamu[$i]->nama;
-            // $mhs->nim = $tamu[$i]->nim;
-            // $mhs->email = $tamu[$i]->email;
-            // $mhs->password = $tamu[$i]->password;
-            // $mhs->dosen_wali = $tamu[$i]->dosenwali;
-
-            $notif = new NotifikasiController;
-            // Notifikasi ke mahasiswa
-            $notif->createNotif(
-                "Selamat ".$tamu[$i]->nama."! Permohonan TA anda telah disetujui. Silakan melakukan pengajuan judul dan dosen pembimbing.",
-                $tamu[$i]->email,
-                route('mahasiswa.judul')
-            );
-
-        //Hapus Data Guests
+            //Hapus Data Guests
             if($cek){
-                guest::destroy($tamu[$i]->id);
+                $notif = new NotifikasiController;
+                // Notifikasi ke mahasiswa
+                $notif->createNotif(
+                    "Selamat ".$nama."! Permohonan TA anda telah disetujui. Silakan melakukan pengajuan judul dan dosen pembimbing.",
+                    $email,
+                    route('mahasiswa.judul')
+                );
+                // guest::destroy($tamu[$i]->id);
             }
 
-
-            return redirect('/dosen/koordinator/validasidaftar')->with('status','Sukses Menambahkan Mahasiswa');
         }
+            return redirect('/dosen/koordinator/validasidaftar')->with('status','Sukses Menambahkan Mahasiswa');
+        
     }
     public function showJudulMahasiswa()
     {
@@ -96,7 +86,7 @@ class KoordinatortaController extends Controller
             return view('dosen.tampilDaftarJudul',['nama'=>$nama,'nomor'=>$nomor]);
         }
         else
-            return redirect('/dosen/profile')->with('status','Maaf Anda Bukan Seorang Koordinator Tugas Akhir Prodi');
+            return redirect('/dosen/profile')->with('dosbing');
     }
     public function showDetailJudul(pengjudul $judul)
     {
