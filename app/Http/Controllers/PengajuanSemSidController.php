@@ -119,6 +119,7 @@ class PengajuanSemSidController extends Controller
             
             //jika ada pengajuan aktif, maka alihkan ke halaman status pengajuan                                                   
             if($pengajuan->count()!=0){
+
                 $dataPengajuans = [];
                 foreach($pengajuan as $a){
                     $dataPengajuan = [
@@ -130,7 +131,6 @@ class PengajuanSemSidController extends Controller
                     
                     array_push($dataPengajuans, $dataPengajuan);
                 }
-
                 return view('dosen.statusPengajuan')->with([
                     'pengajuans' =>$dataPengajuans,
                     'popMsg'=>'Terdapat pengajuan seminar yang masih aktif.',
@@ -139,7 +139,19 @@ class PengajuanSemSidController extends Controller
 
             //jika tidak ada pengajuan aktif
             }else{
+                $dataPengajuans = [];
+                foreach($pengajuan as $a){
+                    $dataPengajuan = [
+                        'namaMhs' => $mahasiswa['name'],
+                        'tanggal' => explode(" ",$a->created_at)[0],
+                        'status' => $a->status,
+                        'jenis' => $a->tipe_pengajuan,
+                    ];
+                    
+                    array_push($dataPengajuans, $dataPengajuan);
+                }
                 return view('dosen.ajukanSemSed', [
+                    'pengajuans'=>$dataPengajuans,
                     'tipePengajuan'=>'seminar',
                     'mahasiswa'=>$mahasiswa,
                     'popMsg'=>FALSE]);

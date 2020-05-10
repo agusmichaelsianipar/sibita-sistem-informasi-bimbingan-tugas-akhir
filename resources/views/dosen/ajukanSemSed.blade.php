@@ -53,7 +53,9 @@ Ajukan {{$tipePengajuan}} | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR'
     <br>
     <br>
     <div>
-        <h6>Pengajuan sebelumnya</h6>
+        @php
+            if(count($pengajuans)) echo "<h6>Pengajuan sebelumnya</h6>";
+        @endphp
         @foreach ($pengajuans as $pengajuan)
         <div class="card mb-1" style="max-width:800px">
             <div class="card-body" >
