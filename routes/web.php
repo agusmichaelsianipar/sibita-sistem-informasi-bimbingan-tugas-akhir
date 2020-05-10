@@ -83,7 +83,7 @@ Route::prefix('mahasiswa')->group(function(){
     ROute::get('/koordinator/setupta', 'MasaTAController@interface')->name('koorta.setup');
     ROute::post('/koordinator/setmasa', 'MasaTAController@setmasa')->name('koorta.setmasa');
     Route::post('/koordinator/konfirmasisemsid','KoordinatortaController@konfirmasisemsid')->name('koorta.konfirmasisemsid');
-    Route::post('/ajukan', 'PengajuanSemSidController@index')->name('dosen.ajukanSemSed');
+    Route::post('/ajukan', 'PengajuanSemSidController@ajukan')->name('dosen.ajukanSemSed');
     Route::post('/koordinator/detail/{judul}/{opsi}','KoordinatortaController@validasiDetailJudul')->name('koorta.validjudulmhs');
     Route::post('/mahasiswa/action', 'DosenController@mhsActionHandler')->name('dosen.mahasiswa.actionHandler');
 });

@@ -12,6 +12,7 @@
         </div>
         @endif
         <hr>
+        @foreach($pengajuans as $pengajuan)
         <div class="card mb-1" style="max-width:800px">
             <div class="card-body" >
                 <table class="table table-md table-md-responsive m-0">
@@ -54,6 +55,7 @@
             <!--div class="card-header bg-light">
             </div-->
         </div>
+        @endforeach
     </div>
 </div>
     

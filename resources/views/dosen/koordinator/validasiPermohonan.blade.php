@@ -37,6 +37,8 @@
                     </tr>
                 </tfoot>
             </table>
+            <label for="dateInput">Waktu Pelaksanaan</label>
+            <input class="" type="date" name="waktuPelaksanaan" id="dateInput">
             <button id="tbl" class="btn btn-primary" formaction="/dosen/koordinator/konfirmasisemsid">ACC</button>
         </div>
     </form>

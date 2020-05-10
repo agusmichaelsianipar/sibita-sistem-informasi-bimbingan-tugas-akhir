@@ -22,6 +22,7 @@ class CreatePengajuanSemSidsTable extends Migration
             $table->string('mahasiswa', 255)->references('email')->on('mahasiswas');
             //status pengajuan: -1=ditolak, 1=disetujui, 0=menunggu
             $table->integer('status');
+            $table->date('waktu_pelaksanaan');
         });
     }
 
