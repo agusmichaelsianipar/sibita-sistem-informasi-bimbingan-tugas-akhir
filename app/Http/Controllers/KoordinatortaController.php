@@ -220,10 +220,15 @@ class KoordinatortaController extends Controller
     {
         $ids=$request->get('ids');
 
+        if($ids==null){
+            $ids = [];
+        }
+
         for($i=0;$i<count($ids);$i++){
             $konfirmasi = 
             PengajuanSemSid::where('id', $ids[$i])->update([
-                'status' => '1'
+                'status' => '1',
+                'waktu_pelaksanaan' => $request['waktu_pelaksanaan']
             ]);
             $aju = PengajuanSemSid::where('id', $ids[$i])->first();
         

@@ -43,34 +43,50 @@ class PengajuanSemSidController extends Controller
             ]);
         }else{
             $pengajuan = DB::table('pengajuan_sem_sids')->where('mahasiswa', $mahasiswa['email'])
-                                                        ->Where('pengaju', Auth::user()->email)
-                                                        ->where('tipe_pengajuan', '2')
-                                                        ->first();
-            
+                                                        ->where('tipe_pengajuan', '2')  // sidang
+                                                        ->where('status', '0')           // yang aktif (menunggu)
+                                                        ->get();
+                                     
+                                                        
             //jika ada pengajuan aktif, maka alihkan ke halaman status pengajuan                                                   
-            if(isset($pengajuan->tipe_pengajuan)){
-                if($pengajuan->status!=2){
+            if($pengajuan->count()!=0){
+                $dataPengajuans = [];
+                foreach($pengajuan as $a){
                     $dataPengajuan = [
-                        'namaMhs' => Mahasiswa::where('email', $pengajuan->mahasiswa)->first()->name,
-                        'tanggal' => explode(" ",$pengajuan->created_at)[0],
-                        'status' => $pengajuan->status,
-                        'jenis' => $pengajuan->tipe_pengajuan,
+                        'namaMhs' => $mahasiswa['name'],
+                        'tanggal' => explode(" ",$a->created_at)[0],
+                        'status' => $a->status,
+                        'jenis' => $a->tipe_pengajuan,
                     ];
-                    return view('dosen.statusPengajuan')->with([
-                        'pengajuan' =>$dataPengajuan,
-                        'popMsg'=>'Terdapat pengajuan sidang yang masih aktif.',
-                        'popLevel' => 'warning',
-                    ]);
-                }else{
-                    return view('dosen.ajukanSemSed', [
-                        'tipePengajuan'=>'sidang',
-                        'mahasiswa'=>$mahasiswa,
-                        'popMsg'=>FALSE]);
                     
+                    array_push($dataPengajuans, $dataPengajuan);
                 }
+
+                return view('dosen.statusPengajuan')->with([
+                    'pengajuans' =>$dataPengajuans,
+                    'popMsg'=>'Terdapat pengajuan seminar yang masih aktif.',
+                    'popLevel' => 'warning',
+                ]);
             //jika tidak ada pengajuan aktif
             }else{
+                $pengajuan = DB::table('pengajuan_sem_sids')->where('mahasiswa', $mahasiswa['email'])
+                                                        ->where('tipe_pengajuan', '2')  // sidang
+                                                        ->get();
+
+                $dataPengajuans = [];
+                foreach($pengajuan as $a){
+                    $dataPengajuan = [
+                        'namaMhs' => $mahasiswa['name'],
+                        'tanggal' => explode(" ",$a->created_at)[0],
+                        'status' => $a->status,
+                        'jenis' => $a->tipe_pengajuan,
+                        'pelaksanaan' => $a->waktu_pelaksanaan
+                    ];
+                    
+                    array_push($dataPengajuans, $dataPengajuan);
+                }
                 return view('dosen.ajukanSemSed', [
+                    'pengajuans' => $dataPengajuans,
                     'tipePengajuan'=>'sidang',
                     'mahasiswa'=>$mahasiswa,
                     'popMsg'=>FALSE]);
@@ -97,30 +113,30 @@ class PengajuanSemSidController extends Controller
             ]);
         }else{
             $pengajuan = DB::table('pengajuan_sem_sids')->where('mahasiswa', $mahasiswa['email'])
-                                                        ->Where('pengaju', Auth::user()->email)
-                                                        ->first();
+                                                        ->where('tipe_pengajuan', '1')   // seminar
+                                                        ->where('status', '0')           // yang aktif (menunggu)
+                                                        ->get();
             
             //jika ada pengajuan aktif, maka alihkan ke halaman status pengajuan                                                   
-            if(isset($pengajuan->tipe_pengajuan)){
-                if($pengajuan->status!=2){
-                    
+            if($pengajuan->count()!=0){
+                $dataPengajuans = [];
+                foreach($pengajuan as $a){
                     $dataPengajuan = [
-                        'namaMhs' => Mahasiswa::where('email', $pengajuan->mahasiswa)->first()->name,
-                        'tanggal' => explode(" ",$pengajuan->created_at)[0],
-                        'status' => $pengajuan->status,
-                        'jenis' => $pengajuan->tipe_pengajuan,
+                        'namaMhs' => $mahasiswa['name'],
+                        'tanggal' => explode(" ",$a->created_at)[0],
+                        'status' => $a->status,
+                        'jenis' => $a->tipe_pengajuan,
                     ];
-                    return view('dosen.statusPengajuan')->with([
-                        'pengajuan' =>$dataPengajuan,
-                        'popMsg'=>'Terdapat pengajuan yang masih aktif.',
-                        'popLevel' => 'warning',
-                    ]);
-                }else{
-                    return view('dosen.ajukanSemSed', [
-                        'tipePengajuan'=>'seminar',
-                        'mahasiswa'=>$mahasiswa,
-                        'popMsg'=>FALSE]);
+                    
+                    array_push($dataPengajuans, $dataPengajuan);
                 }
+
+                return view('dosen.statusPengajuan')->with([
+                    'pengajuans' =>$dataPengajuans,
+                    'popMsg'=>'Terdapat pengajuan seminar yang masih aktif.',
+                    'popLevel' => 'warning',
+                ]);
+
             //jika tidak ada pengajuan aktif
             }else{
                 return view('dosen.ajukanSemSed', [
@@ -136,13 +152,14 @@ class PengajuanSemSidController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($nomorTipe, $emailDosen, $emailMhs)
+    public function create($nomorTipe, $emailDosen, $emailMhs, $waktu)
     {
         $pengajuan = new PengajuanSemSid;
         $pengajuan->tipe_pengajuan = $nomorTipe;
         $pengajuan->pengaju = $emailDosen;
         $pengajuan->mahasiswa = $emailMhs;
         $pengajuan->status = 0;
+        $pengajuan->waktu_pelaksanaan = $waktu;
 
         if($pengajuan->save()){
             $dataPengajuan = [
@@ -174,10 +191,26 @@ class PengajuanSemSidController extends Controller
             'dos@localhost.co',
             "#"
         );
-        
+
+        $pengajuan = DB::table('pengajuan_sem_sids')->where('mahasiswa', $emailMhs)
+                                                        ->where('tipe_pengajuan', $nomorTipe)  // sidang
+                                                        ->where('status', '0')           // yang aktif (menunggu)
+                                                        ->get();
+        $nama = Mahasiswa::where('email', $emailMhs)->first()->name;
+        $dataPengajuans = [];
+        foreach($pengajuan as $a){
+            $dataPengajuan = [
+                'namaMhs' => $nama,
+                'tanggal' => explode(" ",$a->created_at)[0],
+                'status' => $a->status,
+                'jenis' => $a->tipe_pengajuan,
+            ];
+            
+            array_push($dataPengajuans, $dataPengajuan);
+        }
         //echo Auth::user()->name;
         return view('dosen.statusPengajuan')->with([
-            'pengajuan' =>$dataPengajuan,
+            'pengajuans' =>$dataPengajuans,
             'popMsg'=>'Pengajuan berhasil!',
             'popLevel'=>'success'
         ]);
@@ -188,6 +221,7 @@ class PengajuanSemSidController extends Controller
             'emailMhs' => 'required',
             'emailDosen' => 'required',
             'actionName' => 'required',
+            'waktuPelaksanaan' => 'required'
         ]);
         switch ($request['actionName']) {
             case 'seminar':
@@ -200,7 +234,7 @@ class PengajuanSemSidController extends Controller
                 # code...
                 break;
         }
-        return $this->create($request['actionName'], $request['emailDosen'], $request['emailMhs']);
+        return $this->create($request['actionName'], $request['emailDosen'], $request['emailMhs'], $request['waktuPelaksanaan']);
     }
 
     public function getPengSeminarCount()
