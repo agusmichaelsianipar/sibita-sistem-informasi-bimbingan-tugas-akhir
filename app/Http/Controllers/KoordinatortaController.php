@@ -82,15 +82,18 @@ class KoordinatortaController extends Controller
         if(Auth::user()->status){
             $nomor=1;
             $nama = DB::table("pengajuduls")
-                    ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')->get();
+                    ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')
+                    ->select(DB::raw('mahasiswas.*'), DB::raw('pengajuduls.*'))->get();    
             return view('dosen.tampilDaftarJudul',['nama'=>$nama,'nomor'=>$nomor]);
         }
         else
             return redirect('/dosen/profile')->with('dosbing');
     }
-    public function showDetailJudul(pengjudul $judul)
+    public function showDetailJudul( $judul)
     {
+        $judul = Pengjudul::find($judul);
         
+
             $nama = DB::table("mahasiswas")->where('email', $judul->email)->get();
             $emaildosbing = array($judul->cadosbing11,$judul->cadosbing12,$judul->cadosbing13,$judul->cadosbing21,$judul->cadosbing22,$judul->cadosbing23);
             $namadosbing = array(6);
@@ -102,35 +105,41 @@ class KoordinatortaController extends Controller
                     }
                 }
             } 
-        return view('dosen.detailJudulKoorta',['judul'=>$judul,'mahasiswa'=>$nama,'dosen'=>$namadosbing]);
+        $dosens = Dosen::all();
+        return view('dosen.detailJudulKoorta',['judul'=>$judul,'mahasiswa'=>$nama,'dosen'=>$namadosbing, 'dosens'=>$dosens]);
     }
 
     public function validasiDetailJudul(ErrorFormRequest $request, pengjudul $judul,$opsi)
     {
+        // return $judul;
         //Update data Judul dan Dosen Pembimbing ke Tabel Mahasiswas
         if($opsi==1){
             $this->validate($request,[
                 'cadosbing1_1' => 'required',
                 'cadosbing1_2' => 'required',
+                // 'judul_1' => 'required',
             ]);        
     
             $cek=mahasiswa::where('email',$judul->email)
                 ->update([
-                    'judul' => $request->judul_1,
+                    'judul' => $judul->judul1,
                     'email_dosbing1' => $request->cadosbing1_1,
                     'email_dosbing2' => $request->cadosbing1_2,
+                    'status' => 2
                 ]);
         }elseif($opsi==2){
             $this->validate($request,[
                 'cadosbing2_1' => 'required',
                 'cadosbing2_2' => 'required',
+                // 'judul_2' => 'required',
             ]);        
     
             $cek=mahasiswa::where('email',$judul->email)
                 ->update([
-                    'judul' => $request->judul_2,
+                    'judul' => $judul->judul2,
                     'email_dosbing1' => $request->cadosbing2_1,
                     'email_dosbing2' => $request->cadosbing2_2,
+                    'status' => 2
                 ]);
         }
 

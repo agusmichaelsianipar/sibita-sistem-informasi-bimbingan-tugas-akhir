@@ -207,8 +207,10 @@ class DosenController extends Controller
                 ->orWhere('cadosbing21', '=', $dosen->email)
                 ->orWhere('cadosbing22', '=', $dosen->email)
                 ->orWhere('cadosbing23', '=', $dosen->email)
-                ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')->get();    
-                                   
+                ->leftJoin('mahasiswas','pengajuduls.email','=','mahasiswas.email')
+                ->select(DB::raw('mahasiswas.*'), DB::raw('pengajuduls.*'))->get();    
+                            
+                // return $nama;
         return view('pengjuduldosen',['nama' => $nama,'nomor'=>$nomor]);
     }
 

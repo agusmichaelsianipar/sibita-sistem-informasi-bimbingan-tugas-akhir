@@ -32,22 +32,22 @@ Ajukan {{$tipePengajuan}} | SISTEM INFORMASI BIMBINGAN TUGAS AKHIR'
                     </tbody>
                 </table>
             </div>
-            <form action="{{route('dosen.ajukanSemSed')}}" class="d-none" method="POST" id="ajukan{{$tipePengajuan}}Btn">
+            <form action="{{route('dosen.ajukanSemSed')}}" method="POST" id="ajukan{{$tipePengajuan}}Btn">
                 {{ csrf_field() }}
                 <input type="hidden" name="emailMhs" value="{{$mahasiswa['email']}}">
                 <input type="hidden" name="emailDosen" value="{{Auth::user()->email}}">
                 <input type="hidden" name="actionName" value="{{$tipePengajuan}}">
+                <div class="card-header bg-light">
+                    <button type="submit" class="btn btn-sm float-right m-1" style="background-color:#67b2b8">
+                        Ajukan
+                    </button>
+                    <a href="{{route('dosen.mahasiswa')}}">
+                        <div type="button" class="btn btn-sm float-right m-1" style="background-color:#dc6595">
+                            Batal
+                        </div>
+                    </a>
+                </div>
             </form>
-            <div class="card-header bg-light">
-                <button type="button" class="btn btn-sm float-right m-1" style="background-color:#67b2b8" onclick="document.getElementById('ajukan{{$tipePengajuan}}Btn').submit()">
-                    Ajukan
-                </button>
-                <a href="{{route('dosen.mahasiswa')}}">
-                    <div type="button" class="btn btn-sm float-right m-1" style="background-color:#dc6595">
-                        Batal
-                    </div>
-                </a>
-            </div>
         </div>
     </div>
     <br>

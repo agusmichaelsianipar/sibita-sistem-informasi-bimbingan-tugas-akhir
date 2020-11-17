@@ -21,7 +21,7 @@ for($i=0; $i<count($dosen); $i++){
     $tmpDos->email = $dosen[$i][0];
     $tmpDos->name = $dosen[$i][1];
     $tmpDos->status = '0';
-    $tmpDos->password = Hash::make("123123123");
+    $tmpDos->password = Hash::make("sibitaitera");
     $tmpDos->save();
     
 }
